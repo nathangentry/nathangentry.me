@@ -1,0 +1,70 @@
+#hero-right-container {
+    &.sticky {
+        height: fit-content;
+        position: sticky;
+        top: 168px;
+
+        & > #hero-image-tile {
+            height: 400px;
+        }
+    }
+
+    & > #hero-right-button-list {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+
+        & button {
+            margin-top: 12px;
+            width: 100%;
+        }
+    }
+}
+
+#unl-courses-highlight {
+    grid-column: 2;
+    grid-row: 2 / span 2;
+}
+
+#involvements-info-bit {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+#raikes-info-bit {
+    margin-top: 36px;
+
+    & > .title {
+        margin-bottom: 12px;
+    }
+}
+
+.logo-tile-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    & > .logo-grid {
+        flex-grow: 1;
+        display: grid;
+        grid-template-rows: 1fr 1fr;
+        grid-gap: 24px;
+        
+        & .logo-tile {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.25s ease;
+
+            &:hover {
+                cursor: pointer;
+                background-color: #f2f2f2;
+            }
+        }
+    }
+
+}

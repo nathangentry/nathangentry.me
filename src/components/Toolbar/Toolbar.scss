@@ -1,0 +1,17 @@
+.Toolbar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-top: 72px;
+    padding-bottom: 48px;
+    max-width: 1200px;
+    margin: auto;
+
+    & > svg {
+        margin-right: 32px;
+    }
+
+    & > img {
+        mix-blend-mode: darken;
+    }
+}

@@ -1,0 +1,8 @@
+.Tile {
+    background-color: white;
+    border-radius: 4px;
+}
+
+.Tile.wide {
+    grid-column: 1 / span 2;
+}

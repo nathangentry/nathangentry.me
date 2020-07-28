@@ -1,0 +1,95 @@
+* {
+  box-sizing: border-box;
+
+  --success: rgba(39, 147, 115, 1.0);
+  --error: rgba(211, 19, 42, 1.0);
+  --error-opacity: rgba(211, 19, 42, 0.1);
+  --gray: #f2f2f2;
+}
+
+h1, h2, h3, h4, h5, h6, p, span, a, label, input, textarea, button {
+  font-family: 'Manrope', sans-serif;
+  margin: 0;
+}
+
+h1 {
+  font-family: 'Manrope', sans-serif;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 48px;
+}
+
+h2 {
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 48px;
+}
+
+h3 {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 48px;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+}
+
+h4 {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+h5 {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #797979;
+}
+
+p.large {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 30px;
+}
+p, label, input, textarea {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+a {
+  font-weight: 700;
+}
+
+input, textarea {
+  padding: 12px 18px;
+  background-color: var(--gray);
+  border: 2px solid var(--gray);
+  border-radius: 4px;
+  outline: none;
+  transition: background-color 0.25s ease, border 0.25s ease;
+}
+input.error, textarea.error {
+  border: 2px solid var(--error);
+  background-color: var(--error-opacity);
+}
+
+textarea {
+  resize: none;
+}
+
+button {
+  padding: 14px 28px;
+  border: 0;
+  border-radius: 4px;
+  outline: none;
+  font-weight: 800;
+  font-size: 14px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  transition: background-color 0.25s ease;
+}
+button:hover {
+  cursor: pointer;
+}

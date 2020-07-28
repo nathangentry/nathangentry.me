@@ -1,0 +1,21 @@
+.icon-bullet-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    & > .point-container {
+        border-radius: 50%;
+        margin-right: 8px;
+        height: 18px;
+        width: 18px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        & > .material-icons {
+            font-size: 12px;
+            line-height: 12px;
+            margin: 0;
+        }
+    }
+}

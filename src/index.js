@@ -4,6 +4,13 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+import * as firebase from 'firebase/app';
+import firebaseConfig from './firebaseConfig';
+import 'firebase/analytics';
+
+firebase.initializeApp(firebaseConfig);
+firebase.analytics();
+
 ReactDOM.render(
   <React.StrictMode>
     <App />

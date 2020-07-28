@@ -1,0 +1,45 @@
+.contact-section {
+    grid-column: 1 / span 2;
+    margin: 0;
+
+    & > .contact-tile {
+        padding: 60px;
+        width: 100%;
+
+        & > form {
+            display: flex;
+            flex-direction: column;
+            margin-top: 18px;
+            margin-bottom: 24px;
+
+            & > label {
+                margin-top: 18px;
+                margin-bottom: 6px;
+            }
+        }
+
+        & > .horizontal {
+            display: flex;
+            flex-direction: row;
+
+            & > .feedback {
+                display: flex;
+                flex-direction: row;
+                margin-left: 36px;
+                align-self: center;
+
+                &.success {
+                    color: var(--success);
+                }
+
+                &.error {
+                    color: var(--error);
+                }
+                
+                & > .feedback-icon {
+                    margin-right: 8px;
+                }
+            }
+        }
+    }
+}
