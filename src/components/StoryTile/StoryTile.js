@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import Tile from '../Tile/Tile';
 import IconButton from '../IconButton/IconButton';
 
@@ -19,24 +19,26 @@ const StoryTile = props => {
     const closeButtonRef = useRef();
     const fullScrimRef = useRef();
 
+    const [isOpen, setIsOpen] = useState(false);
+
     const setOpenTransitions = () => {
-        previewRef.current.style.transition = `height 0.2s ease, width 0.25s ease`;
+        previewRef.current.style.transition = `height 0.2s ease, width 0.2s ease`;
         previewTitleRef.current.style.transition = `opacity 0.1s ease`;
         previewLogoRef.current.style.transition = `opacity 0.1s ease`;
         previewScrimRef.current.style.transition = `opacity 0.1s ease`;
-        tileRef.current.style.transition = `top 0.2s ease, height 0.2s ease, left 0.25s ease, width 0.25s ease`;
-        fullRef.current.style.transition = `height 0.2s ease, width 0.25s ease, opacity 0.15s ease 0.25s`;
-        fullScrimRef.current.style.transition = `background-color 0.25s ease`;
+        tileRef.current.style.transition = `top 0.2s ease, height 0.2s ease, left 0.2s ease, width 0.2s ease`;
+        fullRef.current.style.transition = `height 0.2s ease, width 0.2s ease, opacity 0.1s ease`;
+        fullScrimRef.current.style.transition = `background-color 0.3s ease`;
     };
 
     const setCloseTransitions = () => {
-        previewRef.current.style.transition = `height 0.25s ease, width 0.2s ease`;
-        previewTitleRef.current.style.transition = `opacity 0.15s ease`;
-        previewLogoRef.current.style.transition = `opacity 0.15s ease`;
-        previewScrimRef.current.style.transition = `opacity 0.15s ease`;
-        tileRef.current.style.transition = `top 0.25s ease, height 0.25s ease, left 0.2s ease, width 0.2s ease`;
-        fullRef.current.style.transition = `height 0.25s ease, width 0.2s ease, opacity 0.1s ease`;
-        fullScrimRef.current.style.transition = `background-color 0.1s ease`;
+        previewRef.current.style.transition = `height 0.2s ease, width 0.2s ease`;
+        previewTitleRef.current.style.transition = `opacity 0.1s ease`;
+        previewLogoRef.current.style.transition = `opacity 0.1s ease`;
+        previewScrimRef.current.style.transition = `opacity 0.1s ease`;
+        tileRef.current.style.transition = `top 0.2s ease, height 0.2s ease, left 0.2s ease, width 0.2s ease`;
+        fullRef.current.style.transition = `height 0.2s ease, width 0.2s ease, opacity 0.1s ease`;
+        fullScrimRef.current.style.transition = `background-color 0.3s ease`;
     }
 
     const setPreviewOpacity = value => {
@@ -57,85 +59,131 @@ const StoryTile = props => {
         previewRef.current.style.height = `${rect.height}px`;
     }
 
-    const openIfClosed = () => {
+    const openStoryTile = () => {
         // pre
         setPreviewOpacity(1);
-        setTileRect(tileRef.current.getBoundingClientRect());
-        setPreviewDimensions(previewRef.current.getBoundingClientRect());
+        tileRef.current.style.position = 'fixed';
+        setTileRect(containerRef.current.getBoundingClientRect());
+        setPreviewDimensions(containerRef.current.getBoundingClientRect());
         fullRef.current.style.opacity = '0';
+        fullRef.current.style.width = '0';
+        fullRef.current.style.height = '500px';
         setOpenTransitions();
 
         // calc
-        const yMargin = 120;
-        const xMargin = Math.max((document.body.clientWidth - 1200) / 2, 120);
-        const targetWidth = document.body.clientWidth - (2 * xMargin);
-        const targetHeight = window.innerHeight - (2 * yMargin);
-        const targetTileRect = { top: yMargin, left: xMargin, width: targetWidth, height: targetHeight };
-        const targetPreviewDimensions = { width: targetWidth * 0.4, height: targetHeight };
+        let yMargin, xMargin, tileWidth, tileHeight, previewWidth, previewHeight, fullWidth, fullHeight, fullPadding;
+        if (document.body.clientWidth < 799) {
+            yMargin = 0;
+            xMargin = 0;
+            tileWidth = document.body.clientWidth;
+            previewWidth = tileWidth;
+            fullWidth = tileWidth;
+
+            tileHeight = window.innerHeight;
+            previewHeight = tileHeight * 0.3;
+            fullHeight = tileHeight * 0.7;
+
+            fullPadding = '36px';
+        } else {
+            yMargin = Math.max((window.innerHeight - 750) / 2, 120);
+            xMargin = Math.max((document.body.clientWidth - 1200) / 2, 120);
+
+            tileWidth = document.body.clientWidth - (2 * xMargin);
+            previewWidth = tileWidth * 0.4;
+            fullWidth = tileWidth * 0.6;
+
+            tileHeight = window.innerHeight - (2 * yMargin);
+            previewHeight = tileHeight;
+            fullHeight = tileHeight;
+
+            fullPadding = '60px';
+        }
+        const targetTileRect = { top: yMargin, left: xMargin, width: tileWidth, height: tileHeight };
+        const targetPreviewDimensions = { width: previewWidth, height: previewHeight };
 
         // post
+        setIsOpen(true);
+        document.body.style.overflowY = 'hidden';
         setPreviewOpacity(0);
+        setTimeout(() => {
+            tileRef.current.style.zIndex = '4';
+            tileRef.current.style.cursor = 'inherit';
 
-        tileRef.current.style.position = 'fixed';
-        tileRef.current.style.zIndex = '4';
-        tileRef.current.style.cursor = 'inherit';
+            closeButtonRef.current.style.zIndex = '4';
 
-        closeButtonRef.current.style.zIndex = '4';
+            fullScrimRef.current.style.zIndex = '3';
+            fullScrimRef.current.style.backgroundColor = 'rgba(0, 0, 0, 0.6)';
 
-        fullScrimRef.current.style.zIndex = '3';
-        fullScrimRef.current.style.backgroundColor = 'rgba(0, 0, 0, 0.6)';
+            fullRef.current.style.width = `${fullWidth}px`;
+            fullRef.current.style.height = `${fullHeight}px`;
 
-        fullRef.current.style.width = `${targetWidth * 0.6}px`;
-        fullRef.current.style.height = `${targetHeight}px`;
-        fullRef.current.style.padding = '60px';
-        fullRef.current.style.opacity = '1';
 
-        setTileRect(targetTileRect);
-        setPreviewDimensions(targetPreviewDimensions)
+            setTileRect(targetTileRect);
+            setPreviewDimensions(targetPreviewDimensions);
+
+            setTimeout(() => {
+                if (document.body.clientWidth < 800) {
+                    tileRef.current.style.borderRadius = '0';
+                    tileRef.current.style.height = '100vh';
+                    tileRef.current.style.width = '100vw';
+                }
+                fullRef.current.style.opacity = '1';
+                fullRef.current.style.padding = fullPadding;
+            }, 200);
+        }, 100);
     }
 
-    const closeIfOpened = () => {
+    const closeStoryTile = () => {
         // post
         setCloseTransitions();
 
-        //
+        // calc
         const targetRect = containerRef.current.getBoundingClientRect();
 
         // post
-        setPreviewOpacity(1);
-
+        setIsOpen(false);
+        document.body.style.overflowY = 'auto';
         closeButtonRef.current.style.zIndex = '-1';
-
-
-        setTileRect(targetRect);
-        setPreviewDimensions(targetRect);
-        previewRef.current.style.top = '0';
-        previewRef.current.style.left = '0';
-
-        fullRef.current.style.width = `0px`;
-        fullRef.current.style.height = `500px`;
-        fullRef.current.style.padding = '0px';
         fullRef.current.style.opacity = '0';
 
-        tileRef.current.style.cursor = 'pointer';
-        fullScrimRef.current.style.backgroundColor = 'rgba(0, 0, 0, 0)';
         setTimeout(() => {
-            fullScrimRef.current.style.zIndex = '-1';
+            setTileRect(targetRect);
+            setPreviewDimensions(targetRect);
+            fullRef.current.style.width = `0`;
+            fullRef.current.style.height = `0`;
+            fullRef.current.style.padding = '0';
+
+            fullScrimRef.current.style.backgroundColor = 'rgba(0, 0, 0, 0)';
+            setTimeout(() => {
+                setPreviewOpacity(1);
+            }, 100);
+
+            setTimeout(() => {
+                tileRef.current.style.cursor = 'pointer';
+                fullScrimRef.current.style.zIndex = '-1';
+
+                if (document.body.clientWidth < 800) {
+                    tileRef.current.style.borderRadius = '4px';
+                }
+
+                tileRef.current.style.transition = '';
+                tileRef.current.style.zIndex = '0';
+                tileRef.current.style.position = 'relative';
+                tileRef.current.style.top = '0';
+                tileRef.current.style.left = '0';
+                tileRef.current.style.width = '100%';
+                tileRef.current.style.height = '100%';
+                previewRef.current.style.width = '100%';
+                previewRef.current.style.height = '100%';
+            }, 200);
         }, 100);
 
-        setTimeout(() => {
-            tileRef.current.style.transition = '';
-            tileRef.current.style.zIndex = '0';
-            tileRef.current.style.position = 'relative';
-            tileRef.current.style.top = '0';
-            tileRef.current.style.left = '0';
-        }, 250);
     }
 
     return (
         <>
             <div ref={containerRef} className={`storytile-container ${props.display ? 'display' : 'active'}`}>
-                <Tile ref={tileRef} className={`storytile`} onClick={!props.display && openIfClosed}>
+                <Tile ref={tileRef} className={`storytile`} onClick={!props.display && !isOpen && openStoryTile}>
                     <div className='preview' ref={previewRef}>
                         <h4 className='title' ref={previewTitleRef}>{props.title}</h4>
                         <img className='logoImage' src={props.logoImage} alt='' ref={previewLogoRef} />
@@ -147,8 +195,8 @@ const StoryTile = props => {
                         {props.children}
                     </div>
                 </Tile>
-                <IconButton icon='close' className='close-button' onClick={closeIfOpened} ref={closeButtonRef} />
-                <div className='full-scrim' onClick={closeIfOpened} ref={fullScrimRef} />
+                <IconButton icon='close' className='close-button' onClick={isOpen && closeStoryTile} ref={closeButtonRef} />
+                <div className='full-scrim' onClick={isOpen && closeStoryTile} ref={fullScrimRef} />
             </div>
         </>
     );

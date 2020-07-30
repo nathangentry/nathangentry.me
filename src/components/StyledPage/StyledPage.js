@@ -1,7 +1,11 @@
 import styled from 'styled-components';
 
 const StyledPage = styled.div`
-    background-color: #f7f7f7;
+    width: 100vw;
+
+    @media (min-width: 800px) {
+        background-color: var(--background);
+    }
 
     & ::selection {
         color: ${props => props.primaryDark};

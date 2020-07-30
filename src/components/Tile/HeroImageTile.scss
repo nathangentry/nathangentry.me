@@ -3,25 +3,57 @@
     width: 100%;
     height: 100%;
     border-radius: 4px;
+    @media (min-width: 800px) {
+        width: 100%;
+        margin-right: 0;
+    }
 
         & > svg {
-            height: calc(100% + 80px);
-            width: 100%;
+            @media (min-width: 800px) {
+                width: 100%;
+            }
             position: absolute;
             left: 0;
-            top: -80px;
             z-index: 1;
             mix-blend-mode: hue;
+            
+            height: calc(100% + 30px);
+            top: -30px;
+            @media (max-width: 799px) {
+                width: 100%;
+            }
+            @media (min-width: 900px) {
+                height: calc(100% + 60px);
+                top: -60px;
+            }
+            @media (min-width: 1025px) {
+                height: calc(100% + 80px);
+                top: -80px;
+            }
         }
 
         & > img {
-            height: calc(100% + 80px);
-            width: 100%;
+            @media (min-width: 800px) {
+                width: 100%;
+            }
             position: absolute;
             object-fit: cover;
             left: 0;
-            top: -80px;
             border-radius: 0 0 4px 4px;
             overflow: hidden;
+
+            height: calc(100% + 30px);
+            top: -30px;
+            @media (max-width: 799px) {
+                width: 100%;
+            }
+            @media (min-width: 900px) {
+                height: calc(100% + 60px);
+                top: -60px;
+            }
+            @media (min-width: 1025px) {
+                height: calc(100% + 80px);
+                top: -80px;
+            }
         }
 }

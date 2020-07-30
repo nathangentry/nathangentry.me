@@ -1,11 +1,40 @@
 #hero-right-container {
+    
+    @media (max-width: 800px) {
+        grid-row: 1;
+        & > #hero-image-tile {
+            height: calc(((100vw - (2 * 36px)) * 1.02) - 30px);
+            width: 100%;
+        }
+    }
     &.sticky {
         height: fit-content;
-        position: sticky;
-        top: 168px;
+        @media (min-width: 800px) {
+            position: sticky;
+            top: 168px;
+            
+            & > #hero-image-tile {
+                height: 400px;
+            }
+        }
+    }
 
-        & > #hero-image-tile {
-            height: 400px;
+    & > #see-more-fab {
+        @media (max-width: 799px) {
+            padding: 0;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 4;
+        }
+        @media (min-width: 800px) {
+            display: none;
         }
     }
 
@@ -13,17 +42,47 @@
         display: flex;
         flex-direction: column;
         width: 100%;
+        @media (max-width: 799px) {
+            width: calc(100vw - (2 * 36px));
+            position: fixed;
+            bottom: 104px;
+            right: 24px;
+            z-index: 3;
 
-        & button {
+            transition: bottom 0.2s ease, opacity 0.25s ease, height 0.2s ease;
+            
+            & > a {
+                background-color: white;
+            }
+
+            &.closed {
+                opacity: 0;
+                bottom: 0;
+                height: 0;
+            }
+            &.opened {
+                bottom: 104px;
+                opacity: 1;
+                height: 177px;
+            }
+        }
+
+        & > a {
             margin-top: 12px;
-            width: 100%;
+            border-radius: 4px;
+
+            & > button {
+                width: 100%;
+            }
         }
     }
 }
 
 #unl-courses-highlight {
-    grid-column: 2;
-    grid-row: 2 / span 2;
+    @media (min-width: 800px) {
+        grid-column: 2;
+        grid-row: 2 / span 2;
+    }
 }
 
 #involvements-info-bit {
@@ -49,15 +108,30 @@
     & > .logo-grid {
         flex-grow: 1;
         display: grid;
-        grid-template-rows: 1fr 1fr;
+        @media (max-width: 799px) {
+            grid-template-columns: 1fr 1fr;
+        }
+        @media (min-width: 800px) {
+            grid-template-rows: 1fr 1fr;
+        }
         grid-gap: 24px;
         
         & .logo-tile {
             width: 100%;
             height: 100%;
+            @media (max-width: 799px) {
+                height: calc((100vw - (2 * 36px) - 24px) / 2);
+            }
             display: flex;
             justify-content: center;
             align-items: center;
+            @media (max-width: 800px) {
+                background-color: var(--gray);
+
+                & > img {
+                    width: 50%;
+                }
+            }
             transition: background-color 0.25s ease;
 
             &:hover {

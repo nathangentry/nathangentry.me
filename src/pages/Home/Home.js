@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { HashLink as Link } from 'react-router-hash-link';
 import StyledPage from '../../components/StyledPage/StyledPage';
 import Toolbar from '../../components/Toolbar/Toolbar';
+import PageWidthWrapper from '../../components/PageWidthWrapper/PageWidthWrapper';
 import GridWrapper from '../../components/GridWrapper/GridWrapper';
 import WelcomeTile from '../../components/Tile/WelcomeTile';
 import HeroImageTile from '../../components/Tile/HeroImageTile';
@@ -135,95 +136,113 @@ const Home = props => {
         }
     ]
 
+    const [educationDisplay, setEducationDisplay] = useState(true);
+    useEffect(() => {
+        const handleResize = () => setEducationDisplay(document.body.clientWidth >= 800);
+
+        handleResize();
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    const [actionsDisplayed, setActionsDisplayed] = useState(false);
+
     return (
-        <StyledPage
-            primaryColor={company.primaryColor}
-            primaryDark={company.primaryDark}
-            opacityColor={company.opacityColor}
-            opacityDark={company.opacityDark}
-        >
-            <Toolbar name={company.name} logo={company.logo} primaryColor={company.primaryColor} />
-            <GridWrapper>
-                <WelcomeTile {...company} />
-                <div id='hero-right-container' className={company.name !== null && 'sticky'}>
-                    <HeroImageTile primaryColor={company.primaryColor} opacityColor={company.opacityColor} />
-                    {company.name !== null &&
-                        <div id='hero-right-button-list'>
-                            <Link smooth to='#contact'><button className='primary'>Get in touch</button></Link>
-                            <a href='https://bit.ly/resume_fall2020' target='_blank' rel='noopener noreferrer'><button className='secondary'>View my resume</button></a>
-                            <Link smooth to='#experience'><button className='secondary'>Skip to the portfolio</button></Link>
+        <>
+            <StyledPage
+                primaryColor={company.primaryColor}
+                primaryDark={company.primaryDark}
+                opacityColor={company.opacityColor}
+                opacityDark={company.opacityDark}
+            >
+                <Toolbar name={company.name} logo={company.logo} primaryColor={company.primaryColor} />
+                <PageWidthWrapper>
+                    <GridWrapper>
+                        <WelcomeTile {...company} />
+                        <div id='hero-right-container' className={company.name !== null ? 'sticky' : ''}>
+                            <HeroImageTile primaryColor={company.primaryColor} opacityColor={company.opacityColor} />
+                            {company.name !== null &&
+                                <>
+                                    <button id='see-more-fab' className='primary' onClick={() => setActionsDisplayed(!actionsDisplayed)} onBlur={() => setTimeout(() => setActionsDisplayed(false), 0)}><i className='material-icons'>{actionsDisplayed ? 'close' : 'more_vert'}</i></button>
+                                    <div id='hero-right-button-list' className={actionsDisplayed ? 'opened' : 'closed'}>
+                                        <Link smooth to='#contact'><button className='primary'>Get in touch</button></Link>
+                                        <a href='https://bit.ly/resume_fall2020' target='_blank' rel='noopener noreferrer'><button className='secondary'>View my resume</button></a>
+                                        <Link smooth to='#experience'><button className='secondary'>Skip to the portfolio</button></Link>
+                                    </div>
+                                </>
+                            }
                         </div>
-                    }
-                </div>
-            </GridWrapper>
-            <Section title='Experience' id='experience'>
-                <GridWrapper>
-                    {experienceData.map(x =>
-                        <StoryTile title={x.title} mainImage={x.mainImage} logoImage={x.logoImage}>
-                            <ExperienceTemplate {...x} />
+                    </GridWrapper>
+                    <Section title='Experience' id='experience'>
+                        <GridWrapper>
+                            {experienceData.map(x =>
+                                <StoryTile title={x.title} mainImage={x.mainImage} logoImage={x.logoImage}>
+                                    <ExperienceTemplate {...x} />
+                                </StoryTile>
+                            )}
+                        </GridWrapper>
+                    </Section>
+                    <Section title='Projects' id='projects'>
+                        <GridWrapper>
+                            {projectData.map(p =>
+                                <StoryTile title={p.title} mainImage={p.mainImage} logoImage={p.logoImage}>
+                                    <ProjectTemplate {...p} />
+                                </StoryTile>
+                            )}
+                        </GridWrapper>
+                    </Section>
+                    <Section title='Education' id='education'>
+                        <StoryTile title='University of Nebraska–Lincoln' mainImage={unlMain} display={educationDisplay}>
+                            <div className='highlight-grid'>
+                                <div>
+                                    <h5 className='section-heading'>Major</h5>
+                                    <p>Computer Science</p>
+                                </div>
+                                <div>
+                                    <h5 className='section-heading'>Minors</h5>
+                                    <p>Math, Business Management</p>
+                                </div>
+                                <div>
+                                    <h5 className='section-heading'>Timeframe</h5>
+                                    <p>August 2019 – May 2023</p>
+                                </div>
+                                <div id='unl-courses-highlight'>
+                                    <h5 className='section-heading'>Courses</h5>
+                                    <IconBullet icon='done' text='Java' />
+                                    <IconBullet icon='done' text='Design Thinking' />
+                                    <IconBullet icon='done' text='Machine Learning' />
+                                    <IconBullet icon='done' text='Software Engineering' />
+                                    <IconBullet icon='done' text='Statistics' />
+                                    <IconBullet icon='done' text='Economics' />
+                                    <IconBullet icon='done' text='Accounting' />
+                                </div>
+                                <div id='involvements-info-bit'>
+                                    <h5 className='section-heading'>Involvements</h5>
+                                    <IconBullet icon='done' text='Raikes Social Media Team' />
+                                    <IconBullet icon='done' text='Girls Code Lincoln' />
+                                    <IconBullet icon='done' text='Engineering Diplomats' />
+                                    <IconBullet icon='done' text='Youth Entrepreneurship Clinics' />
+                                </div>
+                            </div>
+                            <div id='raikes-info-bit'>
+                                <h4 className='title'>Jeffrey S. Raikes School of Computer Science &amp; Management</h4>
+                                <p>The Jeffrey S. Raikes School of Computer Science &amp; Management is a highly selective and competitive program focusing on the intersection of technology, business, innovation, and leadership on the campus of the University of Nebraska–Lincoln.</p>
+                            </div>
                         </StoryTile>
-                    )}
-                </GridWrapper>
-            </Section>
-            <Section title='Projects' id='projects'>
-                <GridWrapper>
-                    {projectData.map(p =>
-                        <StoryTile title={p.title} mainImage={p.mainImage} logoImage={p.logoImage}>
-                            <ProjectTemplate {...p} />
-                        </StoryTile>
-                    )}
-                </GridWrapper>
-            </Section>
-            <Section title='Education' id='education'>
-                <StoryTile title='University of Nebraska–Lincoln' mainImage={unlMain} display>
-                    <div className='highlight-grid'>
-                        <div>
-                            <h5 className='section-heading'>Major</h5>
-                            <p>Computer Science</p>
-                        </div>
-                        <div>
-                            <h5 className='section-heading'>Minors</h5>
-                            <p>Math, Business Management</p>
-                        </div>
-                        <div>
-                            <h5 className='section-heading'>Timeframe</h5>
-                            <p>August 2019 – May 2023</p>
-                        </div>
-                        <div id='unl-courses-highlight'>
-                            <h5 className='section-heading'>Courses</h5>
-                            <IconBullet icon='done' text='Java' />
-                            <IconBullet icon='done' text='Design Thinking' />
-                            <IconBullet icon='done' text='Machine Learning' />
-                            <IconBullet icon='done' text='Software Engineering' />
-                            <IconBullet icon='done' text='Statistics' />
-                            <IconBullet icon='done' text='Economics' />
-                            <IconBullet icon='done' text='Accounting' />
-                        </div>
-                        <div id='involvements-info-bit'>
-                            <h5 className='section-heading'>Involvements</h5>
-                            <IconBullet icon='done' text='Raikes Social Media Team' />
-                            <IconBullet icon='done' text='Girls Code Lincoln' />
-                            <IconBullet icon='done' text='Engineering Diplomats' />
-                            <IconBullet icon='done' text='Youth Entrepreneurship Clinics' />
-                        </div>
-                    </div>
-                    <div id='raikes-info-bit'>
-                        <h4 className='title'>Jeffrey S. Raikes School of Computer Science &amp; Management</h4>
-                        <p>The Jeffrey S. Raikes School of Computer Science &amp; Management is a highly selective and competitive program focusing on the intersection of technology, business, innovation, and leadership on the campus of the University of Nebraska–Lincoln.</p>
-                    </div>
-                </StoryTile>
-            </Section>
-            <GridWrapper>
-                <ContactSection url={props.match.url} />
-                <Section title='Online' className='logo-tile-container'>
-                    <div className='logo-grid'>
-                        <a href='https://github.com/gentryn31' target='_blank' rel='noopener noreferrer'><Tile className='logo-tile'><img src={githubLogo} alt='GitHub logo' width='120px' /></Tile></a>
-                        <a href='https://www.linkedin.com/in/nathan-gentry' target='_blank' rel='noopener noreferrer'><Tile className='logo-tile'><img src={linkedInLogo} alt='LinkedIn logo' width='120px' /></Tile></a>
-                    </div>
-                </Section>
-            </GridWrapper>
-            <Footer />
-        </StyledPage >
+                    </Section>
+                    <GridWrapper>
+                        <ContactSection url={props.match.url} />
+                        <Section title='Online' className='logo-tile-container'>
+                            <div className='logo-grid'>
+                                <a href='https://github.com/gentryn31' target='_blank' rel='noopener noreferrer'><Tile className='logo-tile'><img src={githubLogo} alt='GitHub logo' width='120px' /></Tile></a>
+                                <a href='https://www.linkedin.com/in/nathan-gentry' target='_blank' rel='noopener noreferrer'><Tile className='logo-tile'><img src={linkedInLogo} alt='LinkedIn logo' width='120px' /></Tile></a>
+                            </div>
+                        </Section>
+                    </GridWrapper>
+                </PageWidthWrapper>
+                <Footer />
+            </StyledPage >
+        </>
     );
 }
 

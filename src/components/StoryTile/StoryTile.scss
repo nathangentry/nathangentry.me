@@ -1,18 +1,38 @@
 .storytile-container{
     position: relative;
+    @media (max-width: 799px) {
+        height: calc(100vw - (2 * 36px));
+    }
+    @media (min-width: 800px) {
+        height: 500px;
+    }
+
+    &.display {
+        @media (min-width: 800px) {
+            height: 100%;
+        }
+    }
 
     & > .storytile {
         width: 100%;
         overflow: hidden;
         position: relative;
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
+        @media (min-width: 800px) {
+            flex-direction: row;
+        }
 
         & > .preview {
             position: relative;
             top: 0;
             left: 0;
-            height: 500px;
+            @media (max-width: 799px) {
+                height: calc(100vw - (2 * 36px));
+            }
+            @media (min-width: 800px) {
+                height: 500px;
+            }
             width: 100%;
 
             & > .title {
@@ -53,6 +73,9 @@
         }
 
         & > .full {
+            @media (max-width: 799px) {
+                height: 0;
+            }
             width: 0;
             overflow-y: auto;
     
@@ -62,7 +85,10 @@
     
             & > .highlight-grid {
                 display: grid;
-                grid-template-columns: 1fr 1fr;
+                grid-template-columns: 1fr;
+                @media (min-width: 800px) {
+                    grid-template-columns: 1fr 1fr;
+                }
                 grid-column-gap: 36px;
                 grid-row-gap: 24px;
     
@@ -71,7 +97,9 @@
                 }
     
                 & .full-width {
-                    grid-column: 1 / span 2;
+                    @media (min-width: 800px) {   
+                        grid-column: 1 / span 2;
+                    }
                     
                     & > p {
                         margin-top: 8px;
@@ -87,14 +115,15 @@
     
                 & .skills-highlight-grid {
                     display: grid;
-                    grid-template-columns: 1fr 1fr 1fr;
+                    grid-template-columns: 1fr;
+                    
+                    @media (min-width: 800px) {
+                        grid-template-columns: 1fr 1fr 1fr;
+                    }
                 }
                     
                 & .icon-bullet-container {
                     margin-bottom: 6px;
-                }
-                & .icon-bullet-container:last-of-type {
-                    margin-bottom: 0;
                 }
                 
             }
@@ -115,8 +144,13 @@
 
     & > .close-button {
         position: fixed;
-        top: 36px;
-        right: 36px;
+
+        top: 18px;
+        right: 18px;
+        @media (min-width: 800px) {
+            top: 36px;
+            right: 36px;
+        }
         color: white;
         background-color: rgba(255,255,255, 0);
         z-index: -1;
@@ -149,7 +183,12 @@
 }
 
 .storytile-container.active > .storytile {
-    height: 500px;
+    @media (max-width: 799px) {
+        height: calc(100vw - (2 * 36px));
+    }
+    @media (min-width: 800px) {
+        height: 500px;
+    }
 
     &:hover {
         cursor: pointer;

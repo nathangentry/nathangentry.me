@@ -1,16 +1,26 @@
 .contact-section {
     grid-column: 1 / span 2;
     margin: 0;
+    @media (max-width: 799px) {
+        margin-bottom: -60px;
+    }
 
     & > .contact-tile {
-        padding: 60px;
+        @media (min-width: 800px) {
+            padding: 60px;
+        }
         width: 100%;
 
         & > form {
             display: flex;
             flex-direction: column;
-            margin-top: 18px;
+
+            margin-top: 6px;
             margin-bottom: 24px;
+            @media (min-width: 800px) {
+                margin-top: 18px;
+                margin-bottom: 24px;
+            }
 
             & > label {
                 margin-top: 18px;
@@ -20,14 +30,23 @@
 
         & > .horizontal {
             display: flex;
-            flex-direction: row;
+
+            flex-direction: column;
+            @media (min-width: 800px) {
+                flex-direction: row;
+            }
 
             & > .feedback {
                 display: flex;
                 flex-direction: row;
-                margin-left: 36px;
-                align-self: center;
 
+                margin-top: 24px;
+                align-self: center;
+                @media (min-width: 800px) {
+                    margin-left: 36px;
+                    align-self: center;
+                }
+                
                 &.success {
                     color: var(--success);
                 }

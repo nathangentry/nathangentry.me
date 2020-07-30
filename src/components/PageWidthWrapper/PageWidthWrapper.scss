@@ -1,0 +1,14 @@
+.PageWidthWrapper {
+    margin: 0 36px;
+
+    @media (min-width: 480px) {
+        margin: 0 calc(36px + ((100vw - 480px) * (24 / 640)));
+    }
+    @media (min-width: 1120px) {
+        margin: 0 60px;
+    }   
+    @media (min-width: 1320px) {
+        max-width: 1200px;
+        margin: 0 calc((100vw - 1200px) / 2);
+    }  
+}
