@@ -14,10 +14,20 @@ const StoryTile = props => {
     const previewScrimRef = useRef();
     const previewImageRef = useRef();
 
-    const fullRef = useRef();
+    const detailsRef = useRef();
 
     const closeButtonRef = useRef();
     const fullScrimRef = useRef();
+
+    const BREAKPOINT = {
+        MOBILE: 550,
+        TABLET: 900
+    };
+    const ANIMATION_STEP = {
+        SHORT: 0.1,
+        STANDARD: 0.2,
+        LONG: 0.3
+    };
 
     const [isOpen, setIsOpen] = useState(false);
 
@@ -26,8 +36,7 @@ const StoryTile = props => {
         previewTitleRef.current.style.transition = `opacity 0.1s ease`;
         previewLogoRef.current.style.transition = `opacity 0.1s ease`;
         previewScrimRef.current.style.transition = `opacity 0.1s ease`;
-        tileRef.current.style.transition = `top 0.2s ease, height 0.2s ease, left 0.2s ease, width 0.2s ease`;
-        fullRef.current.style.transition = `height 0.2s ease, width 0.2s ease, opacity 0.1s ease`;
+        detailsRef.current.style.transition = `height 0.2s ease, width 0.2s ease, opacity 0.1s ease`;
         fullScrimRef.current.style.transition = `background-color 0.3s ease`;
     };
 
@@ -37,7 +46,7 @@ const StoryTile = props => {
         previewLogoRef.current.style.transition = `opacity 0.1s ease`;
         previewScrimRef.current.style.transition = `opacity 0.1s ease`;
         tileRef.current.style.transition = `top 0.2s ease, height 0.2s ease, left 0.2s ease, width 0.2s ease`;
-        fullRef.current.style.transition = `height 0.2s ease, width 0.2s ease, opacity 0.1s ease`;
+        detailsRef.current.style.transition = `height 0.2s ease, width 0.2s ease, opacity 0.1s ease`;
         fullScrimRef.current.style.transition = `background-color 0.3s ease`;
     }
 
@@ -59,15 +68,107 @@ const StoryTile = props => {
         previewRef.current.style.height = `${rect.height}px`;
     }
 
+    const updateTile = (isOpen, smooth) => {
+        const screenWidth = document.body.clientWidth;
+        const screenHeight = window.innerHeight;
+        const ref = tileRef.current;
+        let margin = {
+            x: 0,
+            y: 0
+        };
+        let dimens = {
+            width: 0,
+            height: 0,
+        }
+
+        if (isOpen && ref.style.position !== 'fixed') {
+            const current = containerRef.current.getBoundingClientRect();
+            ref.style = {
+                ...ref.style,
+                position: 'fixed',
+                left: current.left,
+                top: current.top,
+                width: current.width,
+                height: current.height
+            };
+
+            const isMobile = screenWidth < BREAKPOINT.MOBILE || screenHeight < BREAKPOINT.MOBILE;
+            const isTablet = screenWidth < BREAKPOINT.TABLET || screenHeight < BREAKPOINT.TABLET;
+            const isDesktop = !isMobile && !isTablet;
+            const isLandscape = screenWidth > screenHeight;
+
+            console.log(isMobile ? 'mobile' : isTablet ? 'tablet' : 'desktop');
+            console.log(isLandscape ? 'landscape' : 'portrait');
+
+            if (isTablet) {
+                margin.x = screenWidth * 0.1;
+                margin.y = screenHeight * 0.1;
+            } else if (!isDesktop) {
+                margin.x = Math.max((document.body.clientWidth - 1200) / 2, 120);
+                margin.y = Math.max((window.innerHeight - 750) / 2, 120);
+            }
+            ref.style.flexDirection = isLandscape ? 'row' : 'column';
+            ref.style.borderRadius = isMobile ? '0' : '4px';
+        } else if (ref.style.position === 'fixed') {
+            const target = containerRef.current.getBoundingClientRect();
+            margin.x = target.left;
+            margin.y = target.top;
+        } else {
+            return;
+        }
+
+        if (smooth) {
+            tileRef.current.style.transition = `
+                left ${ANIMATION_STEP.STANDARD}s ease, 
+                top ${ANIMATION_STEP.STANDARD}s ease, 
+                width ${ANIMATION_STEP.STANDARD}s ease,
+                height ${ANIMATION_STEP.STANDARD}s ease 
+            `;
+        } else {
+            tileRef.current.style.transition = '';
+        }
+
+        ref.style = {
+            ...ref.style,
+            left: `${margin.x}px`,
+            top: `${margin.y}px`,
+            width: `${screenWidth - (2 * margin.x)}px`,
+            height: `${screenHeight - (2 * margin.y)}px`
+        };
+
+        if (!isOpen) {
+            const wait = smooth ? ANIMATION_STEP.STANDARD : 0;
+            setTimeout(() => {
+                ref.style = {
+                    ...ref.style,
+                    position: 'relative',
+                    left: '0',
+                    top: '0',
+                    width: '100%',
+                    height: '100%'
+                };
+            }, wait);
+        }
+
+        resizePreview(isOpen, smooth);
+        resizeDetails(isOpen, smooth);
+    }
+
+    const resizePreview = (isOpen, smooth) => {
+
+    }
+
+    const resizeDetails = (isOpen, smooth) => {
+
+    }
+
     const openStoryTile = () => {
         // pre
         setPreviewOpacity(1);
-        tileRef.current.style.position = 'fixed';
-        setTileRect(containerRef.current.getBoundingClientRect());
         setPreviewDimensions(containerRef.current.getBoundingClientRect());
-        fullRef.current.style.opacity = '0';
-        fullRef.current.style.width = '0';
-        fullRef.current.style.height = '500px';
+        detailsRef.current.style.opacity = '0';
+        detailsRef.current.style.width = '0';
+        detailsRef.current.style.height = '500px';
         setOpenTransitions();
 
         // calc
@@ -76,12 +177,7 @@ const StoryTile = props => {
             yMargin = 0;
             xMargin = 0;
             tileWidth = document.body.clientWidth;
-            previewWidth = tileWidth;
-            fullWidth = tileWidth;
-
             tileHeight = window.innerHeight;
-            previewHeight = tileHeight * 0.3;
-            fullHeight = tileHeight * 0.7;
 
             fullPadding = '36px';
         } else {
@@ -89,16 +185,22 @@ const StoryTile = props => {
             xMargin = Math.max((document.body.clientWidth - 1200) / 2, 120);
 
             tileWidth = document.body.clientWidth - (2 * xMargin);
-            previewWidth = tileWidth * 0.4;
-            fullWidth = tileWidth * 0.6;
-
             tileHeight = window.innerHeight - (2 * yMargin);
-            previewHeight = tileHeight;
-            fullHeight = tileHeight;
 
             fullPadding = '60px';
         }
-        const targetTileRect = { top: yMargin, left: xMargin, width: tileWidth, height: tileHeight };
+        if (document.body.clientWidth < 799 && document.body.clientWidth < window.innerHeight) {
+            previewWidth = tileWidth;
+            fullWidth = tileWidth;
+            previewHeight = tileHeight * 0.3;
+            fullHeight = tileHeight * 0.7;
+        } else {
+            previewWidth = tileWidth * 0.4;
+            fullWidth = tileWidth * 0.6;
+            previewHeight = tileHeight;
+            fullHeight = tileHeight;
+            tileRef.current.style.flexDirection = 'row';
+        }
         const targetPreviewDimensions = { width: previewWidth, height: previewHeight };
 
         // post
@@ -114,21 +216,16 @@ const StoryTile = props => {
             fullScrimRef.current.style.zIndex = '3';
             fullScrimRef.current.style.backgroundColor = 'rgba(0, 0, 0, 0.6)';
 
-            fullRef.current.style.width = `${fullWidth}px`;
-            fullRef.current.style.height = `${fullHeight}px`;
+            detailsRef.current.style.width = `${fullWidth}px`;
+            detailsRef.current.style.height = `${fullHeight}px`;
 
 
-            setTileRect(targetTileRect);
+            updateTile(true, true);
             setPreviewDimensions(targetPreviewDimensions);
 
             setTimeout(() => {
-                if (document.body.clientWidth < 800) {
-                    tileRef.current.style.borderRadius = '0';
-                    tileRef.current.style.height = '100vh';
-                    tileRef.current.style.width = '100vw';
-                }
-                fullRef.current.style.opacity = '1';
-                fullRef.current.style.padding = fullPadding;
+                detailsRef.current.style.opacity = '1';
+                detailsRef.current.style.padding = fullPadding;
             }, 200);
         }, 100);
     }
@@ -144,14 +241,14 @@ const StoryTile = props => {
         setIsOpen(false);
         document.body.style.overflowY = 'auto';
         closeButtonRef.current.style.zIndex = '-1';
-        fullRef.current.style.opacity = '0';
+        detailsRef.current.style.opacity = '0';
 
         setTimeout(() => {
             setTileRect(targetRect);
             setPreviewDimensions(targetRect);
-            fullRef.current.style.width = `0`;
-            fullRef.current.style.height = `0`;
-            fullRef.current.style.padding = '0';
+            detailsRef.current.style.width = `0`;
+            detailsRef.current.style.height = `0`;
+            detailsRef.current.style.padding = '0';
 
             fullScrimRef.current.style.backgroundColor = 'rgba(0, 0, 0, 0)';
             setTimeout(() => {
@@ -168,11 +265,7 @@ const StoryTile = props => {
 
                 tileRef.current.style.transition = '';
                 tileRef.current.style.zIndex = '0';
-                tileRef.current.style.position = 'relative';
-                tileRef.current.style.top = '0';
-                tileRef.current.style.left = '0';
-                tileRef.current.style.width = '100%';
-                tileRef.current.style.height = '100%';
+                updateTile(false, true);
                 previewRef.current.style.width = '100%';
                 previewRef.current.style.height = '100%';
             }, 200);
@@ -183,20 +276,20 @@ const StoryTile = props => {
     return (
         <>
             <div ref={containerRef} className={`storytile-container ${props.display ? 'display' : 'active'}`}>
-                <Tile ref={tileRef} className={`storytile`} onClick={!props.display && !isOpen && openStoryTile}>
+                <Tile ref={tileRef} className={`storytile`} onClick={!props.display && !isOpen ? openStoryTile : undefined}>
                     <div className='preview' ref={previewRef}>
                         <h4 className='title' ref={previewTitleRef}>{props.title}</h4>
                         <img className='logoImage' src={props.logoImage} alt='' ref={previewLogoRef} />
                         <div className='scrim' ref={previewScrimRef} />
                         <img className='mainImage' src={props.mainImage} alt='' ref={previewImageRef} />
                     </div>
-                    <div className='full' ref={fullRef}>
+                    <div className='details' ref={detailsRef}>
                         <h2 className='title'>{props.title}</h2>
                         {props.children}
                     </div>
                 </Tile>
-                <IconButton icon='close' className='close-button' onClick={isOpen && closeStoryTile} ref={closeButtonRef} />
-                <div className='full-scrim' onClick={isOpen && closeStoryTile} ref={fullScrimRef} />
+                <IconButton icon='close' className='close-button' onClick={isOpen ? closeStoryTile : undefined} ref={closeButtonRef} />
+                <div className='full-scrim' onClick={isOpen ? closeStoryTile : undefined} ref={fullScrimRef} />
             </div>
         </>
     );
