@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const StyledPage = styled.div`
     width: 100vw;
 
-    @media (min-width: 800px) {
+    @media (min-width: 550px) {
         background-color: var(--background);
     }
 

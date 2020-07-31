@@ -1,9 +1,16 @@
 .storytile-container{
     position: relative;
-    @media (max-width: 799px) {
-        height: calc(100vw - (2 * 36px));
+    height: calc(100vw - (2 * 36px));
+    @media (min-width: 425px) {
+        height: calc(300px + ((100vw - 425px) * 100 / 175));
     }
-    @media (min-width: 800px) {
+    @media (min-width: 600px) {
+        height: 400px;
+    }
+    @media (min-width: 1000px) {
+        height: calc(400px + ((100vw - 1000px) * 100 / 200));
+    }
+    @media (min-width: 1200px) {
         height: 500px;
     }
 
@@ -27,10 +34,17 @@
             position: relative;
             top: 0;
             left: 0;
-            @media (max-width: 799px) {
-                height: calc(100vw - (2 * 36px));
+            height: calc(100vw - (2 * 36px));
+            @media (min-width: 425px) {
+                height: calc(300px + ((100vw - 425px) * 100 / 175));
             }
-            @media (min-width: 800px) {
+            @media (min-width: 600px) {
+                height: 400px;
+            }
+            @media (min-width: 1000px) {
+                height: calc(400px + ((100vw - 1000px) * 100 / 200));
+            }
+            @media (min-width: 1200px) {
                 height: 500px;
             }
             width: 100%;
@@ -72,7 +86,7 @@
             }
         }
 
-        & > .full {
+        & > .details {
             @media (max-width: 799px) {
                 height: 0;
             }
@@ -183,10 +197,17 @@
 }
 
 .storytile-container.active > .storytile {
-    @media (max-width: 799px) {
-        height: calc(100vw - (2 * 36px));
+    height: calc(100vw - (2 * 36px));
+    @media (min-width: 425px) {
+        height: calc(300px + ((100vw - 425px) * 100 / 175));
     }
-    @media (min-width: 800px) {
+    @media (min-width: 600px) {
+        height: 400px;
+    }
+    @media (min-width: 1000px) {
+        height: calc(400px + ((100vw - 1000px) * 100 / 200));
+    }
+    @media (min-width: 1200px) {
         height: 500px;
     }
 

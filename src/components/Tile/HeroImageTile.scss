@@ -19,6 +19,10 @@
             
             height: calc(100% + 30px);
             top: -30px;
+            @media (min-width: 550px) and (max-width: 700px) {
+                top: calc(70px + ((100vw - 550px) * -100 / 150));
+                height: calc(100% + (-70px + ((100vw - 550px) * 100 / 150)));
+            }
             @media (max-width: 799px) {
                 width: 100%;
             }
@@ -44,6 +48,10 @@
 
             height: calc(100% + 30px);
             top: -30px;
+            @media (min-width: 550px) and (max-width: 700px) {
+                top: calc(70px + ((100vw - 550px) * -100 / 150));
+                height: calc(100% + (-70px + ((100vw - 550px) * 100 / 150)));
+            }
             @media (max-width: 799px) {
                 width: 100%;
             }

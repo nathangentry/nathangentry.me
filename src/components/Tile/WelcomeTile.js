@@ -1,12 +1,20 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { HashLink as Link } from 'react-router-hash-link';
 import Tile from './Tile';
 
 import './WelcomeTile.scss';
 
 const WelcomeTile = props => {
+    const [isWide, setIsWide] = useState(true);
+    useEffect(() => {
+        const handleResize = () => setIsWide(document.body.clientWidth >= 1000);
+
+        handleResize();
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
     return (
-        <Tile className='WelcomeTile' wide>
+        <Tile className='WelcomeTile' wide={isWide}>
             <h1 className='title'>
                 {props.name !== null && <span style={{ color: props.primaryColor }}>Hey {props.name}! </span>}
                 I'm Nathan, and I craft delightful experiences for the web.

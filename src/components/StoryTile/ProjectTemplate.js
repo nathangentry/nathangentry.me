@@ -16,8 +16,8 @@ const ProjectTemplate = props => {
                 <h5 className='section-heading'>Skills</h5>
                 <div className='skills-highlight-grid'>
                     {props.skills.map(column =>
-                        <div>
-                            {column.map(skill => <IconBullet icon='done' text={skill} />)}
+                        <div key={column}>
+                            {column.map(skill => <IconBullet icon='done' text={skill} key={skill} />)}
                         </div>
                     )}
                 </div>
@@ -25,7 +25,7 @@ const ProjectTemplate = props => {
             <div className='full-width'>
                 <h5 className='section-heading'>Overview</h5>
                 {props.overview.map(paragraph =>
-                    <p>{paragraph}</p>
+                    <p key={paragraph}>{paragraph}</p>
                 )}
             </div>
         </div>

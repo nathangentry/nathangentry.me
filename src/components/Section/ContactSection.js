@@ -115,15 +115,15 @@ const ContactSection = props => {
       <Tile className="contact-tile">
         <h2>Like what you see? Let's get in touch</h2>
         <form>
-          <label for="name" id="name-label">
+          <label htmlFor="name" id="name-label">
             Name
           </label>
           <input name="name" type="text" id="name-input" />
-          <label for="email" id="email-label">
+          <label htmlFor="email" id="email-label">
             Email
           </label>
           <input name="email" type="email" id="email-input" />
-          <label for="message" id="message-label">
+          <label htmlFor="message" id="message-label">
             Message
           </label>
           <textarea

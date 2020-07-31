@@ -1,5 +1,8 @@
 .WelcomeTile {
     background-color: white;
+    @media (min-width: 550px) and (max-width: 800px) {
+        background-color: var(--background);
+    }
     @media (min-width: 800px) {
         padding: 36px;
     }
@@ -28,7 +31,7 @@
         align-items: stretch;
         margin-top: 24px;
 
-        @media (min-width: 800px) {
+        @media (min-width: 1000px) {
             margin-top: 36px;
             flex-direction: row;
         }
@@ -38,10 +41,10 @@
         }
 
         & a:first-of-type {
-            @media (max-width: 800px) {
+            @media (max-width: 1000px) {
                 margin-bottom: 12px;
             }
-            @media (min-width: 800px) {
+            @media (min-width: 1000px) {
                 margin-right: 16px;
             }
         }

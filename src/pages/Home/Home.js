@@ -176,7 +176,7 @@ const Home = props => {
                     <Section title='Experience' id='experience'>
                         <GridWrapper>
                             {experienceData.map(x =>
-                                <StoryTile title={x.title} mainImage={x.mainImage} logoImage={x.logoImage}>
+                                <StoryTile title={x.title} mainImage={x.mainImage} logoImage={x.logoImage} key={x.id}>
                                     <ExperienceTemplate {...x} />
                                 </StoryTile>
                             )}
@@ -185,7 +185,7 @@ const Home = props => {
                     <Section title='Projects' id='projects'>
                         <GridWrapper>
                             {projectData.map(p =>
-                                <StoryTile title={p.title} mainImage={p.mainImage} logoImage={p.logoImage}>
+                                <StoryTile title={p.title} mainImage={p.mainImage} logoImage={p.logoImage} key={p.id}>
                                     <ProjectTemplate {...p} />
                                 </StoryTile>
                             )}
