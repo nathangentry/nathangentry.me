@@ -53,37 +53,53 @@ const StoryTile = props => {
         return () => window.removeEventListener('resize', updateTile);
     }, [isOpen]);
 
-    const toggleTransitions = active => {
-        if (active) {
-            tileRef.current.style.transition = `
+    const enableTransitions = () => {
+        tileRef.current.style.transition = `
                 left ${ANIMATION_STEP.STANDARD}s ease, 
                 top ${ANIMATION_STEP.STANDARD}s ease, 
                 width ${ANIMATION_STEP.STANDARD}s ease,
                 height ${ANIMATION_STEP.STANDARD}s ease 
             `;
-            previewRef.current.style.transition = `
+        previewRef.current.style.transition = `
                 height ${ANIMATION_STEP.STANDARD}s ease,
                 width ${ANIMATION_STEP.STANDARD}s ease
             `;
-            previewTitleRef.current.style.transition = `opacity ${ANIMATION_STEP.SHORT}s ease`;
-            previewLogoRef.current.style.transition = `opacity ${ANIMATION_STEP.SHORT}s ease`;
-            previewScrimRef.current.style.transition = `opacity ${ANIMATION_STEP.SHORT}s ease`;
-            detailsRef.current.style.transition = `
+        previewTitleRef.current.style.transition = `opacity ${ANIMATION_STEP.SHORT}s ease`;
+        previewLogoRef.current.style.transition = `opacity ${ANIMATION_STEP.SHORT}s ease`;
+        previewScrimRef.current.style.transition = `opacity ${ANIMATION_STEP.SHORT}s ease`;
+        detailsRef.current.style.transition = `
                 height ${ANIMATION_STEP.STANDARD}s ease,
                 width ${ANIMATION_STEP.STANDARD}s ease,
                 opacity ${ANIMATION_STEP.SHORT}s ease
             `;
-            fullScrimRef.current.style.transition = `background-color ${ANIMATION_STEP.LONG}s ease`;
-        } else {
-            tileRef.current.style.transition = '';
-            previewRef.current.style.transition = '';
-            previewTitleRef.current.style.transition = '';
-            previewLogoRef.current.style.transition = '';
-            previewScrimRef.current.style.transition = '';
-            detailsRef.current.style.transition = '';
-            fullScrimRef.current.style.transition = '';
-        }
+        fullScrimRef.current.style.transition = `background-color ${ANIMATION_STEP.LONG}s ease`;
     }
+
+    const disableTransitions = () => {
+        tileRef.current.style.transition = '';
+        previewRef.current.style.transition = '';
+        previewTitleRef.current.style.transition = '';
+        previewLogoRef.current.style.transition = '';
+        previewScrimRef.current.style.transition = '';
+        detailsRef.current.style.transition = '';
+        fullScrimRef.current.style.transition = '';
+    }
+
+    const fadeInScrim = () => {
+        fullScrimRef.current.style.zIndex = '3';
+        fullScrimRef.current.style.backgroundColor = 'rgba(0, 0, 0, 0.6)';
+    }
+
+    const fadeOutScrim = () => {
+        fullScrimRef.current.style.backgroundColor = 'rgba(0, 0, 0, 0.0)';
+        setTimeout(() => {
+            fullScrimRef.current.style.zIndex = '-1';
+        }, ANIMATION_STEP.LONG * 1000);
+    }
+
+    const showCloseButton = () => closeButtonRef.current.style.zIndex = '5';
+
+    const hideCloseButton = () => closeButtonRef.current.style.zIndex = '-1';
 
     const setPreviewOpacity = value => {
         previewTitleRef.current.style.opacity = `${value}`;
@@ -110,10 +126,7 @@ const StoryTile = props => {
                 if (tile.style.position !== 'fixed') {
                     const current = containerRef.current.getBoundingClientRect();
                     tile.style.position = 'fixed';
-                    tile.style.left = `${current.left}px`;
-                    tile.style.top = `${current.top}px`;
-                    tile.style.width = `${current.width}px`;
-                    tile.style.height = `${current.height}px`;
+                    setBoundingClientRect(tile, current);
                 }
 
                 if (isMobile) {
@@ -187,10 +200,7 @@ const StoryTile = props => {
             }
 
             setTimeout(() => {
-                tile.style.left = `${target.x}px`;
-                tile.style.top = `${target.y}px`;
-                tile.style.width = `${target.width}px`;
-                tile.style.height = `${target.height}px`;
+                setBoundingClientRect(tile, target);
                 preview.style.width = `${target.width * ratio.preview.x}px`;
                 preview.style.height = `${target.height * ratio.preview.y}px`;
                 details.style.width = `${target.width * ratio.details.x}px`;
@@ -211,33 +221,47 @@ const StoryTile = props => {
         }
     };
 
+    const setBoundingClientRect = (element, rect) => {
+        if (rect.x !== undefined) element.style.left = `${rect.x}px`;
+        if (rect.y !== undefined) element.style.top = `${rect.y}px`;
+        if (rect.width !== undefined) element.style.width = `${rect.width}px`;
+        if (rect.height !== undefined) element.style.height = `${rect.height}px`;
+        if (rect.top !== undefined) element.style.top = `${rect.top}px`;
+        if (rect.right !== undefined) element.style.right = `${rect.right}px`;
+        if (rect.bottom !== undefined) element.style.bottom = `${rect.bottom}px`;
+        if (rect.left !== undefined) element.style.left = `${rect.left}px`;
+    }
+
     const openStoryTile = () => {
-        setIsOpen(true);
-        toggleTransitions(true);
+        enableTransitions();
+        fadeInScrim();
+        setPreviewOpacity(0);
+
         document.body.style.overflowY = 'hidden';
         tileRef.current.style.zIndex = '4';
-        setPreviewOpacity(0);
-        fullScrimRef.current.style.zIndex = '3';
-        fullScrimRef.current.style.backgroundColor = 'rgba(0, 0, 0, 0.6)';
-        closeButtonRef.current.style.zIndex = '5';
         resizeTile(true, true);
         setTimeout(() => {
-            toggleTransitions(false);
+            showCloseButton();
+            setIsOpen(true);
+            disableTransitions();
         }, ANIMATION_STEP.LONG * 1000);
     }
 
+    const resizeStoryTile = () => {
+
+    }
+
     const closeStoryTile = () => {
-        setIsOpen(false);
-        toggleTransitions(true);
-        fullScrimRef.current.style.backgroundColor = 'rgba(0, 0, 0, 0.0)';
+        enableTransitions();
+        hideCloseButton();
+        fadeOutScrim();
         setTimeout(() => {
-            closeButtonRef.current.style.zIndex = '-1';
-            fullScrimRef.current.style.zIndex = '-1';
-            setPreviewOpacity(1);
             document.body.removeAttribute('style');
             resizeTile(false, true);
+            setPreviewOpacity(1);
             setTimeout(() => {
-                toggleTransitions(false);
+                setIsOpen(false);
+                disableTransitions();
             }, ANIMATION_STEP.SHORT * 1000);
         }, ANIMATION_STEP.STANDARD * 1000);
     }
