@@ -18,7 +18,8 @@ const StoryTile = props => {
 
     const BREAKPOINT = {
         MOBILE: 550,
-        TABLET: 900
+        TABLET: 900,
+        EDUCATION_DISPLAY: 1100
     };
     const ANIMATION_STEP = {
         SHORT: 0.1,
@@ -26,28 +27,53 @@ const StoryTile = props => {
         LONG: 0.3
     };
 
+    const [isOpen, setIsOpen] = useState(false);
+
     useEffect(() => {
         if (props.display) {
-            if (tileRef.current.style.position === 'fixed') {
-                if (isOpen) {
-                    closeStoryTile();
-                    return;
-                }
+            if (isOpen) {
+                setIsOpen(false);
             } else {
                 setPreviewOpacity(0);
-                return;
             }
         } else if (!isOpen) {
             setPreviewOpacity(1);
         }
     }, [props.display]);
 
-    const [isOpen, setIsOpen] = useState(false);
     useEffect(() => {
-        resizeTile(isOpen, true);
-    }, [isOpen]);
+        if (isOpen) {
+            enableTransitions();
+            document.body.style.overflowY = 'hidden';
+            tileRef.current.style.zIndex = '4';
+            fadeInScrim();
+            setPreviewOpacity(0);
+            setTimeout(() => {
+                openStoryTile();
+                setTimeout(() => {
+                    showCloseButton();
+                    disableTransitions();
+                }, ANIMATION_STEP.STANDARD * 1000);
+            }, ANIMATION_STEP.SHORT * 1000);
+        } else {
+            if (tileRef.current.style.position === 'fixed') {
+                enableTransitions();
+                hideCloseButton();
+                fadeOutScrim();
+                closeStoryTile();
+                setTimeout(() => {
+                    document.body.removeAttribute('style');
+                    !props.display && setPreviewOpacity(1);
+                    setTimeout(() => {
+                        disableTransitions();
+                    }, ANIMATION_STEP.SHORT * 1000);
+                }, ANIMATION_STEP.LONG * 1000);
+            }
+        }
+    }, [isOpen, props.display]);
+
     useEffect(() => {
-        const updateTile = () => resizeTile(isOpen, false);
+        const updateTile = () => isOpen && resizeStoryTile(false);
 
         window.addEventListener('resize', updateTile);
         return () => window.removeEventListener('resize', updateTile);
@@ -58,7 +84,8 @@ const StoryTile = props => {
                 left ${ANIMATION_STEP.STANDARD}s ease, 
                 top ${ANIMATION_STEP.STANDARD}s ease, 
                 width ${ANIMATION_STEP.STANDARD}s ease,
-                height ${ANIMATION_STEP.STANDARD}s ease 
+                height ${ANIMATION_STEP.STANDARD}s ease,
+                border-radius ${ANIMATION_STEP.STANDARD}s ease
             `;
         previewRef.current.style.transition = `
                 height ${ANIMATION_STEP.STANDARD}s ease,
@@ -107,120 +134,6 @@ const StoryTile = props => {
         previewScrimRef.current.style.opacity = `${value}`;
     }
 
-    const resizeTile = (isOpen, smooth) => {
-        const tile = tileRef.current;
-        const screenWidth = document.body.clientWidth;
-
-        if (isOpen || tile.style.position === 'fixed') {
-            const screenHeight = window.innerHeight;
-            const isMobile = screenWidth < BREAKPOINT.MOBILE || screenHeight < BREAKPOINT.MOBILE;
-            const isTablet = screenWidth < BREAKPOINT.TABLET || screenHeight < BREAKPOINT.TABLET;
-            const isLandscape = screenWidth > screenHeight;
-            let target = {};
-            let ratio = {};
-            const preview = previewRef.current;
-            const details = detailsRef.current;
-            let detailsPadding = 0;
-
-            if (isOpen) {
-                if (tile.style.position !== 'fixed') {
-                    const current = containerRef.current.getBoundingClientRect();
-                    tile.style.position = 'fixed';
-                    setBoundingClientRect(tile, current);
-                }
-
-                if (isMobile) {
-                    target.x = 0;
-                    target.y = 0;
-                    target.width = screenWidth;
-                    target.height = screenHeight;
-                    detailsPadding = 36;
-                    if (isLandscape) {
-                        if (screenWidth > 800) {
-                            ratio.preview = { x: 0.3, y: 1.0 };
-                            ratio.details = { x: 0.7, y: 1.0 };
-                        } else {
-                            ratio.preview = { x: 0.4, y: 1.0 };
-                            ratio.details = { x: 0.6, y: 1.0 };
-                        }
-                        tile.style.flexDirection = 'row';
-                        closeButtonRef.current.style.color = 'black';
-                        closeButtonRef.current.style.top = '6px';
-                        closeButtonRef.current.style.right = '6px';
-                    } else {
-                        ratio.preview = { x: 1.0, y: 0.3 };
-                        ratio.details = { x: 1.0, y: 0.7 };
-                        tile.style.flexDirection = 'column';
-                        closeButtonRef.current.style.color = 'white';
-                    }
-                } else if (isTablet) {
-                    target.x = screenWidth * 0.1;
-                    target.y = screenHeight * 0.1;
-                    target.width = screenWidth * 0.8;
-                    target.height = screenHeight * 0.8;
-                    detailsPadding = 48;
-                    closeButtonRef.current.style.color = 'white';
-                    if (isLandscape) {
-                        if (screenWidth < 1024) {
-                            ratio.preview = { x: 0, y: 1.0 };
-                            ratio.details = { x: 1.0, y: 1.0 };
-                        } else if (screenWidth < 1100) {
-                            ratio.preview = { x: 0.3, y: 1.0 };
-                            ratio.details = { x: 0.7, y: 1.0 };
-                        } else {
-                            ratio.preview = { x: 0.4, y: 1.0 };
-                            ratio.details = { x: 0.6, y: 1.0 };
-                        }
-                        tile.style.flexDirection = 'row';
-                    } else {
-                        ratio.preview = { x: 1.0, y: 0.3 };
-                        ratio.details = { x: 1.0, y: 0.7 };
-                        tile.style.flexDirection = 'column';
-                    }
-                } else {
-                    target.x = Math.max((document.body.clientWidth - 1200) / 2, 120);
-                    target.y = Math.max((window.innerHeight - 750) / 2, 120);
-                    target.width = screenWidth - (2 * target.x);
-                    target.height = screenHeight - (2 * target.y);
-                    detailsPadding = 60;
-                    closeButtonRef.current.style.color = 'white';
-                    ratio.preview = { x: 0.4, y: 1.0 };
-                    ratio.details = { x: 0.6, y: 1.0 };
-                    tile.style.flexDirection = 'row';
-                }
-
-                tile.style.borderRadius = isMobile ? '0' : '4px';
-            } else {
-                target = containerRef.current.getBoundingClientRect();
-                if (props.display) target.height = details.clientHeight;
-                ratio.preview = { x: 1.0, y: 1.0 };
-                ratio.details = { x: 0.0, y: 0.0 };
-                details.style.opacity = '0';
-                detailsPadding = 0;
-            }
-
-            setTimeout(() => {
-                setBoundingClientRect(tile, target);
-                preview.style.width = `${target.width * ratio.preview.x}px`;
-                preview.style.height = `${target.height * ratio.preview.y}px`;
-                details.style.width = `${target.width * ratio.details.x}px`;
-                details.style.height = `${target.height * ratio.details.y}px`;
-                if (!isOpen) { details.style.padding = `${detailsPadding}px`; }
-
-                setTimeout(() => {
-                    if (!isOpen) {
-                        tile.removeAttribute('style');
-                        preview.removeAttribute('style');
-                        details.removeAttribute('style');
-                    } else {
-                        details.style.padding = `${detailsPadding}px`;
-                        details.style.opacity = '1';
-                    }
-                }, smooth ? ANIMATION_STEP.STANDARD * 1000 : 0);
-            }, smooth ? ANIMATION_STEP.SHORT * 1000 : 0);
-        }
-    };
-
     const setBoundingClientRect = (element, rect) => {
         if (rect.x !== undefined) element.style.left = `${rect.x}px`;
         if (rect.y !== undefined) element.style.top = `${rect.y}px`;
@@ -232,44 +145,170 @@ const StoryTile = props => {
         if (rect.left !== undefined) element.style.left = `${rect.left}px`;
     }
 
-    const openStoryTile = () => {
-        enableTransitions();
-        fadeInScrim();
-        setPreviewOpacity(0);
-
-        document.body.style.overflowY = 'hidden';
-        tileRef.current.style.zIndex = '4';
-        resizeTile(true, true);
-        setTimeout(() => {
-            showCloseButton();
-            setIsOpen(true);
-            disableTransitions();
-        }, ANIMATION_STEP.LONG * 1000);
+    const getScreenProperties = () => {
+        return {
+            width: document.body.clientWidth,
+            height: window.innerHeight,
+            isMobile: document.body.clientWidth < BREAKPOINT.MOBILE || window.innerHeight < BREAKPOINT.MOBILE,
+            isTablet: document.body.clientWidth < BREAKPOINT.TABLET || window.innerHeight < BREAKPOINT.TABLET,
+            isLandscape: document.body.clientWidth > window.innerHeight
+        };
     }
 
-    const resizeStoryTile = () => {
+    const resizeStoryTile = (smooth) => {
+        // properties
+        const screen = getScreenProperties();
+        const maxWidth = 1200;
+        const maxHeight = 750;
+        const minMargin = 120;
 
+        // find ending margins
+        let target = {};
+        if (screen.isMobile) {
+            target.x = 0;
+            target.y = 0;
+        } else if (screen.isTablet) {
+            target.x = screen.width * 0.1;
+            target.y = screen.height * 0.1;
+        } else {
+            target.x = Math.max((document.body.clientWidth - maxWidth) / 2, minMargin);
+            target.y = Math.max((window.innerHeight - maxHeight) / 2, minMargin);
+        }
+
+        // find ending width & height
+        target.width = screen.width - (2 * target.x);
+        target.height = screen.height - (2 * target.y);
+        const children = getTileChildrenDimensions(target, true);
+
+        // set ending rect
+        setBoundingClientRect(tileRef.current, target);
+        setBoundingClientRect(previewRef.current, children.preview);
+        setBoundingClientRect(detailsRef.current, children.details);
+        tileRef.current.style.borderRadius = screen.isMobile ? '0' : '4px';
+        tileRef.current.style.flexDirection = screen.isLandscape ? 'row' : 'column';
+        setTimeout(() => {
+            detailsRef.current.style.padding = `${children.details.padding}px`;
+            detailsRef.current.style.opacity = '1.0';
+        }, smooth ? ANIMATION_STEP.STANDARD * 1000 : 0);
+    }
+
+    const getTileChildrenDimensions = (tileRect, isOpen) => {
+        const screen = getScreenProperties();
+        const detailColumnLayoutBreakpoint = 800;
+        const tabletSmallBreakpoint = 1024;
+        const tabletMediumBreakpoint = 1100;
+
+        let ratio = {};
+        let detailsPadding;
+        if (isOpen) {
+            closeButtonRef.current.className = 'close-button';
+            if (screen.isMobile) {
+                detailsPadding = 36;
+                if (screen.isLandscape) {
+                    closeButtonRef.current.className += ' dark';
+                    if (screen.width > detailColumnLayoutBreakpoint) {
+                        ratio.preview = { width: 0.3, height: 1.0 };
+                        ratio.details = { width: 0.7, height: 1.0 };
+                    } else {
+                        ratio.preview = { width: 0.4, height: 1.0 };
+                        ratio.details = { width: 0.6, height: 1.0 };
+                    }
+                } else {
+                    ratio.preview = { width: 1.0, height: 0.3 };
+                    ratio.details = { width: 1.0, height: 0.7 };
+                }
+            } else if (screen.isTablet) {
+                detailsPadding = 48;
+                if (screen.isLandscape) {
+                    if (screen.width < tabletSmallBreakpoint) {
+                        ratio.preview = { width: 0.0, height: 1.0 };
+                        ratio.details = { width: 1.0, height: 1.0 };
+                    } else if (screen.width < tabletMediumBreakpoint) {
+                        ratio.preview = { width: 0.3, height: 1.0 };
+                        ratio.details = { width: 0.7, height: 1.0 };
+                    } else {
+                        ratio.preview = { width: 0.4, height: 1.0 };
+                        ratio.details = { width: 0.6, height: 1.0 };
+                    }
+                } else {
+                    ratio.preview = { width: 1.0, height: 0.3 };
+                    ratio.details = { width: 1.0, height: 0.7 };
+                }
+            } else {
+                detailsPadding = 60;
+                ratio.preview = { width: 0.4, height: 1.0 };
+                ratio.details = { width: 0.6, height: 1.0 };
+            }
+        } else {
+            detailsPadding = 0;
+            if (props.display) {
+                const expandedImageBreakpoint = 1250;
+                if (screen.width < expandedImageBreakpoint) {
+                    ratio.preview = { width: 0.3, height: 1.0 };
+                    ratio.details = { width: 0.7, height: 1.0 };
+                } else {
+                    ratio.preview = { width: 0.4, height: 1.0 };
+                    ratio.details = { width: 0.6, height: 1.0 };
+                }
+            } else {
+                ratio.preview = { width: 1.0, height: 1.0 };
+                ratio.details = { width: 0.0, height: 0.0 };
+            }
+        }
+
+        return {
+            preview: {
+                width: tileRect.width * ratio.preview.width,
+                height: tileRect.height * ratio.preview.height
+            },
+            details: {
+                width: tileRect.width * ratio.details.width,
+                height: tileRect.height * ratio.details.height,
+                padding: detailsPadding
+            }
+        };
+    }
+
+    const openStoryTile = () => {
+        // set starting rect
+        tileRef.current.style.position = 'fixed';
+        const startingRect = containerRef.current.getBoundingClientRect();
+        setBoundingClientRect(tileRef.current, startingRect);
+        setBoundingClientRect(previewRef.current, {
+            width: startingRect.width,
+            height: startingRect.height
+        });
+
+        // set finishing rect
+        resizeStoryTile(true);
     }
 
     const closeStoryTile = () => {
-        enableTransitions();
-        hideCloseButton();
-        fadeOutScrim();
+        // find ending width & height
+        const target = containerRef.current.getBoundingClientRect();
+        if (props.display) target.height = detailsRef.current.clientHeight;
+        const children = getTileChildrenDimensions(target, false);
+
+        // set ending rect
+        detailsRef.current.style.opacity = '0.0';
         setTimeout(() => {
-            document.body.removeAttribute('style');
-            resizeTile(false, true);
-            setPreviewOpacity(1);
+            detailsRef.current.style.padding = `${children.details.padding}px`;
+            setBoundingClientRect(tileRef.current, target);
+            setBoundingClientRect(previewRef.current, children.preview);
+            setBoundingClientRect(detailsRef.current, children.details);
+            tileRef.current.style.borderRadius = '4px';
             setTimeout(() => {
-                setIsOpen(false);
-                disableTransitions();
-            }, ANIMATION_STEP.SHORT * 1000);
-        }, ANIMATION_STEP.STANDARD * 1000);
+                tileRef.current.removeAttribute('style');
+                previewRef.current.removeAttribute('style');
+                detailsRef.current.removeAttribute('style');
+            }, ANIMATION_STEP.STANDARD * 1000);
+        }, ANIMATION_STEP.SHORT * 1000);
     }
 
     return (
         <>
             <div ref={containerRef} className={`storytile-container ${props.display ? 'display' : 'active'}`}>
-                <Tile ref={tileRef} className={`storytile`} onClick={!props.display && !isOpen ? openStoryTile : undefined}>
+                <Tile ref={tileRef} className={`storytile`} onClick={() => !props.display && !isOpen ? setIsOpen(true) : undefined}>
                     <div className='preview' ref={previewRef}>
                         <h4 className='title' ref={previewTitleRef}>{props.title}</h4>
                         <img className='logoImage' src={props.logoImage} alt='' ref={previewLogoRef} />
@@ -281,8 +320,8 @@ const StoryTile = props => {
                         {props.children}
                     </div>
                 </Tile>
-                <IconButton icon='close' className='close-button' onClick={isOpen ? closeStoryTile : undefined} ref={closeButtonRef} />
-                <div className='full-scrim' onClick={isOpen ? closeStoryTile : undefined} ref={fullScrimRef} />
+                <IconButton icon='close' className='close-button' onClick={() => isOpen ? setIsOpen(false) : undefined} ref={closeButtonRef} />
+                <div className='full-scrim' onClick={() => isOpen ? setIsOpen(false) : undefined} ref={fullScrimRef} />
             </div>
         </>
     );
