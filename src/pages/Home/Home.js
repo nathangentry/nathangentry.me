@@ -76,12 +76,11 @@ const Home = props => {
             if (company.name !== null) {
                 const windowWidth = window.innerWidth;
                 const windowHeight = window.innerHeight;
-                heroRightSectionRef.current.style.height = 'fit-content';
-                const container = heroRightSectionRef.current.getBoundingClientRect();
-                heroRightSectionRef.current.removeAttribute('style');
+                const containerHeight = 577;
+                const containerTop = windowWidth >= 800 ? 168 : 108;
                 if (windowWidth < 550) {
                     heroRightSectionRef.current.className = '';
-                } else if ((container.top + container.height) > windowHeight) {
+                } else if ((containerTop + containerHeight) > windowHeight) {
                     heroRightSectionRef.current.className = 'sticky buttons';
                 } else {
                     heroRightSectionRef.current.className = 'sticky full';
@@ -160,9 +159,9 @@ const Home = props => {
         }
     ]
 
-    const [educationDisplay, setEducationDisplay] = useState(true);
+    const [educationDisplay, setEducationDisplay] = useState(false);
     useEffect(() => {
-        const handleResize = () => setEducationDisplay(document.body.clientWidth >= 1100);
+        const handleResize = () => setEducationDisplay(window.innerWidth >= 1100);
 
         handleResize();
         window.addEventListener('resize', handleResize);
@@ -191,7 +190,7 @@ const Home = props => {
                                     <div id='hero-right-button-list' className={actionsDisplayed ? 'opened' : 'closed'}>
                                         <Link smooth to='#contact'><button className='primary'>Get in touch</button></Link>
                                         <a href='https://bit.ly/ng_resume' target='_blank' rel='noopener noreferrer'><button className='secondary'>View my resume</button></a>
-                                        <Link smooth to='#experience'><button className='secondary'>Skip to the portfolio</button></Link>
+                                        <Link smooth to='#experience'><button className='secondary'>Skip to my work</button></Link>
                                     </div>
                                 </>
                             }

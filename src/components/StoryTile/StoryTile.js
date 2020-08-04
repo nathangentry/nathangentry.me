@@ -26,16 +26,32 @@ const StoryTile = props => {
         LONG: 0.3
     };
 
-    const [isOpen, setIsOpen] = useState(false);
-
     useEffect(() => {
-        const updateTile = () => {
-            resizeTile(isOpen, false);
+        if (props.display) {
+            if (tileRef.current.style.position === 'fixed') {
+                if (isOpen) {
+                    closeStoryTile();
+                    return;
+                }
+            } else {
+                setPreviewOpacity(0);
+                return;
+            }
+        } else if (!isOpen) {
+            setPreviewOpacity(1);
         }
+    }, [props.display]);
+
+    const [isOpen, setIsOpen] = useState(false);
+    useEffect(() => {
+        resizeTile(isOpen, true);
+    }, [isOpen]);
+    useEffect(() => {
+        const updateTile = () => resizeTile(isOpen, false);
 
         window.addEventListener('resize', updateTile);
         return () => window.removeEventListener('resize', updateTile);
-    }, [isOpen, props.display]);
+    }, [isOpen]);
 
     const toggleTransitions = active => {
         if (active) {
@@ -77,23 +93,9 @@ const StoryTile = props => {
 
     const resizeTile = (isOpen, smooth) => {
         const tile = tileRef.current;
-
-        if (props.display) {
-            if (tile.style.position === 'fixed') {
-                if (isOpen) {
-                    closeStoryTile();
-                    return;
-                }
-            } else {
-                setPreviewOpacity(0);
-                return;
-            }
-        } else if (!isOpen) {
-            setPreviewOpacity(1);
-        }
+        const screenWidth = document.body.clientWidth;
 
         if (isOpen || tile.style.position === 'fixed') {
-            const screenWidth = document.body.clientWidth;
             const screenHeight = window.innerHeight;
             const isMobile = screenWidth < BREAKPOINT.MOBILE || screenHeight < BREAKPOINT.MOBILE;
             const isTablet = screenWidth < BREAKPOINT.TABLET || screenHeight < BREAKPOINT.TABLET;
@@ -121,8 +123,13 @@ const StoryTile = props => {
                     target.height = screenHeight;
                     detailsPadding = 36;
                     if (isLandscape) {
-                        ratio.preview = { x: 0.4, y: 1.0 };
-                        ratio.details = { x: 0.6, y: 1.0 };
+                        if (screenWidth > 800) {
+                            ratio.preview = { x: 0.3, y: 1.0 };
+                            ratio.details = { x: 0.7, y: 1.0 };
+                        } else {
+                            ratio.preview = { x: 0.4, y: 1.0 };
+                            ratio.details = { x: 0.6, y: 1.0 };
+                        }
                         tile.style.flexDirection = 'row';
                         closeButtonRef.current.style.color = 'black';
                         closeButtonRef.current.style.top = '6px';
@@ -140,9 +147,17 @@ const StoryTile = props => {
                     target.height = screenHeight * 0.8;
                     detailsPadding = 48;
                     closeButtonRef.current.style.color = 'white';
-                    if (isLandscape && screenWidth > 1100) {
-                        ratio.preview = { x: 0.3, y: 1.0 };
-                        ratio.details = { x: 0.7, y: 1.0 };
+                    if (isLandscape) {
+                        if (screenWidth < 1024) {
+                            ratio.preview = { x: 0, y: 1.0 };
+                            ratio.details = { x: 1.0, y: 1.0 };
+                        } else if (screenWidth < 1100) {
+                            ratio.preview = { x: 0.3, y: 1.0 };
+                            ratio.details = { x: 0.7, y: 1.0 };
+                        } else {
+                            ratio.preview = { x: 0.4, y: 1.0 };
+                            ratio.details = { x: 0.6, y: 1.0 };
+                        }
                         tile.style.flexDirection = 'row';
                     } else {
                         ratio.preview = { x: 1.0, y: 0.3 };
@@ -151,20 +166,14 @@ const StoryTile = props => {
                     }
                 } else {
                     target.x = Math.max((document.body.clientWidth - 1200) / 2, 120);
-                    target.y = Math.min((window.innerHeight - 750) / 2, 120);
+                    target.y = Math.max((window.innerHeight - 750) / 2, 120);
                     target.width = screenWidth - (2 * target.x);
                     target.height = screenHeight - (2 * target.y);
                     detailsPadding = 60;
                     closeButtonRef.current.style.color = 'white';
-                    if (isLandscape) {
-                        ratio.preview = { x: 0.4, y: 1.0 };
-                        ratio.details = { x: 0.6, y: 1.0 };
-                        tile.style.flexDirection = 'row';
-                    } else {
-                        ratio.preview = { x: 1.0, y: 0.4 };
-                        ratio.details = { x: 1.0, y: 0.6 };
-                        tile.style.flexDirection = 'column';
-                    }
+                    ratio.preview = { x: 0.4, y: 1.0 };
+                    ratio.details = { x: 0.6, y: 1.0 };
+                    tile.style.flexDirection = 'row';
                 }
 
                 tile.style.borderRadius = isMobile ? '0' : '4px';
@@ -200,7 +209,7 @@ const StoryTile = props => {
                 }, smooth ? ANIMATION_STEP.STANDARD * 1000 : 0);
             }, smooth ? ANIMATION_STEP.SHORT * 1000 : 0);
         }
-    }
+    };
 
     const openStoryTile = () => {
         setIsOpen(true);
@@ -221,12 +230,12 @@ const StoryTile = props => {
         setIsOpen(false);
         toggleTransitions(true);
         fullScrimRef.current.style.backgroundColor = 'rgba(0, 0, 0, 0.0)';
-        resizeTile(false, true);
         setTimeout(() => {
             closeButtonRef.current.style.zIndex = '-1';
             fullScrimRef.current.style.zIndex = '-1';
             setPreviewOpacity(1);
             document.body.removeAttribute('style');
+            resizeTile(false, true);
             setTimeout(() => {
                 toggleTransitions(false);
             }, ANIMATION_STEP.SHORT * 1000);
