@@ -7,11 +7,18 @@
         display: flex;
         flex-direction: row;
         align-items: center;
+        justify-content: flex-start;
         padding-top: 36px;
         padding-bottom: 36px;
         @media (min-width: 800px) {
             padding-top: 72px;
             padding-bottom: 48px;
+        }
+
+        #toolbar-logo {
+            @media (max-width: 800px) { 
+                width: 96px;
+            }
         }
         
         & > svg {
@@ -21,18 +28,15 @@
             }
         }
 
-        #toolbar-logo {
-            @media (max-width: 800px) {
-                height: 36px; 
-                width: auto;
-            }
-        }
         
         & > img {
             mix-blend-mode: darken;
-            @media (max-width: 800px) {
-                max-height: 28px;
-                width: auto;
+            height: 48px;
+            max-width: 200px;
+            object-fit: contain;
+            @media (max-width: 400px) {
+                width: 0;
+                flex-grow: 1;
             }
         }
     }

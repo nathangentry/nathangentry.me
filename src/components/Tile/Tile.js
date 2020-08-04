@@ -4,7 +4,7 @@ import './Tile.scss';
 
 const Tile = React.forwardRef((props, ref) => {
     return (
-        <div className={`Tile ${props.className} ${props.wide ? 'wide' : ''}`} id={props.id} ref={ref} onClick={props.onClick}>
+        <div className={`Tile${props.className ? ` ${props.className}` : ''}${props.wide ? ' wide' : ''}`} id={props.id} ref={ref} onClick={props.onClick}>
             {props.children}
         </div>
     );

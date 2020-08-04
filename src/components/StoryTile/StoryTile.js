@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import Tile from '../Tile/Tile';
 import IconButton from '../IconButton/IconButton';
 
@@ -7,15 +7,12 @@ import './StoryTile.scss';
 const StoryTile = props => {
     const containerRef = useRef();
     const tileRef = useRef();
-
     const previewRef = useRef();
     const previewTitleRef = useRef();
     const previewLogoRef = useRef();
     const previewScrimRef = useRef();
     const previewImageRef = useRef();
-
     const detailsRef = useRef();
-
     const closeButtonRef = useRef();
     const fullScrimRef = useRef();
 
@@ -31,23 +28,45 @@ const StoryTile = props => {
 
     const [isOpen, setIsOpen] = useState(false);
 
-    const setOpenTransitions = () => {
-        previewRef.current.style.transition = `height 0.2s ease, width 0.2s ease`;
-        previewTitleRef.current.style.transition = `opacity 0.1s ease`;
-        previewLogoRef.current.style.transition = `opacity 0.1s ease`;
-        previewScrimRef.current.style.transition = `opacity 0.1s ease`;
-        detailsRef.current.style.transition = `height 0.2s ease, width 0.2s ease, opacity 0.1s ease`;
-        fullScrimRef.current.style.transition = `background-color 0.3s ease`;
-    };
+    useEffect(() => {
+        const updateTile = () => {
+            resizeTile(isOpen, false);
+        }
 
-    const setCloseTransitions = () => {
-        previewRef.current.style.transition = `height 0.2s ease, width 0.2s ease`;
-        previewTitleRef.current.style.transition = `opacity 0.1s ease`;
-        previewLogoRef.current.style.transition = `opacity 0.1s ease`;
-        previewScrimRef.current.style.transition = `opacity 0.1s ease`;
-        tileRef.current.style.transition = `top 0.2s ease, height 0.2s ease, left 0.2s ease, width 0.2s ease`;
-        detailsRef.current.style.transition = `height 0.2s ease, width 0.2s ease, opacity 0.1s ease`;
-        fullScrimRef.current.style.transition = `background-color 0.3s ease`;
+        window.addEventListener('resize', updateTile);
+        return () => window.removeEventListener('resize', updateTile);
+    }, [isOpen, props.display]);
+
+    const toggleTransitions = active => {
+        if (active) {
+            tileRef.current.style.transition = `
+                left ${ANIMATION_STEP.STANDARD}s ease, 
+                top ${ANIMATION_STEP.STANDARD}s ease, 
+                width ${ANIMATION_STEP.STANDARD}s ease,
+                height ${ANIMATION_STEP.STANDARD}s ease 
+            `;
+            previewRef.current.style.transition = `
+                height ${ANIMATION_STEP.STANDARD}s ease,
+                width ${ANIMATION_STEP.STANDARD}s ease
+            `;
+            previewTitleRef.current.style.transition = `opacity ${ANIMATION_STEP.SHORT}s ease`;
+            previewLogoRef.current.style.transition = `opacity ${ANIMATION_STEP.SHORT}s ease`;
+            previewScrimRef.current.style.transition = `opacity ${ANIMATION_STEP.SHORT}s ease`;
+            detailsRef.current.style.transition = `
+                height ${ANIMATION_STEP.STANDARD}s ease,
+                width ${ANIMATION_STEP.STANDARD}s ease,
+                opacity ${ANIMATION_STEP.SHORT}s ease
+            `;
+            fullScrimRef.current.style.transition = `background-color ${ANIMATION_STEP.LONG}s ease`;
+        } else {
+            tileRef.current.style.transition = '';
+            previewRef.current.style.transition = '';
+            previewTitleRef.current.style.transition = '';
+            previewLogoRef.current.style.transition = '';
+            previewScrimRef.current.style.transition = '';
+            detailsRef.current.style.transition = '';
+            fullScrimRef.current.style.transition = '';
+        }
     }
 
     const setPreviewOpacity = value => {
@@ -56,221 +75,162 @@ const StoryTile = props => {
         previewScrimRef.current.style.opacity = `${value}`;
     }
 
-    const setTileRect = rect => {
-        tileRef.current.style.top = `${rect.top}px`;
-        tileRef.current.style.left = `${rect.left}px`;
-        tileRef.current.style.width = `${rect.width}px`;
-        tileRef.current.style.height = `${rect.height}px`;
-    }
+    const resizeTile = (isOpen, smooth) => {
+        const tile = tileRef.current;
 
-    const setPreviewDimensions = rect => {
-        previewRef.current.style.width = `${rect.width}px`;
-        previewRef.current.style.height = `${rect.height}px`;
-    }
-
-    const updateTile = (isOpen, smooth) => {
-        const screenWidth = document.body.clientWidth;
-        const screenHeight = window.innerHeight;
-        const ref = tileRef.current;
-        let margin = {
-            x: 0,
-            y: 0
-        };
-        let dimens = {
-            width: 0,
-            height: 0,
+        if (props.display) {
+            if (tile.style.position === 'fixed') {
+                if (isOpen) {
+                    closeStoryTile();
+                    return;
+                }
+            } else {
+                setPreviewOpacity(0);
+                return;
+            }
+        } else if (!isOpen) {
+            setPreviewOpacity(1);
         }
 
-        if (isOpen && ref.style.position !== 'fixed') {
-            const current = containerRef.current.getBoundingClientRect();
-            ref.style = {
-                ...ref.style,
-                position: 'fixed',
-                left: current.left,
-                top: current.top,
-                width: current.width,
-                height: current.height
-            };
-
+        if (isOpen || tile.style.position === 'fixed') {
+            const screenWidth = document.body.clientWidth;
+            const screenHeight = window.innerHeight;
             const isMobile = screenWidth < BREAKPOINT.MOBILE || screenHeight < BREAKPOINT.MOBILE;
             const isTablet = screenWidth < BREAKPOINT.TABLET || screenHeight < BREAKPOINT.TABLET;
-            const isDesktop = !isMobile && !isTablet;
             const isLandscape = screenWidth > screenHeight;
+            let target = {};
+            let ratio = {};
+            const preview = previewRef.current;
+            const details = detailsRef.current;
+            let detailsPadding = 0;
 
-            console.log(isMobile ? 'mobile' : isTablet ? 'tablet' : 'desktop');
-            console.log(isLandscape ? 'landscape' : 'portrait');
+            if (isOpen) {
+                if (tile.style.position !== 'fixed') {
+                    const current = containerRef.current.getBoundingClientRect();
+                    tile.style.position = 'fixed';
+                    tile.style.left = `${current.left}px`;
+                    tile.style.top = `${current.top}px`;
+                    tile.style.width = `${current.width}px`;
+                    tile.style.height = `${current.height}px`;
+                }
 
-            if (isTablet) {
-                margin.x = screenWidth * 0.1;
-                margin.y = screenHeight * 0.1;
-            } else if (!isDesktop) {
-                margin.x = Math.max((document.body.clientWidth - 1200) / 2, 120);
-                margin.y = Math.max((window.innerHeight - 750) / 2, 120);
+                if (isMobile) {
+                    target.x = 0;
+                    target.y = 0;
+                    target.width = screenWidth;
+                    target.height = screenHeight;
+                    detailsPadding = 36;
+                    if (isLandscape) {
+                        ratio.preview = { x: 0.4, y: 1.0 };
+                        ratio.details = { x: 0.6, y: 1.0 };
+                        tile.style.flexDirection = 'row';
+                        closeButtonRef.current.style.color = 'black';
+                        closeButtonRef.current.style.top = '6px';
+                        closeButtonRef.current.style.right = '6px';
+                    } else {
+                        ratio.preview = { x: 1.0, y: 0.3 };
+                        ratio.details = { x: 1.0, y: 0.7 };
+                        tile.style.flexDirection = 'column';
+                        closeButtonRef.current.style.color = 'white';
+                    }
+                } else if (isTablet) {
+                    target.x = screenWidth * 0.1;
+                    target.y = screenHeight * 0.1;
+                    target.width = screenWidth * 0.8;
+                    target.height = screenHeight * 0.8;
+                    detailsPadding = 48;
+                    closeButtonRef.current.style.color = 'white';
+                    if (isLandscape && screenWidth > 1100) {
+                        ratio.preview = { x: 0.3, y: 1.0 };
+                        ratio.details = { x: 0.7, y: 1.0 };
+                        tile.style.flexDirection = 'row';
+                    } else {
+                        ratio.preview = { x: 1.0, y: 0.3 };
+                        ratio.details = { x: 1.0, y: 0.7 };
+                        tile.style.flexDirection = 'column';
+                    }
+                } else {
+                    target.x = Math.max((document.body.clientWidth - 1200) / 2, 120);
+                    target.y = Math.min((window.innerHeight - 750) / 2, 120);
+                    target.width = screenWidth - (2 * target.x);
+                    target.height = screenHeight - (2 * target.y);
+                    detailsPadding = 60;
+                    closeButtonRef.current.style.color = 'white';
+                    if (isLandscape) {
+                        ratio.preview = { x: 0.4, y: 1.0 };
+                        ratio.details = { x: 0.6, y: 1.0 };
+                        tile.style.flexDirection = 'row';
+                    } else {
+                        ratio.preview = { x: 1.0, y: 0.4 };
+                        ratio.details = { x: 1.0, y: 0.6 };
+                        tile.style.flexDirection = 'column';
+                    }
+                }
+
+                tile.style.borderRadius = isMobile ? '0' : '4px';
+            } else {
+                target = containerRef.current.getBoundingClientRect();
+                if (props.display) target.height = details.clientHeight;
+                ratio.preview = { x: 1.0, y: 1.0 };
+                ratio.details = { x: 0.0, y: 0.0 };
+                details.style.opacity = '0';
+                detailsPadding = 0;
             }
-            ref.style.flexDirection = isLandscape ? 'row' : 'column';
-            ref.style.borderRadius = isMobile ? '0' : '4px';
-        } else if (ref.style.position === 'fixed') {
-            const target = containerRef.current.getBoundingClientRect();
-            margin.x = target.left;
-            margin.y = target.top;
-        } else {
-            return;
-        }
 
-        if (smooth) {
-            tileRef.current.style.transition = `
-                left ${ANIMATION_STEP.STANDARD}s ease, 
-                top ${ANIMATION_STEP.STANDARD}s ease, 
-                width ${ANIMATION_STEP.STANDARD}s ease,
-                height ${ANIMATION_STEP.STANDARD}s ease 
-            `;
-        } else {
-            tileRef.current.style.transition = '';
-        }
-
-        ref.style = {
-            ...ref.style,
-            left: `${margin.x}px`,
-            top: `${margin.y}px`,
-            width: `${screenWidth - (2 * margin.x)}px`,
-            height: `${screenHeight - (2 * margin.y)}px`
-        };
-
-        if (!isOpen) {
-            const wait = smooth ? ANIMATION_STEP.STANDARD : 0;
             setTimeout(() => {
-                ref.style = {
-                    ...ref.style,
-                    position: 'relative',
-                    left: '0',
-                    top: '0',
-                    width: '100%',
-                    height: '100%'
-                };
-            }, wait);
+                tile.style.left = `${target.x}px`;
+                tile.style.top = `${target.y}px`;
+                tile.style.width = `${target.width}px`;
+                tile.style.height = `${target.height}px`;
+                preview.style.width = `${target.width * ratio.preview.x}px`;
+                preview.style.height = `${target.height * ratio.preview.y}px`;
+                details.style.width = `${target.width * ratio.details.x}px`;
+                details.style.height = `${target.height * ratio.details.y}px`;
+                if (!isOpen) { details.style.padding = `${detailsPadding}px`; }
+
+                setTimeout(() => {
+                    if (!isOpen) {
+                        tile.removeAttribute('style');
+                        preview.removeAttribute('style');
+                        details.removeAttribute('style');
+                    } else {
+                        details.style.padding = `${detailsPadding}px`;
+                        details.style.opacity = '1';
+                    }
+                }, smooth ? ANIMATION_STEP.STANDARD * 1000 : 0);
+            }, smooth ? ANIMATION_STEP.SHORT * 1000 : 0);
         }
-
-        resizePreview(isOpen, smooth);
-        resizeDetails(isOpen, smooth);
-    }
-
-    const resizePreview = (isOpen, smooth) => {
-
-    }
-
-    const resizeDetails = (isOpen, smooth) => {
-
     }
 
     const openStoryTile = () => {
-        // pre
-        setPreviewOpacity(1);
-        setPreviewDimensions(containerRef.current.getBoundingClientRect());
-        detailsRef.current.style.opacity = '0';
-        detailsRef.current.style.width = '0';
-        detailsRef.current.style.height = '500px';
-        setOpenTransitions();
-
-        // calc
-        let yMargin, xMargin, tileWidth, tileHeight, previewWidth, previewHeight, fullWidth, fullHeight, fullPadding;
-        if (document.body.clientWidth < 799) {
-            yMargin = 0;
-            xMargin = 0;
-            tileWidth = document.body.clientWidth;
-            tileHeight = window.innerHeight;
-
-            fullPadding = '36px';
-        } else {
-            yMargin = Math.max((window.innerHeight - 750) / 2, 120);
-            xMargin = Math.max((document.body.clientWidth - 1200) / 2, 120);
-
-            tileWidth = document.body.clientWidth - (2 * xMargin);
-            tileHeight = window.innerHeight - (2 * yMargin);
-
-            fullPadding = '60px';
-        }
-        if (document.body.clientWidth < 799 && document.body.clientWidth < window.innerHeight) {
-            previewWidth = tileWidth;
-            fullWidth = tileWidth;
-            previewHeight = tileHeight * 0.3;
-            fullHeight = tileHeight * 0.7;
-        } else {
-            previewWidth = tileWidth * 0.4;
-            fullWidth = tileWidth * 0.6;
-            previewHeight = tileHeight;
-            fullHeight = tileHeight;
-            tileRef.current.style.flexDirection = 'row';
-        }
-        const targetPreviewDimensions = { width: previewWidth, height: previewHeight };
-
-        // post
         setIsOpen(true);
+        toggleTransitions(true);
         document.body.style.overflowY = 'hidden';
+        tileRef.current.style.zIndex = '4';
         setPreviewOpacity(0);
+        fullScrimRef.current.style.zIndex = '3';
+        fullScrimRef.current.style.backgroundColor = 'rgba(0, 0, 0, 0.6)';
+        closeButtonRef.current.style.zIndex = '5';
+        resizeTile(true, true);
         setTimeout(() => {
-            tileRef.current.style.zIndex = '4';
-            tileRef.current.style.cursor = 'inherit';
-
-            closeButtonRef.current.style.zIndex = '4';
-
-            fullScrimRef.current.style.zIndex = '3';
-            fullScrimRef.current.style.backgroundColor = 'rgba(0, 0, 0, 0.6)';
-
-            detailsRef.current.style.width = `${fullWidth}px`;
-            detailsRef.current.style.height = `${fullHeight}px`;
-
-
-            updateTile(true, true);
-            setPreviewDimensions(targetPreviewDimensions);
-
-            setTimeout(() => {
-                detailsRef.current.style.opacity = '1';
-                detailsRef.current.style.padding = fullPadding;
-            }, 200);
-        }, 100);
+            toggleTransitions(false);
+        }, ANIMATION_STEP.LONG * 1000);
     }
 
     const closeStoryTile = () => {
-        // post
-        setCloseTransitions();
-
-        // calc
-        const targetRect = containerRef.current.getBoundingClientRect();
-
-        // post
         setIsOpen(false);
-        document.body.style.overflowY = 'auto';
-        closeButtonRef.current.style.zIndex = '-1';
-        detailsRef.current.style.opacity = '0';
-
+        toggleTransitions(true);
+        fullScrimRef.current.style.backgroundColor = 'rgba(0, 0, 0, 0.0)';
+        resizeTile(false, true);
         setTimeout(() => {
-            setTileRect(targetRect);
-            setPreviewDimensions(targetRect);
-            detailsRef.current.style.width = `0`;
-            detailsRef.current.style.height = `0`;
-            detailsRef.current.style.padding = '0';
-
-            fullScrimRef.current.style.backgroundColor = 'rgba(0, 0, 0, 0)';
+            closeButtonRef.current.style.zIndex = '-1';
+            fullScrimRef.current.style.zIndex = '-1';
+            setPreviewOpacity(1);
+            document.body.removeAttribute('style');
             setTimeout(() => {
-                setPreviewOpacity(1);
-            }, 100);
-
-            setTimeout(() => {
-                tileRef.current.style.cursor = 'pointer';
-                fullScrimRef.current.style.zIndex = '-1';
-
-                if (document.body.clientWidth < 800) {
-                    tileRef.current.style.borderRadius = '4px';
-                }
-
-                tileRef.current.style.transition = '';
-                tileRef.current.style.zIndex = '0';
-                updateTile(false, true);
-                previewRef.current.style.width = '100%';
-                previewRef.current.style.height = '100%';
-            }, 200);
-        }, 100);
-
+                toggleTransitions(false);
+            }, ANIMATION_STEP.SHORT * 1000);
+        }, ANIMATION_STEP.STANDARD * 1000);
     }
 
     return (

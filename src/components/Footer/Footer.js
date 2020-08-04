@@ -26,7 +26,7 @@ const Footer = props => {
                         <a href='mailto:hello@nathangentry.me' target='_blank' rel='noopener noreferrer'>Email</a>
                         <a href='https://github.com/gentryn31' target='_blank' rel='noopener noreferrer'>GitHub</a>
                         <a href='https://www.linkedin.com/in/nathan-gentry' target='_blank' rel='noopener noreferrer'>LinkedIn</a>
-                        <a href='https://bit.ly/resume_fall2020' target='_blank' rel='noopener noreferrer'>Resume</a>
+                        <a href='https://bit.ly/ng_resume' target='_blank' rel='noopener noreferrer'>Resume</a>
                     </div>
                     <p id='footer-copyright'>&copy; 2020 Nathan Gentry</p>
                 </div>

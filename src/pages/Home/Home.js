@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { HashLink as Link } from 'react-router-hash-link';
 import StyledPage from '../../components/StyledPage/StyledPage';
 import Toolbar from '../../components/Toolbar/Toolbar';
@@ -70,6 +70,30 @@ const Home = props => {
         }
     }, [props.match.params.company]);
 
+    const heroRightSectionRef = useRef();
+    useEffect(() => {
+        const handleWindowResize = () => {
+            if (company.name !== null) {
+                const windowWidth = window.innerWidth;
+                const windowHeight = window.innerHeight;
+                heroRightSectionRef.current.style.height = 'fit-content';
+                const container = heroRightSectionRef.current.getBoundingClientRect();
+                heroRightSectionRef.current.removeAttribute('style');
+                if (windowWidth < 550) {
+                    heroRightSectionRef.current.className = '';
+                } else if ((container.top + container.height) > windowHeight) {
+                    heroRightSectionRef.current.className = 'sticky buttons';
+                } else {
+                    heroRightSectionRef.current.className = 'sticky full';
+                }
+            }
+        };
+
+        handleWindowResize();
+        window.addEventListener('resize', handleWindowResize);
+        return () => window.removeEventListener('resize', handleWindowResize);
+    }, [company.name]);
+
     const experienceData = [
         {
             id: 'cboe',
@@ -78,7 +102,7 @@ const Home = props => {
             logoImage: cboeLogo,
             company: 'Cboe Global Markets',
             location: 'Lenexa, KS',
-            position: 'Web Development Intern',
+            position: 'Full Stack Web Development Intern',
             timeframe: 'Summer 2020',
             skills: [['React', 'Python', 'PostgreSQL'], ['Django', 'Git', 'Bitbucket'], ['Agile', 'Jira', 'Communication']],
             overview: ['Cboe Global Markets is a major player in the markets and exchanges industry. During the summer of 2020, they sought to transition their high-traffic market insights blog into a news and video hub to create a more engaging experience. As my intern project, I worked on creating a content management system (CMS) for the marketing and communications team to streamline publishing content to the new site.'],
@@ -93,9 +117,9 @@ const Home = props => {
             logoImage: dmsiLogo,
             company: 'DMSi Software',
             location: 'Lincoln, NE',
-            position: 'Frontend Development Intern',
+            position: 'Front End Development Intern',
             timeframe: 'Spring 2020',
-            skills: [['React', 'SASS', 'Golang'], ['GitHub', 'Git', 'Zenhub'], ['Agile', 'Ownership']],
+            skills: [['React', 'SASS', 'TypeScript'], ['Golang', 'GitHub', 'Git'], ['Zenhub', 'Agile']],
             overview: ['DMSi creates innovative business software for the lumber and building materials industry. One major pain point they recognized was in their door configuration software, which was frustrating, convoluted, and confusing. This project created new in-house software that dynamically generated images as users configured their doors to create transparency in the process and add value to the user. One DMSi executive noted this software will soon be used to configure 50% of doors in America.',
                 <a href='https://digitalcommons.unl.edu/honorsembargoed/138/' target='_blank' rel='noopener noreferrer'><button className='secondary'>Read the thesis</button></a>],
             myRole: ['My main task through the internship was developing the preview in environment functionality. This allowed users to preview the door they had configured in the application on an image of their house. I took ownership of everything from sprint planning and agile ticket creation to the actual development of the feature using React and SASS. By bringing me on as an intern, the team was able to achieve one of their reach goals for the overall project.']
@@ -138,7 +162,7 @@ const Home = props => {
 
     const [educationDisplay, setEducationDisplay] = useState(true);
     useEffect(() => {
-        const handleResize = () => setEducationDisplay(document.body.clientWidth >= 800);
+        const handleResize = () => setEducationDisplay(document.body.clientWidth >= 1100);
 
         handleResize();
         window.addEventListener('resize', handleResize);
@@ -159,14 +183,14 @@ const Home = props => {
                 <PageWidthWrapper>
                     <GridWrapper>
                         <WelcomeTile {...company} />
-                        <div id='hero-right-container' className={company.name !== null ? 'sticky' : ''}>
+                        <div id='hero-right-container' className={company.name !== null ? 'sticky' : ''} ref={heroRightSectionRef}>
                             <HeroImageTile primaryColor={company.primaryColor} opacityColor={company.opacityColor} />
                             {company.name !== null &&
                                 <>
                                     <button id='see-more-fab' className='primary' onClick={() => setActionsDisplayed(!actionsDisplayed)} onBlur={() => setTimeout(() => setActionsDisplayed(false), 0)}><i className='material-icons'>{actionsDisplayed ? 'close' : 'more_vert'}</i></button>
                                     <div id='hero-right-button-list' className={actionsDisplayed ? 'opened' : 'closed'}>
                                         <Link smooth to='#contact'><button className='primary'>Get in touch</button></Link>
-                                        <a href='https://bit.ly/resume_fall2020' target='_blank' rel='noopener noreferrer'><button className='secondary'>View my resume</button></a>
+                                        <a href='https://bit.ly/ng_resume' target='_blank' rel='noopener noreferrer'><button className='secondary'>View my resume</button></a>
                                         <Link smooth to='#experience'><button className='secondary'>Skip to the portfolio</button></Link>
                                     </div>
                                 </>
@@ -192,43 +216,45 @@ const Home = props => {
                         </GridWrapper>
                     </Section>
                     <Section title='Education' id='education'>
-                        <StoryTile title='University of Nebraska–Lincoln' mainImage={unlMain} display={educationDisplay}>
-                            <div className='highlight-grid'>
-                                <div>
-                                    <h5 className='section-heading'>Major</h5>
-                                    <p>Computer Science</p>
+                        <GridWrapper>
+                            <StoryTile title='University of Nebraska–Lincoln' mainImage={unlMain} display={educationDisplay}>
+                                <div className='highlight-grid'>
+                                    <div>
+                                        <h5 className='section-heading'>Major</h5>
+                                        <p>Computer Science</p>
+                                    </div>
+                                    <div>
+                                        <h5 className='section-heading'>Minors</h5>
+                                        <p>Business, Math</p>
+                                    </div>
+                                    <div>
+                                        <h5 className='section-heading'>Timeframe</h5>
+                                        <p>August 2019 – May 2023</p>
+                                    </div>
+                                    <div id='unl-courses-highlight'>
+                                        <h5 className='section-heading'>Courses</h5>
+                                        <IconBullet icon='done' text='Java' />
+                                        <IconBullet icon='done' text='Design Thinking' />
+                                        <IconBullet icon='done' text='Machine Learning' />
+                                        <IconBullet icon='done' text='Software Engineering' />
+                                        <IconBullet icon='done' text='Statistics' />
+                                        <IconBullet icon='done' text='Economics' />
+                                        <IconBullet icon='done' text='Accounting' />
+                                    </div>
+                                    <div id='involvements-info-bit'>
+                                        <h5 className='section-heading'>Involvements</h5>
+                                        <IconBullet icon='done' text='Raikes Social Media Team' />
+                                        <IconBullet icon='done' text='Girls Code Lincoln' />
+                                        <IconBullet icon='done' text='Engineering Diplomats' />
+                                        <IconBullet icon='done' text='Youth Entrepreneurship Clinics' />
+                                    </div>
                                 </div>
-                                <div>
-                                    <h5 className='section-heading'>Minors</h5>
-                                    <p>Math, Business Management</p>
+                                <div id='raikes-info-bit'>
+                                    <h4 className='title'>Jeffrey S. Raikes School of Computer Science &amp; Management</h4>
+                                    <p>The Jeffrey S. Raikes School of Computer Science &amp; Management is a highly selective and competitive program focusing on the intersection of technology, business, innovation, and leadership on the campus of the University of Nebraska–Lincoln.</p>
                                 </div>
-                                <div>
-                                    <h5 className='section-heading'>Timeframe</h5>
-                                    <p>August 2019 – May 2023</p>
-                                </div>
-                                <div id='unl-courses-highlight'>
-                                    <h5 className='section-heading'>Courses</h5>
-                                    <IconBullet icon='done' text='Java' />
-                                    <IconBullet icon='done' text='Design Thinking' />
-                                    <IconBullet icon='done' text='Machine Learning' />
-                                    <IconBullet icon='done' text='Software Engineering' />
-                                    <IconBullet icon='done' text='Statistics' />
-                                    <IconBullet icon='done' text='Economics' />
-                                    <IconBullet icon='done' text='Accounting' />
-                                </div>
-                                <div id='involvements-info-bit'>
-                                    <h5 className='section-heading'>Involvements</h5>
-                                    <IconBullet icon='done' text='Raikes Social Media Team' />
-                                    <IconBullet icon='done' text='Girls Code Lincoln' />
-                                    <IconBullet icon='done' text='Engineering Diplomats' />
-                                    <IconBullet icon='done' text='Youth Entrepreneurship Clinics' />
-                                </div>
-                            </div>
-                            <div id='raikes-info-bit'>
-                                <h4 className='title'>Jeffrey S. Raikes School of Computer Science &amp; Management</h4>
-                                <p>The Jeffrey S. Raikes School of Computer Science &amp; Management is a highly selective and competitive program focusing on the intersection of technology, business, innovation, and leadership on the campus of the University of Nebraska–Lincoln.</p>
-                            </div>
-                        </StoryTile>
+                            </StoryTile>
+                        </GridWrapper>
                     </Section>
                     <GridWrapper>
                         <ContactSection url={props.match.url} />

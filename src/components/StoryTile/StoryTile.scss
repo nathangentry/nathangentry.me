@@ -15,13 +15,12 @@
     }
 
     &.display {
-        @media (min-width: 800px) {
-            height: 100%;
+        @media (min-width: 1100px) {
+            height: fit-content;
         }
     }
 
     & > .storytile {
-        width: 100%;
         overflow: hidden;
         position: relative;
         display: flex;
@@ -32,8 +31,6 @@
 
         & > .preview {
             position: relative;
-            top: 0;
-            left: 0;
             height: calc(100vw - (2 * 36px));
             @media (min-width: 425px) {
                 height: calc(300px + ((100vw - 425px) * 100 / 175));
@@ -64,6 +61,15 @@
                 right: 24px;
                 z-index: 2;
                 mix-blend-mode: lighten;
+                width: auto;
+                object-fit: contain;
+
+                height: 24px;
+                max-width: 75px;
+                @media (min-width: 550px) {
+                    height: 30px;
+                    max-width: 80px;
+                }
             }
             
             & > .scrim {
@@ -87,11 +93,13 @@
         }
 
         & > .details {
-            @media (max-width: 799px) {
-                height: 0;
-            }
+            height: 0;
             width: 0;
+            opacity: 0;
             overflow-y: auto;
+            & ::-webkit-scrollbar-track {
+                background-color: white;
+            }
     
             & > .title {
                 margin-bottom: 36px;
@@ -153,7 +161,7 @@
         height: 100vh;
         width: 100vw;
         z-index: -1;
-        background-color: rgba(0,0,0,0);
+        background-color: rgba(0, 0, 0, 0);
     }
 
     & > .close-button {
@@ -181,7 +189,10 @@
 
     & > .preview {
         height: inherit;
-        width: 40%;
+        width: 30%;
+        @media (min-width: 1250px) {
+            width: 40%;
+        }
 
         & > .title,
         & > .logoImage,
@@ -190,9 +201,14 @@
         }
     }
 
-    & > .full {
-        width: 60%;
+    & > .details {
+        width: 70%;
+        @media (min-width: 1250px) {
+            width: 60%;
+        }
         padding: 60px;
+        opacity: 1;
+        height: 100%;
     }
 }
 
@@ -215,7 +231,7 @@
         cursor: pointer;
     }
 
-    & > .full {
+    & > .details {
         opacity: 0;
     }
 }

@@ -25,7 +25,7 @@ const WelcomeTile = props => {
             {props.name === null ?
                 <div className='button-group'>
                     <Link smooth to='#contact'><button className='primary'>Get in touch</button></Link>
-                    <a href='https://bit.ly/resume_fall2020' target='_blank' rel='noopener noreferrer'><button className='secondary'>View my resume</button></a>
+                    <a href='https://bit.ly/ng_resume' target='_blank' rel='noopener noreferrer'><button className='secondary'>View my resume</button></a>
                 </div>
                 :
                 <>
@@ -39,7 +39,7 @@ const WelcomeTile = props => {
                     <h4>Why do I want to work at {props.name}?</h4>
                     <p className='large'>{props.motivation}</p>
                     <h4>Want to see more?</h4>
-                    <p className='large'>You can either check out my portfolio by scrolling down, or <a href='https://bit.ly/resume_fall2020' target='_blank' rel='noopener noreferrer'>view my condensed resume here.</a></p>
+                    <p className='large'>You can either check out my portfolio by scrolling down, or <a href='https://bit.ly/ng_resume' target='_blank' rel='noopener noreferrer'>view my condensed resume here.</a></p>
                     <h4>Ready to move forward?</h4>
                     <p className='large'>Send an email to <a href='mailto:hello@nathangentry.me'>hello@nathangentry.me</a> to let me know, and we can move forward together from there.</p>
                 </>

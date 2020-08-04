@@ -4,7 +4,7 @@ import './Section.scss';
 
 const Section = props => {
     return (
-        <div className={`Section ${props.className}`} id={props.id}>
+        <div className={`Section${props.className ? ` ${props.className}` : ''}`} id={props.id}>
             <h3 className='title'>{props.title}</h3>
             {props.children}
         </div>

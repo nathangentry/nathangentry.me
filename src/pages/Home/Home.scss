@@ -15,12 +15,24 @@
     }
     &.sticky {
         height: fit-content;
-        @media (min-width: 550px) {
+        & > #hero-image-tile {
+            height: 400px;
+        }
+        
+        &.full {
             position: sticky;
-            top: 168px;
-            
-            & > #hero-image-tile {
-                height: 400px;
+
+            top: 108px;
+            @media (min-width: 800px) {
+                top: 168px;
+            }
+        }
+        &.buttons {
+            height: 100%;
+
+            & > #hero-right-button-list {
+                position: sticky;
+                top: 0;
             }
         }
     }
@@ -82,8 +94,14 @@
     }
 }
 
+#education .storytile-container {
+    @media (min-width: 1100px) {
+        grid-column: 1 / span 3;
+    }
+}
+
 #unl-courses-highlight {
-    @media (min-width: 900px) {
+    @media (min-width: 800px) {
         grid-column: 2;
         grid-row: 2 / span 2;
     }
