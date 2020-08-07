@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import * as firebase from 'firebase/app';
+import 'firebase/analytics';
 import emailjs from "emailjs-com";
 import Section from "./Section";
 import Tile from "../Tile/Tile";
@@ -8,6 +10,11 @@ import "./ContactSection.scss";
 
 const ContactSection = props => {
   const [feedback, setFeedback] = useState({ status: "", message: "" });
+
+  useEffect(() => {
+    feedback.status === "success" && firebase.analytics().logEvent('message_sent');
+    feedback.status === "error" && firebase.analytics().logEvent('message_error', { error: feedback.message });
+  }, [feedback]);
 
   const sendMessage = () => {
     const nameInput = document.getElementById("name-input");

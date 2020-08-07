@@ -1,5 +1,7 @@
 import React from 'react';
 import { HashLink as Link } from 'react-router-hash-link';
+import * as firebase from 'firebase/app';
+import 'firebase/analytics';
 import PageWidthWrapper from '../PageWidthWrapper/PageWidthWrapper';
 
 import './Footer.scss';
@@ -17,21 +19,73 @@ const Footer = props => {
                         </g>
                     </svg>
                     <div className='footer-link-list'>
-                        <Link smooth to={`#experience`}>Experience</Link>
-                        <Link smooth to={`#projects`}>Projects</Link>
-                        <Link smooth to={`#education`}>Education</Link>
-                        <Link smooth to={`#contact`}>Contact</Link>
+                        <Link
+                            smooth
+                            to={`#experience`}
+                            onClick={() => firebase.analytics().logEvent('link_clicked', { to: 'experience', from: 'footer' })}
+                        >
+                            Experience
+                        </Link>
+                        <Link
+                            smooth
+                            to={`#projects`}
+                            onClick={() => firebase.analytics().logEvent('link_clicked', { to: 'projects', from: 'footer' })}
+                        >
+                            Projects
+                        </Link>
+                        <Link
+                            smooth
+                            to={`#education`}
+                            onClick={() => firebase.analytics().logEvent('link_clicked', { to: 'education', from: 'footer' })}
+                        >
+                            Education
+                        </Link>
+                        <Link
+                            smooth
+                            to={`#contact`}
+                            onClick={() => firebase.analytics().logEvent('link_clicked', { to: 'contact', from: 'footer' })}
+                        >
+                            Contact
+                        </Link>
                     </div>
                     <div className='footer-link-list'>
-                        <a href='mailto:hello@nathangentry.me' target='_blank' rel='noopener noreferrer'>Email</a>
-                        <a href='https://github.com/gentryn31' target='_blank' rel='noopener noreferrer'>GitHub</a>
-                        <a href='https://www.linkedin.com/in/nathan-gentry' target='_blank' rel='noopener noreferrer'>LinkedIn</a>
-                        <a href='https://bit.ly/ng_resume' target='_blank' rel='noopener noreferrer'>Resume</a>
+                        <a
+                            href='mailto:hello@nathangentry.me'
+                            target='_blank'
+                            rel='noopener noreferrer'
+                            onClick={() => firebase.analytics().logEvent('link_clicked', { to: 'email', from: 'footer' })}
+                        >
+                            Email
+                        </a>
+                        <a
+                            href='https://github.com/gentryn31'
+                            target='_blank'
+                            rel='noopener noreferrer'
+                            onClick={() => firebase.analytics().logEvent('link_clicked', { to: 'github', from: 'footer' })}
+                        >
+                            GitHub
+                        </a>
+                        <a
+                            href='https://www.linkedin.com/in/nathan-gentry'
+                            target='_blank'
+                            rel='noopener noreferrer'
+                            onClick={() => firebase.analytics().logEvent('link_clicked', { to: 'linkedin', from: 'footer' })}
+                        >
+                            LinkedIn
+                        </a>
+                        <a
+                            href='https://bit.ly/ng_resume'
+                            target='_blank'
+                            rel='noopener noreferrer'
+                            onClick={() => firebase.analytics().logEvent('link_clicked', { to: 'resume', from: 'footer' })}
+                        >
+                            Resume
+                        </a>
                     </div>
                     <p id='footer-copyright'>&copy; 2020 Nathan Gentry</p>
                 </div>
             </PageWidthWrapper>
-        </div>
+        </div >
     );
 }
 

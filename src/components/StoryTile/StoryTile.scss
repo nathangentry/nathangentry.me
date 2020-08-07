@@ -21,6 +21,7 @@
     }
 
     & > .storytile {
+        will-change: width, height, opacity;
         overflow: hidden;
         position: relative;
         display: flex;
@@ -30,6 +31,7 @@
         }
 
         & > .preview {
+            will-change: width, height, opacity;
             position: relative;
             height: calc(100vw - (2 * 36px));
             @media (min-width: 425px) {
@@ -93,6 +95,7 @@
         }
 
         & > .details {
+            will-change: width, height, opacity;
             height: 0;
             width: 0;
             opacity: 0;
@@ -124,7 +127,7 @@
                     }
                     
                     & > p {
-                        margin-top: 8px;
+                        margin-top: 12px;
                     }
                     & > p:first-of-type {
                         margin-top: 0;

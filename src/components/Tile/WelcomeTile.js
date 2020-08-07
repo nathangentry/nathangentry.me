@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { HashLink as Link } from 'react-router-hash-link';
+import * as firebase from 'firebase/app';
+import 'firebase/analytics';
 import Tile from './Tile';
 
 import './WelcomeTile.scss';
@@ -16,16 +18,29 @@ const WelcomeTile = props => {
     return (
         <Tile className='WelcomeTile' wide={isWide}>
             <h1 className='title'>
-                {props.name !== null && <span style={{ color: props.primaryColor }}>Hey {props.name}! </span>}
-                I'm Nathan, and I craft delightful experiences for the web.
+                <span style={{ color: props.primaryColor }}>Hey {props.name !== null ? props.name : 'there'}! </span>
+                I'm Nathan, and I craft enganging experiences for the web.
             </h1>
             <p className='large'>
-                I combine the best of design and development to create web projects that are beautiful — not only at first glance but also after further (code) review.
+                I combine my passion for delightful design and clean code to create web projects that are beautiful — not only at first glance but also after further (code) review.
             </p>
             {props.name === null ?
                 <div className='button-group'>
-                    <Link smooth to='#contact'><button className='primary'>Get in touch</button></Link>
-                    <a href='https://bit.ly/ng_resume' target='_blank' rel='noopener noreferrer'><button className='secondary'>View my resume</button></a>
+                    <Link
+                        smooth
+                        to='#contact'
+                        onClick={() => firebase.analytics().logEvent('link_clicked', { to: 'contact', from: 'hero' })}
+                    >
+                        <button className='primary'>Get in touch</button>
+                    </Link>
+                    <a
+                        href='https://bit.ly/ng_resume'
+                        target='_blank'
+                        rel='noopener noreferrer'
+                        onClick={() => firebase.analytics().logEvent('link_clicked', { to: 'resume', from: 'hero' })}
+                    >
+                        <button className='secondary'>View my resume</button>
+                    </a>
                 </div>
                 :
                 <>

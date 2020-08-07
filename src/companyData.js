@@ -104,7 +104,8 @@ const data = {
             r: 30,
             g: 215,
             b: 96
-        }
+        },
+        active: false
     },
     microsoft: {
         name: 'Microsoft',
@@ -113,7 +114,8 @@ const data = {
             r: 241,
             g: 81,
             b: 27
-        }
+        },
+        active: true
     },
     google: {
         name: 'Google',
@@ -122,7 +124,8 @@ const data = {
             r: 66,
             g: 133,
             b: 244
-        }
+        },
+        active: false
     },
     linkedin: {
         name: 'LinkedIn',
@@ -131,7 +134,8 @@ const data = {
             r: 40,
             g: 103,
             b: 178
-        }
+        },
+        active: false
     },
     intuit: {
         name: 'Intuit',
@@ -140,7 +144,8 @@ const data = {
             r: 54,
             g: 94,
             b: 191
-        }
+        },
+        active: false
     },
     webflow: {
         name: 'Webflow',
@@ -149,7 +154,8 @@ const data = {
             r: 70,
             g: 84,
             b: 254
-        }
+        },
+        active: false
     },
     zillow: {
         name: 'Zillow',
@@ -158,7 +164,8 @@ const data = {
             r: 0,
             g: 106,
             b: 255
-        }
+        },
+        active: false
     },
     duolingo: {
         name: 'Duolingo',
@@ -167,7 +174,8 @@ const data = {
             r: 80,
             g: 200,
             b: 0
-        }
+        },
+        active: false
     },
     khanacademy: {
         name: 'Khan Academy',
@@ -176,7 +184,8 @@ const data = {
             r: 20,
             g: 191,
             b: 150
-        }
+        },
+        active: false
     },
     codecademy: {
         name: 'Codecademy',
@@ -185,7 +194,8 @@ const data = {
             r: 100,
             g: 0,
             b: 228
-        }
+        },
+        active: false
     },
     hulu: {
         name: 'Hulu',
@@ -194,7 +204,8 @@ const data = {
             r: 28,
             g: 231,
             b: 131
-        }
+        },
+        active: false
     },
     mozilla: {
         name: 'Mozilla',
@@ -203,7 +214,8 @@ const data = {
             r: 255,
             g: 79,
             b: 94
-        }
+        },
+        active: false
     },
     apple: {
         name: 'Apple',
@@ -212,7 +224,8 @@ const data = {
             r: 0,
             g: 0,
             b: 0
-        }
+        },
+        active: false
     },
     adobe: {
         name: 'Adobe',
@@ -221,7 +234,8 @@ const data = {
             r: 250,
             g: 15,
             b: 0
-        }
+        },
+        active: false
     },
     snap: {
         name: 'Snap',
@@ -230,7 +244,8 @@ const data = {
             r: 0,
             g: 0,
             b: 0
-        }
+        },
+        active: false
     },
     uber: {
         name: 'Uber',
@@ -239,7 +254,8 @@ const data = {
             r: 0,
             g: 0,
             b: 0
-        }
+        },
+        active: false
     },
     slack: {
         name: 'Slack',
@@ -248,7 +264,8 @@ const data = {
             r: 97,
             g: 31,
             b: 105
-        }
+        },
+        active: false
     },
     twitter: {
         name: 'Twitter',
@@ -257,7 +274,8 @@ const data = {
             r: 29,
             g: 161,
             b: 252
-        }
+        },
+        active: false
     },
     facebook: {
         name: 'Facebook',
@@ -266,7 +284,8 @@ const data = {
             r: 24,
             g: 119,
             b: 242
-        }
+        },
+        active: false
     },
     paypal: {
         name: 'PayPal',
@@ -275,7 +294,8 @@ const data = {
             r: 23,
             g: 155,
             b: 215
-        }
+        },
+        active: false
     },
     square: {
         name: 'Square',
@@ -284,7 +304,8 @@ const data = {
             r: 0,
             g: 0,
             b: 0
-        }
+        },
+        active: false
     },
     lemonade: {
         name: 'Lemonade',
@@ -293,7 +314,8 @@ const data = {
             r: 255,
             g: 0,
             b: 132
-        }
+        },
+        active: false
     },
     root: {
         name: 'Root',
@@ -302,7 +324,8 @@ const data = {
             r: 255,
             g: 87,
             b: 21
-        }
+        },
+        active: false
     },
     ynab: {
         name: 'YNAB',
@@ -311,7 +334,8 @@ const data = {
             r: 133,
             g: 195,
             b: 233
-        }
+        },
+        active: false
     },
     coursera: {
         name: 'Coursera',
@@ -320,7 +344,8 @@ const data = {
             r: 42,
             g: 115,
             b: 204
-        }
+        },
+        active: false
     },
     expedia: {
         name: 'Expedia',
@@ -329,7 +354,8 @@ const data = {
             r: 251,
             g: 193,
             b: 8
-        }
+        },
+        active: false
     },
     robinhood: {
         name: 'Robinhood',
@@ -338,7 +364,8 @@ const data = {
             r: 0,
             g: 199,
             b: 7
-        }
+        },
+        active: false
     },
     m1: {
         name: 'M1 Finance',
@@ -347,7 +374,8 @@ const data = {
             r: 0,
             g: 32,
             b: 189
-        }
+        },
+        active: false
     },
     stripe: {
         name: 'Stripe',
@@ -356,7 +384,8 @@ const data = {
             r: 103,
             g: 114,
             b: 229
-        }
+        },
+        active: false
     },
     justworks: {
         name: 'Justworks',
@@ -365,7 +394,8 @@ const data = {
             r: 57,
             g: 182,
             b: 233
-        }
+        },
+        active: false
     },
     squarespace: {
         name: 'Squarespace',
@@ -374,7 +404,8 @@ const data = {
             r: 0,
             g: 0,
             b: 0
-        }
+        },
+        active: false
     },
     twosigma: {
         name: 'Two Sigma',
@@ -383,7 +414,8 @@ const data = {
             r: 0,
             g: 154,
             b: 166
-        }
+        },
+        active: false
     },
     github: {
         name: 'GitHub',
@@ -392,7 +424,8 @@ const data = {
             r: 0,
             g: 0,
             b: 0
-        }
+        },
+        active: false
     },
     plaid: {
         name: 'Plaid',
@@ -401,7 +434,8 @@ const data = {
             r: 0,
             g: 0,
             b: 0
-        }
+        },
+        active: false
     },
     volusion: {
         name: 'Volusion',
@@ -410,7 +444,8 @@ const data = {
             r: 255,
             g: 62,
             b: 128
-        }
+        },
+        active: false
     },
     shipengine: {
         name: 'ShipEngine',
@@ -419,7 +454,8 @@ const data = {
             r: 69,
             g: 170,
             b: 242
-        }
+        },
+        active: false
     },
     shopify: {
         name: 'Shopify',
@@ -428,7 +464,8 @@ const data = {
             r: 94,
             g: 142,
             b: 62
-        }
+        },
+        active: false
     },
     intercom: {
         name: 'Intercom',
@@ -437,7 +474,8 @@ const data = {
             r: 48,
             g: 71,
             b: 236
-        }
+        },
+        active: false
     },
     ebay: {
         name: 'eBay',
@@ -446,7 +484,8 @@ const data = {
             r: 229,
             g: 50,
             b: 56
-        }
+        },
+        active: false
     },
     dropbox: {
         name: 'Dropbox',
@@ -455,7 +494,8 @@ const data = {
             r: 0,
             g: 97,
             b: 255
-        }
+        },
+        active: false
     },
     redfin: {
         name: 'Redfin',
@@ -464,7 +504,8 @@ const data = {
             r: 160,
             g: 32,
             b: 33
-        }
+        },
+        active: false
     },
     atlassian: {
         name: 'Atlassian',
@@ -473,7 +514,8 @@ const data = {
             r: 0,
             g: 82,
             b: 204
-        }
+        },
+        active: false
     },
     tableau: {
         name: 'Tableau',
@@ -482,7 +524,8 @@ const data = {
             r: 31,
             g: 68,
             b: 126
-        }
+        },
+        active: false
     },
     kahoot: {
         name: 'Kahoot',
@@ -491,7 +534,8 @@ const data = {
             r: 85,
             g: 26,
             b: 139
-        }
+        },
+        active: false
     },
     brilliant: {
         name: 'Brilliant',
@@ -500,7 +544,8 @@ const data = {
             r: 0,
             g: 0,
             b: 0
-        }
+        },
+        active: false
     },
     instagram: {
         name: 'Instagram',
@@ -509,7 +554,8 @@ const data = {
             r: 176,
             g: 56,
             b: 167
-        }
+        },
+        active: false
     },
     dave: {
         name: 'Dave',
@@ -518,7 +564,8 @@ const data = {
             r: 11,
             g: 154,
             b: 64
-        }
+        },
+        active: false
     },
     coda: {
         name: 'Coda',
@@ -527,7 +574,8 @@ const data = {
             r: 244,
             g: 106,
             b: 84
-        }
+        },
+        active: false
     },
     freshconsulting: {
         name: 'Fresh Consulting',
@@ -536,7 +584,8 @@ const data = {
             r: 80,
             g: 179,
             b: 78
-        }
+        },
+        active: false
     },
     medium: {
         name: 'Medium',
@@ -545,7 +594,8 @@ const data = {
             r: 3,
             g: 168,
             b: 124
-        }
+        },
+        active: false
     },
     nyt: {
         name: 'New York Times',
@@ -554,7 +604,8 @@ const data = {
             r: 0,
             g: 0,
             b: 0
-        }
+        },
+        active: false
     },
     flywheel: {
         name: 'Flywheel',
@@ -563,7 +614,8 @@ const data = {
             r: 79,
             g: 198,
             b: 219
-        }
+        },
+        active: false
     },
     buildertrend: {
         name: 'Buildertrend',
@@ -572,7 +624,8 @@ const data = {
             r: 0,
             g: 174,
             b: 239
-        }
+        },
+        active: false
     },
     nike: {
         name: 'Nike',
@@ -581,7 +634,8 @@ const data = {
             r: 0,
             g: 0,
             b: 0
-        }
+        },
+        active: false
     },
     adidas: {
         name: 'Adidas',
@@ -590,7 +644,8 @@ const data = {
             r: 0,
             g: 0,
             b: 0
-        }
+        },
+        active: false
     },
     netflix: {
         name: 'Netflix',
@@ -599,7 +654,8 @@ const data = {
             r: 216,
             g: 31,
             b: 38
-        }
+        },
+        active: false
     },
     tripadvisor: {
         name: 'Tripadvisor',
@@ -608,7 +664,8 @@ const data = {
             r: 52,
             g: 224,
             b: 161
-        }
+        },
+        active: false
     },
     wix: {
         name: 'Wix',
@@ -617,7 +674,8 @@ const data = {
             r: 251,
             g: 189,
             b: 113
-        }
+        },
+        active: false
     },
     box: {
         name: 'Box',
@@ -626,7 +684,8 @@ const data = {
             r: 0,
             g: 113,
             b: 247
-        }
+        },
+        active: false
     },
     salesforce: {
         name: 'Salesforce',
@@ -635,7 +694,8 @@ const data = {
             r: 0,
             g: 161,
             b: 224
-        }
+        },
+        active: false
     },
     notion: {
         name: 'Notion',
@@ -644,7 +704,8 @@ const data = {
             r: 0,
             g: 0,
             b: 0
-        }
+        },
+        active: false
     },
     discover: {
         name: 'Discover',
@@ -653,7 +714,8 @@ const data = {
             r: 255,
             g: 96,
             b: 0
-        }
+        },
+        active: false
     },
     pluralsight: {
         name: 'Pluralsight',
@@ -662,7 +724,8 @@ const data = {
             r: 236,
             g: 0,
             b: 140
-        }
+        },
+        active: false
     },
     acorns: {
         name: 'Acorns',
@@ -671,7 +734,8 @@ const data = {
             r: 116,
             g: 201,
             b: 70
-        }
+        },
+        active: false
     },
     stash: {
         name: 'Stash',
@@ -680,7 +744,8 @@ const data = {
             r: 66,
             g: 33,
             b: 138
-        }
+        },
+        active: false
     },
     amazon: {
         name: 'Amazon',
@@ -689,7 +754,8 @@ const data = {
             r: 255,
             g: 153,
             b: 0
-        }
+        },
+        active: false
     },
     chime: {
         name: 'Chime',
@@ -698,7 +764,8 @@ const data = {
             r: 30,
             g: 198,
             b: 119
-        }
+        },
+        active: false
     },
     wealthfront: {
         name: 'Wealthfront',
@@ -707,7 +774,8 @@ const data = {
             r: 72,
             g: 64,
             b: 187
-        }
+        },
+        active: false
     },
     groupon: {
         name: 'Groupon',
@@ -716,7 +784,8 @@ const data = {
             r: 83,
             g: 163,
             b: 24
-        }
+        },
+        active: false
     },
     rakuten: {
         name: 'Rakuten',
@@ -725,7 +794,8 @@ const data = {
             r: 191,
             g: 0,
             b: 0
-        }
+        },
+        active: false
     },
     workday: {
         name: 'Workday',
@@ -734,7 +804,8 @@ const data = {
             r: 243,
             g: 139,
             b: 0
-        }
+        },
+        active: false
     },
     hudl: {
         name: 'Hudl',
@@ -743,7 +814,8 @@ const data = {
             r: 255,
             g: 99,
             b: 0
-        }
+        },
+        active: false
     },
     americangiant: {
         name: 'American Giant',
@@ -752,7 +824,8 @@ const data = {
             r: 226,
             g: 33,
             b: 32
-        }
+        },
+        active: false
     },
     tesla: {
         name: 'Tesla',
@@ -761,7 +834,8 @@ const data = {
             r: 232,
             g: 33,
             b: 39
-        }
+        },
+        active: false
     },
     lyft: {
         name: 'Lyft',
@@ -770,7 +844,8 @@ const data = {
             r: 234,
             g: 11,
             b: 140
-        }
+        },
+        active: false
     },
     wasai: {
         name: 'Wasai',
@@ -779,7 +854,8 @@ const data = {
             r: 0,
             g: 0,
             b: 0
-        }
+        },
+        active: false
     },
     casper: {
         name: 'Casper',
@@ -788,7 +864,8 @@ const data = {
             r: 0,
             g: 35,
             b: 126
-        }
+        },
+        active: false
     },
     tn: {
         name: 'Tuft & Needle',
@@ -797,7 +874,8 @@ const data = {
             r: 96,
             g: 237,
             b: 179
-        }
+        },
+        active: false
     },
     dixonmoe: {
         name: 'Dixon & Moe',
@@ -806,7 +884,8 @@ const data = {
             r: 0,
             g: 0,
             b: 0
-        }
+        },
+        active: false
     },
     hopper: {
         name: 'Hopper',
@@ -815,7 +894,8 @@ const data = {
             r: 250,
             g: 104,
             b: 102
-        }
+        },
+        active: false
     },
     skyscanner: {
         name: 'Skyscanner',
@@ -824,7 +904,8 @@ const data = {
             r: 7,
             g: 112,
             b: 227
-        }
+        },
+        active: false
     },
     transit: {
         name: 'Transit',
@@ -833,7 +914,8 @@ const data = {
             r: 43,
             g: 200,
             b: 117
-        }
+        },
+        active: false
     },
     disney: {
         name: 'Disney',
@@ -842,7 +924,8 @@ const data = {
             r: 0,
             g: 0,
             b: 0
-        }
+        },
+        active: false
     },
     airbnb: {
         name: 'Airbnb',
@@ -851,7 +934,8 @@ const data = {
             r: 255,
             g: 90,
             b: 95
-        }
+        },
+        active: false
     },
     zelle: {
         name: 'Zelle',
@@ -860,7 +944,8 @@ const data = {
             r: 108,
             g: 28,
             b: 211
-        }
+        },
+        active: false
     },
     convertkit: {
         name: 'ConvertKit',
@@ -869,7 +954,8 @@ const data = {
             r: 251,
             g: 105,
             b: 112
-        }
+        },
+        active: false
     },
     doordash: {
         name: 'DoorDash',
@@ -878,7 +964,8 @@ const data = {
             r: 255,
             g: 48,
             b: 8
-        }
+        },
+        active: false
     },
     grubhub: {
         name: 'Grubhub',
@@ -887,7 +974,8 @@ const data = {
             r: 246,
             g: 52,
             b: 64
-        }
+        },
+        active: false
     },
     coinbase: {
         name: 'Coinbase',
@@ -896,7 +984,8 @@ const data = {
             r: 22,
             g: 82,
             b: 241
-        }
+        },
+        active: false
     },
     instacart: {
         name: 'Instacart',
@@ -905,7 +994,8 @@ const data = {
             r: 67,
             g: 176,
             b: 42
-        }
+        },
+        active: false
     },
     eventbrite: {
         name: 'Eventbrite',
@@ -914,7 +1004,8 @@ const data = {
             r: 240,
             g: 85,
             b: 55
-        }
+        },
+        active: false
     },
     gusto: {
         name: 'Gusto',
@@ -923,7 +1014,8 @@ const data = {
             r: 244,
             g: 93,
             b: 71
-        }
+        },
+        active: false
     },
     zapier: {
         name: 'Zapier',
@@ -932,7 +1024,8 @@ const data = {
             r: 255,
             g: 74,
             b: 0
-        }
+        },
+        active: false
     },
     podium: {
         name: 'Podium',
@@ -941,7 +1034,8 @@ const data = {
             r: 0,
             g: 0,
             b: 0
-        }
+        },
+        active: false
     },
     clever: {
         name: 'Clever',
@@ -950,7 +1044,8 @@ const data = {
             r: 66,
             g: 116,
             b: 246
-        }
+        },
+        active: false
     },
     evernote: {
         name: 'Evernote',
@@ -959,7 +1054,8 @@ const data = {
             r: 0,
             g: 168,
             b: 45
-        }
+        },
+        active: false
     },
     zeus: {
         name: 'Zeus',
@@ -968,7 +1064,8 @@ const data = {
             r: 76,
             g: 162,
             b: 216
-        }
+        },
+        active: false
     },
 };
 

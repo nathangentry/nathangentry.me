@@ -1,4 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
+import * as firebase from 'firebase/app';
+import 'firebase/analytics';
 import Tile from '../Tile/Tile';
 import IconButton from '../IconButton/IconButton';
 
@@ -53,6 +55,7 @@ const StoryTile = props => {
                 setTimeout(() => {
                     showCloseButton();
                     disableTransitions();
+                    firebase.analytics().logEvent('storytile_selected', { storytile_id: props.id });
                 }, ANIMATION_STEP.STANDARD * 1000);
             }, ANIMATION_STEP.SHORT * 1000);
         } else {
@@ -155,43 +158,6 @@ const StoryTile = props => {
         };
     }
 
-    const resizeStoryTile = (smooth) => {
-        // properties
-        const screen = getScreenProperties();
-        const maxWidth = 1200;
-        const maxHeight = 750;
-        const minMargin = 120;
-
-        // find ending margins
-        let target = {};
-        if (screen.isMobile) {
-            target.x = 0;
-            target.y = 0;
-        } else if (screen.isTablet) {
-            target.x = screen.width * 0.1;
-            target.y = screen.height * 0.1;
-        } else {
-            target.x = Math.max((document.body.clientWidth - maxWidth) / 2, minMargin);
-            target.y = Math.max((window.innerHeight - maxHeight) / 2, minMargin);
-        }
-
-        // find ending width & height
-        target.width = screen.width - (2 * target.x);
-        target.height = screen.height - (2 * target.y);
-        const children = getTileChildrenDimensions(target, true);
-
-        // set ending rect
-        setBoundingClientRect(tileRef.current, target);
-        setBoundingClientRect(previewRef.current, children.preview);
-        setBoundingClientRect(detailsRef.current, children.details);
-        tileRef.current.style.borderRadius = screen.isMobile ? '0' : '4px';
-        tileRef.current.style.flexDirection = screen.isLandscape ? 'row' : 'column';
-        setTimeout(() => {
-            detailsRef.current.style.padding = `${children.details.padding}px`;
-            detailsRef.current.style.opacity = '1.0';
-        }, smooth ? ANIMATION_STEP.STANDARD * 1000 : 0);
-    }
-
     const getTileChildrenDimensions = (tileRect, isOpen) => {
         const screen = getScreenProperties();
         const detailColumnLayoutBreakpoint = 800;
@@ -201,7 +167,7 @@ const StoryTile = props => {
         let ratio = {};
         let detailsPadding;
         if (isOpen) {
-            closeButtonRef.current.className = 'close-button';
+            closeButtonRef.current.className = 'IconButton close-button';
             if (screen.isMobile) {
                 detailsPadding = 36;
                 if (screen.isLandscape) {
@@ -267,6 +233,44 @@ const StoryTile = props => {
                 padding: detailsPadding
             }
         };
+    }
+
+    const resizeStoryTile = (smooth) => {
+        // properties
+        const screen = getScreenProperties();
+        const maxWidth = 1200;
+        const maxHeight = 750;
+        const minMargin = 120;
+
+        // find ending margins
+        let target = {};
+        if (screen.isMobile) {
+            target.x = 0;
+            target.y = 0;
+        } else if (screen.isTablet) {
+            target.x = screen.width * 0.1;
+            target.y = screen.height * 0.1;
+        } else {
+            target.x = Math.max((document.body.clientWidth - maxWidth) / 2, minMargin);
+            target.y = Math.max((window.innerHeight - maxHeight) / 2, minMargin);
+        }
+
+        // find ending width & height
+        target.width = screen.width - (2 * target.x);
+        target.height = screen.height - (2 * target.y);
+        const children = getTileChildrenDimensions(target, true);
+
+        // set ending rect
+        setBoundingClientRect(tileRef.current, target);
+        setBoundingClientRect(previewRef.current, children.preview);
+        setBoundingClientRect(detailsRef.current, children.details);
+        tileRef.current.style.borderRadius = screen.isMobile ? '0' : '4px';
+        tileRef.current.style.flexDirection = screen.isLandscape ? 'row' : 'column';
+        setTimeout(() => {
+            tileRef.current.style.cursor = 'inherit';
+            detailsRef.current.style.padding = `${children.details.padding}px`;
+            detailsRef.current.style.opacity = '1.0';
+        }, smooth ? ANIMATION_STEP.STANDARD * 1000 : 0);
     }
 
     const openStoryTile = () => {

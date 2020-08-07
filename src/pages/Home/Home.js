@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { HashLink as Link } from 'react-router-hash-link';
+import * as firebase from 'firebase/app';
+import 'firebase/analytics';
 import StyledPage from '../../components/StyledPage/StyledPage';
 import Toolbar from '../../components/Toolbar/Toolbar';
 import PageWidthWrapper from '../../components/PageWidthWrapper/PageWidthWrapper';
@@ -53,8 +55,8 @@ const Home = props => {
     useEffect(() => {
         if (props.match.params.company !== undefined) {
             const companyMatch = data[props.match.params.company];
-            if (companyMatch !== undefined) {
-                companyMatch !== undefined && setCompany({
+            if (companyMatch !== undefined && companyMatch.active) {
+                setCompany({
                     name: companyMatch.name,
                     path: companyMatch.path,
                     logo: companyMatch.logo,
@@ -66,6 +68,8 @@ const Home = props => {
                     different: companyMatch.different !== undefined ? companyMatch.different : different,
                     motivation: companyMatch.motivation !== undefined ? companyMatch.motivation : motivation
                 });
+            } else {
+                props.history.push('/');
             }
         }
     }, [props.match.params.company]);
@@ -103,11 +107,19 @@ const Home = props => {
             location: 'Lenexa, KS',
             position: 'Full Stack Web Development Intern',
             timeframe: 'Summer 2020',
-            skills: [['React', 'Python', 'PostgreSQL'], ['Django', 'Git', 'Bitbucket'], ['Agile', 'Jira', 'Communication']],
-            overview: ['Cboe Global Markets is a major player in the markets and exchanges industry. During the summer of 2020, they sought to transition their high-traffic market insights blog into a news and video hub to create a more engaging experience. As my intern project, I worked on creating a content management system (CMS) for the marketing and communications team to streamline publishing content to the new site.'],
-            myRole: ['My primary focus was on the frontend of the application, programmed in React. I communicated effectively in a remote setting with the UI designer, as well as stakeholders in the marketing and communications team. Through this collaboration, I worked towards translating UI designs into code, while incorporating changes to benefit stakeholders involved.',
-                'For example, the initial UI design segmented post creation and forced the user to insert one paragraph, image, or video at a time. When evaluating from the user’s perspective, I felt that this workflow would be frustrating compared to their current system. Instead, I worked toward implementing a familiar rich text editor to allow them to write posts in a more seamless manner.',
-                'In addition to work on frontend implementation, I also created API endpoints in Django, library code in Python, and database tables in PostgreSQL to ensure the flow of data was seamless throughout the application from end-to-end.']
+            skills: [
+                ['React', 'Python', 'PostgreSQL'],
+                ['Django', 'Git', 'Bitbucket'],
+                ['Agile', 'Jira', 'Communication']
+            ],
+            overview: [
+                'Cboe Global Markets is a major player in the markets and exchanges industry. During the summer of 2020, they were transitioning their market insights blog into a news and video hub to create a more engaging experience for users. As my intern project, I created a content management system (CMS) for the marketing and communications team to streamline publishing content to the new site.'
+            ],
+            myRole: [
+                'A major focus of mine was on the front end of the application. I communicated effectively in a remote setting with the lead UI designer and stakeholders in the marketing and communications team. Through this collaboration, I translated wireframes into React code, while incorporating changes that benefited end-users.',
+                'For example, the initial design segmented post creation, forcing the user to insert one paragraph, image, or video at a time. When evaluating from the user’s perspective, I felt this would be frustrating — especially compared to their current workflow. Instead, I adapted a familiar rich text editor to meet our project\'s needs while allowing authors to write posts more seamlessly.',
+                'In addition to implementing front end code, I also created API endpoints and library code in Python, as well as database tables in PostgreSQL to ensure uninterrupted data flow from end-to-end.'
+            ]
         },
         {
             id: 'dmsi',
@@ -118,10 +130,19 @@ const Home = props => {
             location: 'Lincoln, NE',
             position: 'Front End Development Intern',
             timeframe: 'Spring 2020',
-            skills: [['React', 'SASS', 'TypeScript'], ['Golang', 'GitHub', 'Git'], ['Zenhub', 'Agile']],
-            overview: ['DMSi creates innovative business software for the lumber and building materials industry. One major pain point they recognized was in their door configuration software, which was frustrating, convoluted, and confusing. This project created new in-house software that dynamically generated images as users configured their doors to create transparency in the process and add value to the user. One DMSi executive noted this software will soon be used to configure 50% of doors in America.',
-                <a href='https://digitalcommons.unl.edu/honorsembargoed/138/' target='_blank' rel='noopener noreferrer'><button className='secondary'>Read the thesis</button></a>],
-            myRole: ['My main task through the internship was developing the preview in environment functionality. This allowed users to preview the door they had configured in the application on an image of their house. I took ownership of everything from sprint planning and agile ticket creation to the actual development of the feature using React and SASS. By bringing me on as an intern, the team was able to achieve one of their reach goals for the overall project.']
+            skills: [
+                ['React', 'SASS', 'TypeScript'],
+                ['Golang', 'GitHub', 'Git'],
+                ['Zenhub', 'Agile']
+            ],
+            overview: [
+                'DMSi Software creates innovative business tools for the lumber and building materials industry. One major pain point they recognized was in their door configuration software, which was frustrating and convoluted. This project created new, in-house software that dynamically generated images as users configured their doors to create transparency in the process. One DMSi executive noted this software will soon be used to configure 50% of doors in America.',
+                <a href='https://digitalcommons.unl.edu/honorsembargoed/138/' target='_blank' rel='noopener noreferrer'><button className='secondary'>Read the thesis</button></a>
+            ],
+            myRole: [
+                'My main task through the internship was developing the preview-in-environment functionality. This feature allowed users to test out any number of door configurations on their house. This added value both to the user and to DMSi by creating a seamless way to reduce the risk of buying a door. ',
+                'I quickly adapted to working in an agile-based team environment halfway through the project and took control in developing the feature using React and SASS. By bringing me on as an intern, the team was able to achieve one of their reach goals for the overall project.'
+            ]
         }
     ];
 
@@ -133,8 +154,15 @@ const Home = props => {
             logoImage: evergreenLogo,
             project: 'Evergreen Design Agency',
             timeframe: 'Summer 2020 – Present',
-            skills: [['React', 'CSS', 'Firebase'], ['UI/UX Design', 'Figma', 'Branding'], ['Marketing', 'Entrepreneurship', 'Copywriting']],
-            overview: ['Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'],
+            skills: [
+                ['React', 'CSS', 'Firebase'],
+                ['UI/UX Design', 'Figma', 'Branding'],
+                ['Marketing', 'Entrepreneurship', 'Copywriting']
+            ],
+            overview: [
+                'Evergreen Design Agency is a branding and website design consulting firm that I launched in June 2020. This involved running social media campaigns to build a presence within the design community and generate potential business leads. Within just weeks, this campaign resulted in a bid for a design project.',
+                'In addition to the social media announcement, I produced a website for Evergreen Design Agency to act as a landing page for the company, highlighting previous work and the value proposition. This process was led from end-to-end by myself, including designing wireframes in Figma and then translating those to code with React and CSS.'
+            ],
         },
         {
             id: 'ngme',
@@ -143,9 +171,17 @@ const Home = props => {
             logoImage: ngmeLogo,
             project: 'nathangentry.me',
             timeframe: 'Summer 2020',
-            skills: [['React', 'SASS'], ['Firebase', 'Figma'], ['UI/UX Design', 'Copywriting']],
-            overview: ['In an effort to differentiate from other job and internship candidates in a competitive field, I created an interactive portfolio experience by using React and SASS to bring my UI designs to life. To ensure flexibility and sustainability for years to come, I designed the site with segmentation and componentization in mind, allowing new experiences and projects to be added with ease.',
-                'In addition to the general portfolio site for public visitors, I also ensured the site was extensible to any number of companies and jobs. By utilizing React Router and styled components, I was able to create a unique experience for each company, including a cover letter and custom theming.'],
+            skills: [
+                ['React', 'SASS'],
+                ['Firebase', 'Figma'],
+                ['UI/UX Design', 'Copywriting']
+            ],
+            overview: [
+                'nathangentry.me is an interactive portfolio site I created to showcase my past work experience, personal projects, and education history. To ensure flexibility for years to come, I designed the site with componentization in mind, allowing new experiences and projects to be added with ease in the future.',
+                'Interactivity was emphasized as a focal point of the website. Transitions originating from user actions spark joy and act as a differentiating factor from other resume sites. These were brought to life in development using React and SASS transitions.',
+                'In addition to the general portfolio site for public visitors, I also ensured the site was extensible to match any number of companies and jobs I apply for in the future. By utilizing React Router and styled-components, I was able to create a unique, private experience for each company, including a cover letter and custom theming.',
+                <a href='https://github.com/gentryn31/portfolio' target='_blank' rel='noopener noreferrer'><button className='secondary'>Check out the code</button></a>
+            ]
         },
         {
             id: 'bulletin',
@@ -154,8 +190,18 @@ const Home = props => {
             logoImage: bulletinLogo,
             project: 'Bulletin by BlueLine',
             timeframe: 'Fall 2019',
-            skills: [['React', 'CSS'], ['Firebase', 'UI/UX Design'], ['Entrepreneurship', 'Collaboration']],
-            overview: ['Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'],
+            skills: [
+                ['React', 'CSS'],
+                ['Firebase', 'UI/UX Design'],
+                ['Entrepreneurship', 'Collaboration']
+            ],
+            overview: [
+                'Bulletin is a case management system prototype developed in coordination with the Nebraska State Patrol. Currently, there is no centralized, digital source of truth for case updates or task management. This tool was created to fill that gap, create transparency throughout the Patrol, and ensure that everyone is acting on the most up-to-date information.',
+                'Creating a product that catered to our target audience was a particular challenge in this project. Officers are notoriously reluctant to adopt new technology, so we placed a strong emphasis on simplifying the user experience. This manifests itself in a bare-bones home screen with a limited set of options to proceed. Additionally, after our user interviews, we incorporated a rotating information panel filled with jokes in an attempt to decrease cynicism in the workplace.',
+                'Beyond the home screen in the case updates page, we once again focused on simplicity. Highlights draw an officer\'s attention to new updates, with cases of particular importance at the top of their list. Additionally, search functionality makes the process of finding old information a breeze, with text highlighting to bring the user\'s attention to any matches.',
+                'Bulletin was developed as a part of the Raikes School\'s Innovation Processes course. Over the course of the semester, my team members and I developed a business model using the Lean Startup methodology. As a proof-of-concept for our business model, we developed this prototype and refined it with feedback from the Nebraska State Patrol.',
+                <a href='https://ip-group-7.web.app/wade' target='_blank' rel='noopener noreferrer'><button className='secondary'>Check out the project</button></a>
+            ]
         }
     ]
 
@@ -188,9 +234,28 @@ const Home = props => {
                                 <>
                                     <button id='see-more-fab' className='primary' onClick={() => setActionsDisplayed(!actionsDisplayed)} onBlur={() => setTimeout(() => setActionsDisplayed(false), 0)}><i className='material-icons'>{actionsDisplayed ? 'close' : 'more_vert'}</i></button>
                                     <div id='hero-right-button-list' className={actionsDisplayed ? 'opened' : 'closed'}>
-                                        <Link smooth to='#contact'><button className='primary'>Get in touch</button></Link>
-                                        <a href='https://bit.ly/ng_resume' target='_blank' rel='noopener noreferrer'><button className='secondary'>View my resume</button></a>
-                                        <Link smooth to='#experience'><button className='secondary'>Skip to my work</button></Link>
+                                        <Link
+                                            smooth
+                                            to='#contact'
+                                            onClick={() => firebase.analytics().logEvent('link_clicked', { to: 'contact', from: 'hero' })}
+                                        >
+                                            <button className='primary'>Get in touch</button>
+                                        </Link>
+                                        <a
+                                            href='https://bit.ly/ng_resume'
+                                            target='_blank'
+                                            rel='noopener noreferrer'
+                                            onClick={() => firebase.analytics().logEvent('link_clicked', { to: 'resume', from: 'hero' })}
+                                        >
+                                            <button className='secondary'>View my resume</button>
+                                        </a>
+                                        <Link
+                                            smooth
+                                            to='#experience'
+                                            onClick={() => firebase.analytics().logEvent('link_clicked', { to: 'experience', from: 'hero' })}
+                                        >
+                                            <button className='secondary'>Skip to my work</button>
+                                        </Link>
                                     </div>
                                 </>
                             }
@@ -199,7 +264,7 @@ const Home = props => {
                     <Section title='Experience' id='experience'>
                         <GridWrapper>
                             {experienceData.map(x =>
-                                <StoryTile title={x.title} mainImage={x.mainImage} logoImage={x.logoImage} key={x.id}>
+                                <StoryTile title={x.title} mainImage={x.mainImage} logoImage={x.logoImage} key={x.id} id={x.id} path={company.path}>
                                     <ExperienceTemplate {...x} />
                                 </StoryTile>
                             )}
@@ -208,7 +273,7 @@ const Home = props => {
                     <Section title='Projects' id='projects'>
                         <GridWrapper>
                             {projectData.map(p =>
-                                <StoryTile title={p.title} mainImage={p.mainImage} logoImage={p.logoImage} key={p.id}>
+                                <StoryTile title={p.title} mainImage={p.mainImage} logoImage={p.logoImage} key={p.id} id={p.id} path={company.path}>
                                     <ProjectTemplate {...p} />
                                 </StoryTile>
                             )}
@@ -216,7 +281,7 @@ const Home = props => {
                     </Section>
                     <Section title='Education' id='education'>
                         <GridWrapper>
-                            <StoryTile title='University of Nebraska–Lincoln' mainImage={unlMain} display={educationDisplay}>
+                            <StoryTile title='University of Nebraska–Lincoln' mainImage={unlMain} display={educationDisplay} id={'unl'} path={company.path}>
                                 <div className='highlight-grid'>
                                     <div>
                                         <h5 className='section-heading'>Major</h5>
@@ -250,7 +315,7 @@ const Home = props => {
                                 </div>
                                 <div id='raikes-info-bit'>
                                     <h4 className='title'>Jeffrey S. Raikes School of Computer Science &amp; Management</h4>
-                                    <p>The Jeffrey S. Raikes School of Computer Science &amp; Management is a highly selective and competitive program focusing on the intersection of technology, business, innovation, and leadership on the campus of the University of Nebraska–Lincoln.</p>
+                                    <p>The Jeffrey S. Raikes School of Computer Science and Management is a highly selective and competitive honors program at the University of Nebraska-Lincoln focusing on the intersection of technology and business. Along with my cohort of approximately 40 students, I study topics such as software engineering processes, innovation, and business fundamentals to create a well-rounded skillset that I can apply to real-world solutions.</p>
                                 </div>
                             </StoryTile>
                         </GridWrapper>
@@ -259,8 +324,22 @@ const Home = props => {
                         <ContactSection url={props.match.url} />
                         <Section title='Online' className='logo-tile-container'>
                             <div className='logo-grid'>
-                                <a href='https://github.com/gentryn31' target='_blank' rel='noopener noreferrer'><Tile className='logo-tile'><img src={githubLogo} alt='GitHub logo' width='120px' /></Tile></a>
-                                <a href='https://www.linkedin.com/in/nathan-gentry' target='_blank' rel='noopener noreferrer'><Tile className='logo-tile'><img src={linkedInLogo} alt='LinkedIn logo' width='120px' /></Tile></a>
+                                <a
+                                    href='https://github.com/gentryn31'
+                                    target='_blank'
+                                    rel='noopener noreferrer'
+                                    onClick={() => firebase.analytics().logEvent('link_clicked', { to: 'github', from: 'contact' })}
+                                >
+                                    <Tile className='logo-tile'><img src={githubLogo} alt='GitHub logo' width='120px' /></Tile>
+                                </a>
+                                <a
+                                    href='https://www.linkedin.com/in/nathan-gentry'
+                                    target='_blank'
+                                    rel='noopener noreferrer'
+                                    onClick={() => firebase.analytics().logEvent('link_clicked', { to: 'linkedin', from: 'contact' })}
+                                >
+                                    <Tile className='logo-tile'><img src={linkedInLogo} alt='LinkedIn logo' width='120px' /></Tile>
+                                </a>
                             </div>
                         </Section>
                     </GridWrapper>
