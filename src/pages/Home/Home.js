@@ -4,8 +4,8 @@ import * as firebase from 'firebase/app';
 import 'firebase/analytics';
 import StyledPage from '../../components/StyledPage/StyledPage';
 import Toolbar from '../../components/Toolbar/Toolbar';
-import PageWidthWrapper from '../../components/PageWidthWrapper/PageWidthWrapper';
-import GridWrapper from '../../components/GridWrapper/GridWrapper';
+import PageWidthWrapper from '../../components/Wrapper/PageWidthWrapper';
+import GridWrapper from '../../components/Wrapper/GridWrapper';
 import WelcomeTile from '../../components/Tile/WelcomeTile';
 import HeroImageTile from '../../components/Tile/HeroImageTile';
 import Section from '../../components/Section/Section';
@@ -242,7 +242,7 @@ const Home = props => {
                                             <button className='primary'>Get in touch</button>
                                         </Link>
                                         <a
-                                            href='https://bit.ly/ng_resume'
+                                            href='https://bit.ly/ng_resume_fall2020'
                                             target='_blank'
                                             rel='noopener noreferrer'
                                             onClick={() => firebase.analytics().logEvent('link_clicked', { to: 'resume', from: 'hero' })}
@@ -301,9 +301,9 @@ const Home = props => {
                                         <IconBullet icon='done' text='Design Thinking' />
                                         <IconBullet icon='done' text='Machine Learning' />
                                         <IconBullet icon='done' text='Software Engineering' />
-                                        <IconBullet icon='done' text='Statistics' />
-                                        <IconBullet icon='done' text='Economics' />
-                                        <IconBullet icon='done' text='Accounting' />
+                                        <IconBullet icon='done' text='Honors Statistics' />
+                                        <IconBullet icon='done' text='Calculus I, II, & III' />
+                                        <IconBullet icon='done' text='Linear Algebra' />
                                     </div>
                                     <div id='involvements-info-bit'>
                                         <h5 className='section-heading'>Involvements</h5>

@@ -1,5 +1,5 @@
 import React from 'react';
-import PageWidthWrapper from '../PageWidthWrapper/PageWidthWrapper';
+import PageWidthWrapper from '../Wrapper/PageWidthWrapper';
 import './Toolbar.scss';
 
 const Toolbar = props => {

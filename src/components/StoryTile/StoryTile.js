@@ -3,6 +3,7 @@ import * as firebase from 'firebase/app';
 import 'firebase/analytics';
 import Tile from '../Tile/Tile';
 import IconButton from '../IconButton/IconButton';
+import ScrollWrapper from '../Wrapper/ScrollWrapper';
 
 import './StoryTile.scss';
 
@@ -15,6 +16,7 @@ const StoryTile = props => {
     const previewScrimRef = useRef();
     const previewImageRef = useRef();
     const detailsRef = useRef();
+    const detailsContentRef = useRef();
     const closeButtonRef = useRef();
     const fullScrimRef = useRef();
 
@@ -161,8 +163,8 @@ const StoryTile = props => {
     const getTileChildrenDimensions = (tileRect, isOpen) => {
         const screen = getScreenProperties();
         const detailColumnLayoutBreakpoint = 800;
-        const tabletSmallBreakpoint = 1024;
-        const tabletMediumBreakpoint = 1100;
+        const landscapeSmallBreakpoint = 1024;
+        const landscapeMediumBreakpoint = 1100;
 
         let ratio = {};
         let detailsPadding;
@@ -183,13 +185,13 @@ const StoryTile = props => {
                     ratio.preview = { width: 1.0, height: 0.3 };
                     ratio.details = { width: 1.0, height: 0.7 };
                 }
-            } else if (screen.isTablet) {
-                detailsPadding = 48;
+            } else {
+                detailsPadding = screen.isTablet ? 48 : 60;
                 if (screen.isLandscape) {
-                    if (screen.width < tabletSmallBreakpoint) {
+                    if (screen.width < landscapeSmallBreakpoint) {
                         ratio.preview = { width: 0.0, height: 1.0 };
                         ratio.details = { width: 1.0, height: 1.0 };
-                    } else if (screen.width < tabletMediumBreakpoint) {
+                    } else if (screen.width < landscapeMediumBreakpoint) {
                         ratio.preview = { width: 0.3, height: 1.0 };
                         ratio.details = { width: 0.7, height: 1.0 };
                     } else {
@@ -200,10 +202,6 @@ const StoryTile = props => {
                     ratio.preview = { width: 1.0, height: 0.3 };
                     ratio.details = { width: 1.0, height: 0.7 };
                 }
-            } else {
-                detailsPadding = 60;
-                ratio.preview = { width: 0.4, height: 1.0 };
-                ratio.details = { width: 0.6, height: 1.0 };
             }
         } else {
             detailsPadding = 0;
@@ -268,7 +266,7 @@ const StoryTile = props => {
         tileRef.current.style.flexDirection = screen.isLandscape ? 'row' : 'column';
         setTimeout(() => {
             tileRef.current.style.cursor = 'inherit';
-            detailsRef.current.style.padding = `${children.details.padding}px`;
+            detailsContentRef.current.style.padding = `${children.details.padding}px`;
             detailsRef.current.style.opacity = '1.0';
         }, smooth ? ANIMATION_STEP.STANDARD * 1000 : 0);
     }
@@ -305,6 +303,10 @@ const StoryTile = props => {
                 tileRef.current.removeAttribute('style');
                 previewRef.current.removeAttribute('style');
                 detailsRef.current.removeAttribute('style');
+
+                if (props.display && !CSS.supports('height: fit-content')) {
+                    containerRef.current.style.height = tileRef.current.getBoundingClientRect().height;
+                }
             }, ANIMATION_STEP.STANDARD * 1000);
         }, ANIMATION_STEP.SHORT * 1000);
     }
@@ -319,10 +321,12 @@ const StoryTile = props => {
                         <div className='scrim' ref={previewScrimRef} />
                         <img className='mainImage' src={props.mainImage} alt='' ref={previewImageRef} />
                     </div>
-                    <div className='details' ref={detailsRef}>
-                        <h2 className='title'>{props.title}</h2>
-                        {props.children}
-                    </div>
+                    <ScrollWrapper className='details' ref={detailsRef} vertical>
+                        <div ref={detailsContentRef}>
+                            <h2 className='title'>{props.title}</h2>
+                            {props.children}
+                        </div>
+                    </ScrollWrapper>
                 </Tile>
                 <IconButton icon='close' className='close-button' onClick={() => isOpen ? setIsOpen(false) : undefined} ref={closeButtonRef} />
                 <div className='full-scrim' onClick={() => isOpen ? setIsOpen(false) : undefined} ref={fullScrimRef} />

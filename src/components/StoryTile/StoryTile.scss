@@ -14,12 +14,6 @@
         height: 500px;
     }
 
-    &.display {
-        @media (min-width: 1100px) {
-            height: fit-content;
-        }
-    }
-
     & > .storytile {
         will-change: width, height, opacity;
         overflow: hidden;
@@ -100,15 +94,12 @@
             width: 0;
             opacity: 0;
             overflow-y: auto;
-            & ::-webkit-scrollbar-track {
-                background-color: white;
-            }
     
-            & > .title {
+            & .title {
                 margin-bottom: 36px;
             }
     
-            & > .highlight-grid {
+            & .highlight-grid {
                 display: grid;
                 grid-template-columns: 1fr;
                 @media (min-width: 800px) {
@@ -199,31 +190,34 @@
     }
 }
 
-.storytile-container.display > .storytile {
-    align-items: stretch;
+.storytile-container.display {
+    height: 100%;
+    & > .storytile {
+        align-items: stretch;
 
-    & > .preview {
-        height: inherit;
-        width: 30%;
-        @media (min-width: 1250px) {
-            width: 40%;
+        & > .preview {
+            height: inherit;
+            width: 30%;
+            @media (min-width: 1250px) {
+                width: 40%;
+            }
+
+            & > .title,
+            & > .logoImage,
+            & > .scrim {
+                opacity: 0;
+            }
         }
 
-        & > .title,
-        & > .logoImage,
-        & > .scrim {
-            opacity: 0;
+        & > .details {
+            width: 70%;
+            @media (min-width: 1250px) {
+                width: 60%;
+            }
+            padding: 60px;
+            opacity: 1;
+            height: 100%;
         }
-    }
-
-    & > .details {
-        width: 70%;
-        @media (min-width: 1250px) {
-            width: 60%;
-        }
-        padding: 60px;
-        opacity: 1;
-        height: 100%;
     }
 }
 

@@ -19,7 +19,7 @@ const WelcomeTile = props => {
         <Tile className='WelcomeTile' wide={isWide}>
             <h1 className='title'>
                 <span style={{ color: props.primaryColor }}>Hey {props.name !== null ? props.name : 'there'}! </span>
-                I'm Nathan, and I craft enganging experiences for the web.
+                I'm Nathan, and I craft engaging experiences for the web.
             </h1>
             <p className='large'>
                 I combine my passion for delightful design and clean code to create web projects that are beautiful — not only at first glance but also after further (code) review.
@@ -34,7 +34,7 @@ const WelcomeTile = props => {
                         <button className='primary'>Get in touch</button>
                     </Link>
                     <a
-                        href='https://bit.ly/ng_resume'
+                        href='https://bit.ly/ng_resume_fall2020'
                         target='_blank'
                         rel='noopener noreferrer'
                         onClick={() => firebase.analytics().logEvent('link_clicked', { to: 'resume', from: 'hero' })}
@@ -54,7 +54,7 @@ const WelcomeTile = props => {
                     <h4>Why do I want to work at {props.name}?</h4>
                     <p className='large'>{props.motivation}</p>
                     <h4>Want to see more?</h4>
-                    <p className='large'>You can either check out my portfolio by scrolling down, or <a href='https://bit.ly/ng_resume' target='_blank' rel='noopener noreferrer'>view my condensed resume here.</a></p>
+                    <p className='large'>You can either check out my portfolio by scrolling down, or <a href='https://bit.ly/ng_resume_fall2020' target='_blank' rel='noopener noreferrer'>view my condensed resume here.</a></p>
                     <h4>Ready to move forward?</h4>
                     <p className='large'>Send an email to <a href='mailto:hello@nathangentry.me'>hello@nathangentry.me</a> to let me know, and we can move forward together from there.</p>
                 </>

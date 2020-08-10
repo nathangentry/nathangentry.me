@@ -115,7 +115,7 @@ const data = {
             g: 81,
             b: 27
         },
-        active: true
+        active: false
     },
     google: {
         name: 'Google',

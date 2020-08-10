@@ -15,7 +15,11 @@
             position: absolute;
             left: 0;
             z-index: 1;
-            mix-blend-mode: hue;
+            opacity: 0;
+            @supports (mix-blend-mode: hue) {
+                mix-blend-mode: hue;
+                opacity: 1;
+            }
             
             height: calc(100% + 30px);
             top: -30px;
