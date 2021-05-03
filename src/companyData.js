@@ -95,6 +95,8 @@ import podium from './assets/companyLogos/podium.png';
 import clever from './assets/companyLogos/clever.png';
 import evernote from './assets/companyLogos/evernote.png';
 import zeus from './assets/companyLogos/zeus.png';
+import nextdoor from './assets/companyLogos/nextdoor.png';
+import roblox from './assets/companyLogos/roblox.png';
 
 const data = {
     spotify: {
@@ -105,7 +107,10 @@ const data = {
             g: 215,
             b: 96
         },
-        active: false
+        motivation: [
+            'For many years, I have been building personal coding projects that have had limited scope outside myself. Last summer, I had the opportunity to work at Cboe Global Markets, a major player in the exchanges and securities space, building software on a broader scope. I enjoyed that experience of being able to reach more people with my code and would love to continue that to the next level at Spotify.',
+            'Beyond significant personal development, Spotify has developed an incredible product that has been transformative in the music industry and brings joy to so many people. From personal experience, I can say that Spotify has had a significant impact on my daily routine. Throughout the day, I turn to music for everything from studying to relaxing to having fun. I would love to be able to improve people\'s lives and better the world by working with Spotify\'s incredible team.'
+        ]
     },
     microsoft: {
         name: 'Microsoft',
@@ -115,7 +120,9 @@ const data = {
             g: 81,
             b: 27
         },
-        active: false
+        motivation: [
+            'Ever since I was little, I have been empowered with Microsoft products, including Windows, Office, and more, that have helped me achieve my best and grow my horizons. Microsoft\'s products have helped inspire a curiosity in me that has led me to the field of computer science in general, and more specifically this internship position. I would love the opportunity to grow and develop products that touch people\'s lives in similar ways and help them to achieve their best, as well.'
+        ]
     },
     google: {
         name: 'Google',
@@ -125,7 +132,11 @@ const data = {
             g: 133,
             b: 244
         },
-        active: false
+        motivation: [
+            'Google holds an important place in my journey into design and development. Ever since I was in middle school I would watch Google I/O sessions that got me incredibly excited to keep learning more and trying new technologies. It pushed me to persevere and finish my first big project and launch a bucket list app to the Google Play store.',
+            'In particular, I remember the launch of Material Design at Google I/O a few years back. That was a game-changer for me as far as gaining interest in user interface design. I had never really thought about the design of the websites that I had used or the systems that made up the experience. Material Design was so cohesive and well thought out that it inspired me to dig deeper into the field of design and figure out how to improve my personal projects.',
+            'I would love to be able to intern at a company that inspires the next generation of programmers and designers while changing the world with ubiquitous products that make the internet a better place. That would be a dream come true. Working at Google would bring that dream to life.'
+        ]
     },
     linkedin: {
         name: 'LinkedIn',
@@ -135,7 +146,7 @@ const data = {
             g: 103,
             b: 178
         },
-        active: false
+        active: true
     },
     intuit: {
         name: 'Intuit',
@@ -145,7 +156,7 @@ const data = {
             g: 94,
             b: 191
         },
-        active: false
+        active: true
     },
     webflow: {
         name: 'Webflow',
@@ -155,7 +166,6 @@ const data = {
             g: 84,
             b: 254
         },
-        active: false
     },
     zillow: {
         name: 'Zillow',
@@ -165,7 +175,6 @@ const data = {
             g: 106,
             b: 255
         },
-        active: false
     },
     duolingo: {
         name: 'Duolingo',
@@ -175,7 +184,9 @@ const data = {
             g: 200,
             b: 0
         },
-        active: false
+        motivation: [
+            'Working at Duolingo has been a dream of mine for years now. As someone who highly values delightful user interfaces, Duolingo is a product that I have always admired. Countless times I have heard that people use Duolingo and keep coming back because of its beautiful design and pleasing interactions. That kind of impact and motivation to help people learn new skills is inspiring. I would love to work on a team that can have that kind of influence in helping people to expand their view of the world and other people\'s cultures globally.'
+        ]
     },
     khanacademy: {
         name: 'Khan Academy',
@@ -185,7 +196,10 @@ const data = {
             g: 191,
             b: 150
         },
-        active: false
+        motivation: [
+            'Ever since I was in elementary and middle school, I have been turning to Khan Academy to satiate my intellectual curiosities. This platform has allowed me to learn about everything from capital markets to even computer science. That is right: I started my journey into computer science on Khan Academy. What began as drawing and animating shapes on a virtual canvas has now turned into a deep passion for connecting with users through digital experiences.',
+            'Now I want to give back. I have happily seen Khan Academy evolve over the years and continue to help students all around the world in new and innovative ways. I would love to be able to help Khan Academy as an intern next summer as the company continues to shape the future of online learning at a time when it is more important than ever.'
+        ]
     },
     codecademy: {
         name: 'Codecademy',
@@ -195,7 +209,6 @@ const data = {
             g: 0,
             b: 228
         },
-        active: false
     },
     hulu: {
         name: 'Hulu',
@@ -205,7 +218,7 @@ const data = {
             g: 231,
             b: 131
         },
-        active: false
+        active: true
     },
     mozilla: {
         name: 'Mozilla',
@@ -215,7 +228,6 @@ const data = {
             g: 79,
             b: 94
         },
-        active: false
     },
     apple: {
         name: 'Apple',
@@ -225,7 +237,9 @@ const data = {
             g: 0,
             b: 0
         },
-        active: false
+        motivation: [
+            'As my interest in merging the fields of design and development has evolved, so has my interest in Apple. Especially recently, I have gained an intense appreciation for the work that Apple produces and the way that they ensure the user remains at the heart of the product rather than the technology. That is the kind of work that I want to be doing: designing and developing meaningful, user-focused products that add beauty to the digital world. I know that Apple would be the perfect place to accomplish that goal.'
+        ]
     },
     adobe: {
         name: 'Adobe',
@@ -235,7 +249,6 @@ const data = {
             g: 15,
             b: 0
         },
-        active: false
     },
     snap: {
         name: 'Snap',
@@ -245,7 +258,7 @@ const data = {
             g: 0,
             b: 0
         },
-        active: false
+        active: true
     },
     uber: {
         name: 'Uber',
@@ -255,7 +268,7 @@ const data = {
             g: 0,
             b: 0
         },
-        active: false
+        active: true
     },
     slack: {
         name: 'Slack',
@@ -265,7 +278,6 @@ const data = {
             g: 31,
             b: 105
         },
-        active: false
     },
     twitter: {
         name: 'Twitter',
@@ -275,7 +287,7 @@ const data = {
             g: 161,
             b: 252
         },
-        active: false
+        active: true
     },
     facebook: {
         name: 'Facebook',
@@ -285,7 +297,7 @@ const data = {
             g: 119,
             b: 242
         },
-        active: false
+        active: true
     },
     paypal: {
         name: 'PayPal',
@@ -295,7 +307,6 @@ const data = {
             g: 155,
             b: 215
         },
-        active: false
     },
     square: {
         name: 'Square',
@@ -305,7 +316,6 @@ const data = {
             g: 0,
             b: 0
         },
-        active: false
     },
     lemonade: {
         name: 'Lemonade',
@@ -315,7 +325,6 @@ const data = {
             g: 0,
             b: 132
         },
-        active: false
     },
     root: {
         name: 'Root',
@@ -325,7 +334,6 @@ const data = {
             g: 87,
             b: 21
         },
-        active: false
     },
     ynab: {
         name: 'YNAB',
@@ -335,7 +343,6 @@ const data = {
             g: 195,
             b: 233
         },
-        active: false
     },
     coursera: {
         name: 'Coursera',
@@ -345,7 +352,6 @@ const data = {
             g: 115,
             b: 204
         },
-        active: false
     },
     expedia: {
         name: 'Expedia',
@@ -355,7 +361,10 @@ const data = {
             g: 193,
             b: 8
         },
-        active: false
+        motivation: [
+            'Traveling and exploring has been important to me from a very young age. Some of my first career aspirations included pilot, ship captain, and even world traveler (no joke – I showed up to career day in second grade wearing a polo, khaki shorts, and a lei). As I have grown up, it has become apparent that those careers are not in my future, but getting to work at {company} to help shape the way people travel and revolutionize the industry would bring some of those childhood dreams to fruition.',
+            'Now, I would be remiss if I did not acknowledge the troubles the industry has run into with the rise of COVID-19. Times are tough, and I understand that. However, if you do happen to have an internship opening for next summer, I would love to help {company} move forward and continue innovating through and beyond the pandemic.'
+        ]
     },
     robinhood: {
         name: 'Robinhood',
@@ -365,7 +374,10 @@ const data = {
             g: 199,
             b: 7
         },
-        active: false
+        motivation: [
+            'Throughout my childhood, finance, and particularly investments, has fascinated me. In elementary school, I remember wanting to be a stockbroker. In middle school, I took online capital markets courses to learn more about the financial system. In high school, I ran stock market simulations with fake money to test out investment strategies. Now, in college, I have been able to pursue that passion with business courses through the prestigious Jeffrey S. Raikes School and an internship last summer at Cboe Global Markets.',
+            'These experiences have only grown my interest in investments, and I want to continue to foster my passion for finance and technology next summer. I would love the opportunity to work at {company} designing and developing beautiful products that help simplify, democratize, and modernize the markets.'
+        ]
     },
     m1: {
         name: 'M1 Finance',
@@ -375,7 +387,10 @@ const data = {
             g: 32,
             b: 189
         },
-        active: false
+        motivation: [
+            'Throughout my childhood, finance, and particularly investments, has fascinated me. In elementary school, I remember wanting to be a stockbroker. In middle school, I took online capital markets courses to learn more about the financial system. In high school, I ran stock market simulations with fake money to test out investment strategies. Now, in college, I have been able to pursue that passion with business courses through the prestigious Jeffrey S. Raikes School and an internship last summer at Cboe Global Markets.',
+            'These experiences have only grown my interest in investments, and I want to continue to foster my passion for finance and technology next summer. I would love the opportunity to work at {company} designing and developing beautiful products that help simplify, democratize, and modernize the markets.'
+        ]
     },
     stripe: {
         name: 'Stripe',
@@ -385,7 +400,10 @@ const data = {
             g: 114,
             b: 229
         },
-        active: false
+        motivation: [
+            'I first learned about Stripe when attending a talk from an employee at the Kansas City Developer Conference a few years back when I was in high school. At that time, online transactions were very much a mystery to me, but I kept Stripe in my mind. Later, when developing other projects, I looked back into the company and learned about all the fascinating ways they were democratizing complicated payment infrastructure. ',
+            'That still fascinates me to this day, and I would love to be able to help shape the industry moving forward as an intern at Stripe. Providing a platform for businesses and individuals to exchange money in new ways sounds like a very challenging and rewarding task that I would love to undertake with the incredible team at Stripe.'
+        ]
     },
     justworks: {
         name: 'Justworks',
@@ -395,7 +413,6 @@ const data = {
             g: 182,
             b: 233
         },
-        active: false
     },
     squarespace: {
         name: 'Squarespace',
@@ -405,7 +422,6 @@ const data = {
             g: 0,
             b: 0
         },
-        active: false
     },
     twosigma: {
         name: 'Two Sigma',
@@ -415,7 +431,6 @@ const data = {
             g: 154,
             b: 166
         },
-        active: false
     },
     github: {
         name: 'GitHub',
@@ -425,7 +440,6 @@ const data = {
             g: 0,
             b: 0
         },
-        active: false
     },
     plaid: {
         name: 'Plaid',
@@ -435,7 +449,6 @@ const data = {
             g: 0,
             b: 0
         },
-        active: false
     },
     volusion: {
         name: 'Volusion',
@@ -445,7 +458,6 @@ const data = {
             g: 62,
             b: 128
         },
-        active: false
     },
     shipengine: {
         name: 'ShipEngine',
@@ -455,7 +467,6 @@ const data = {
             g: 170,
             b: 242
         },
-        active: false
     },
     shopify: {
         name: 'Shopify',
@@ -465,7 +476,6 @@ const data = {
             g: 142,
             b: 62
         },
-        active: false
     },
     intercom: {
         name: 'Intercom',
@@ -475,7 +485,6 @@ const data = {
             g: 71,
             b: 236
         },
-        active: false
     },
     ebay: {
         name: 'eBay',
@@ -485,7 +494,6 @@ const data = {
             g: 50,
             b: 56
         },
-        active: false
     },
     dropbox: {
         name: 'Dropbox',
@@ -495,7 +503,6 @@ const data = {
             g: 97,
             b: 255
         },
-        active: false
     },
     redfin: {
         name: 'Redfin',
@@ -505,7 +512,6 @@ const data = {
             g: 32,
             b: 33
         },
-        active: false
     },
     atlassian: {
         name: 'Atlassian',
@@ -515,7 +521,6 @@ const data = {
             g: 82,
             b: 204
         },
-        active: false
     },
     tableau: {
         name: 'Tableau',
@@ -525,7 +530,6 @@ const data = {
             g: 68,
             b: 126
         },
-        active: false
     },
     kahoot: {
         name: 'Kahoot',
@@ -535,7 +539,6 @@ const data = {
             g: 26,
             b: 139
         },
-        active: false
     },
     brilliant: {
         name: 'Brilliant',
@@ -545,7 +548,6 @@ const data = {
             g: 0,
             b: 0
         },
-        active: false
     },
     instagram: {
         name: 'Instagram',
@@ -555,7 +557,7 @@ const data = {
             g: 56,
             b: 167
         },
-        active: false
+        active: true
     },
     dave: {
         name: 'Dave',
@@ -565,7 +567,6 @@ const data = {
             g: 154,
             b: 64
         },
-        active: false
     },
     coda: {
         name: 'Coda',
@@ -575,7 +576,6 @@ const data = {
             g: 106,
             b: 84
         },
-        active: false
     },
     freshconsulting: {
         name: 'Fresh Consulting',
@@ -585,7 +585,6 @@ const data = {
             g: 179,
             b: 78
         },
-        active: false
     },
     medium: {
         name: 'Medium',
@@ -595,7 +594,6 @@ const data = {
             g: 168,
             b: 124
         },
-        active: false
     },
     nyt: {
         name: 'New York Times',
@@ -605,7 +603,6 @@ const data = {
             g: 0,
             b: 0
         },
-        active: false
     },
     flywheel: {
         name: 'Flywheel',
@@ -615,7 +612,6 @@ const data = {
             g: 198,
             b: 219
         },
-        active: false
     },
     buildertrend: {
         name: 'Buildertrend',
@@ -625,7 +621,6 @@ const data = {
             g: 174,
             b: 239
         },
-        active: false
     },
     nike: {
         name: 'Nike',
@@ -635,7 +630,7 @@ const data = {
             g: 0,
             b: 0
         },
-        active: false
+        active: true
     },
     adidas: {
         name: 'Adidas',
@@ -645,7 +640,6 @@ const data = {
             g: 0,
             b: 0
         },
-        active: false
     },
     netflix: {
         name: 'Netflix',
@@ -655,7 +649,7 @@ const data = {
             g: 31,
             b: 38
         },
-        active: false
+        active: true
     },
     tripadvisor: {
         name: 'Tripadvisor',
@@ -665,7 +659,10 @@ const data = {
             g: 224,
             b: 161
         },
-        active: false
+        motivation: [
+            'Traveling and exploring has been important to me from a very young age. Some of my first career aspirations included pilot, ship captain, and even world traveler (no joke – I showed up to career day in second grade wearing a polo, khaki shorts, and a lei). As I have grown up, it has become apparent that those careers are not in my future, but getting to work at {company} to help shape the way people travel and revolutionize the industry would bring some of those childhood dreams to fruition.',
+            'Now, I would be remiss if I did not acknowledge the troubles the industry has run into with the rise of COVID-19. Times are tough, and I understand that. However, if you do happen to have an internship opening for next summer, I would love to help {company} move forward and continue innovating through and beyond the pandemic.'
+        ]
     },
     wix: {
         name: 'Wix',
@@ -675,7 +672,6 @@ const data = {
             g: 189,
             b: 113
         },
-        active: false
     },
     box: {
         name: 'Box',
@@ -685,7 +681,6 @@ const data = {
             g: 113,
             b: 247
         },
-        active: false
     },
     salesforce: {
         name: 'Salesforce',
@@ -695,7 +690,6 @@ const data = {
             g: 161,
             b: 224
         },
-        active: false
     },
     notion: {
         name: 'Notion',
@@ -705,7 +699,6 @@ const data = {
             g: 0,
             b: 0
         },
-        active: false
     },
     discover: {
         name: 'Discover',
@@ -715,7 +708,6 @@ const data = {
             g: 96,
             b: 0
         },
-        active: false
     },
     pluralsight: {
         name: 'Pluralsight',
@@ -725,7 +717,6 @@ const data = {
             g: 0,
             b: 140
         },
-        active: false
     },
     acorns: {
         name: 'Acorns',
@@ -735,7 +726,10 @@ const data = {
             g: 201,
             b: 70
         },
-        active: false
+        motivation: [
+            'Throughout my childhood, finance, and particularly investments, has fascinated me. In elementary school, I remember wanting to be a stockbroker. In middle school, I took online capital markets courses to learn more about the financial system. In high school, I ran stock market simulations with fake money to test out investment strategies. Now, in college, I have been able to pursue that passion with business courses through the prestigious Jeffrey S. Raikes School and an internship last summer at Cboe Global Markets.',
+            'These experiences have only grown my interest in investments, and I want to continue to foster my passion for finance and technology next summer. I would love the opportunity to work at {company} designing and developing beautiful products that help simplify, democratize, and modernize the markets.'
+        ]
     },
     stash: {
         name: 'Stash',
@@ -745,7 +739,10 @@ const data = {
             g: 33,
             b: 138
         },
-        active: false
+        motivation: [
+            'Throughout my childhood, finance, and particularly investments, has fascinated me. In elementary school, I remember wanting to be a stockbroker. In middle school, I took online capital markets courses to learn more about the financial system. In high school, I ran stock market simulations with fake money to test out investment strategies. Now, in college, I have been able to pursue that passion with business courses through the prestigious Jeffrey S. Raikes School and an internship last summer at Cboe Global Markets.',
+            'These experiences have only grown my interest in investments, and I want to continue to foster my passion for finance and technology next summer. I would love the opportunity to work at {company} designing and developing beautiful products that help simplify, democratize, and modernize the markets.'
+        ]
     },
     amazon: {
         name: 'Amazon',
@@ -755,7 +752,7 @@ const data = {
             g: 153,
             b: 0
         },
-        active: false
+        active: true
     },
     chime: {
         name: 'Chime',
@@ -765,7 +762,6 @@ const data = {
             g: 198,
             b: 119
         },
-        active: false
     },
     wealthfront: {
         name: 'Wealthfront',
@@ -775,7 +771,6 @@ const data = {
             g: 64,
             b: 187
         },
-        active: false
     },
     groupon: {
         name: 'Groupon',
@@ -785,7 +780,6 @@ const data = {
             g: 163,
             b: 24
         },
-        active: false
     },
     rakuten: {
         name: 'Rakuten',
@@ -795,7 +789,6 @@ const data = {
             g: 0,
             b: 0
         },
-        active: false
     },
     workday: {
         name: 'Workday',
@@ -805,7 +798,6 @@ const data = {
             g: 139,
             b: 0
         },
-        active: false
     },
     hudl: {
         name: 'Hudl',
@@ -815,7 +807,6 @@ const data = {
             g: 99,
             b: 0
         },
-        active: false
     },
     americangiant: {
         name: 'American Giant',
@@ -825,7 +816,6 @@ const data = {
             g: 33,
             b: 32
         },
-        active: false
     },
     tesla: {
         name: 'Tesla',
@@ -835,7 +825,6 @@ const data = {
             g: 33,
             b: 39
         },
-        active: false
     },
     lyft: {
         name: 'Lyft',
@@ -845,7 +834,6 @@ const data = {
             g: 11,
             b: 140
         },
-        active: false
     },
     wasai: {
         name: 'Wasai',
@@ -855,7 +843,6 @@ const data = {
             g: 0,
             b: 0
         },
-        active: false
     },
     casper: {
         name: 'Casper',
@@ -865,7 +852,6 @@ const data = {
             g: 35,
             b: 126
         },
-        active: false
     },
     tn: {
         name: 'Tuft & Needle',
@@ -875,7 +861,6 @@ const data = {
             g: 237,
             b: 179
         },
-        active: false
     },
     dixonmoe: {
         name: 'Dixon & Moe',
@@ -885,7 +870,6 @@ const data = {
             g: 0,
             b: 0
         },
-        active: false
     },
     hopper: {
         name: 'Hopper',
@@ -895,7 +879,6 @@ const data = {
             g: 104,
             b: 102
         },
-        active: false
     },
     skyscanner: {
         name: 'Skyscanner',
@@ -905,7 +888,10 @@ const data = {
             g: 112,
             b: 227
         },
-        active: false
+        motivation: [
+            'Traveling and exploring has been important to me from a very young age. Some of my first career aspirations included pilot, ship captain, and even world traveler (no joke – I showed up to career day in second grade wearing a polo, khaki shorts, and a lei). As I have grown up, it has become apparent that those careers are not in my future, but getting to work at {company} to help shape the way people travel and revolutionize the industry would bring some of those childhood dreams to fruition.',
+            'Now, I would be remiss if I did not acknowledge the troubles the industry has run into with the rise of COVID-19. Times are tough, and I understand that. However, if you do happen to have an internship opening for next summer, I would love to help {company} move forward and continue innovating through and beyond the pandemic.'
+        ]
     },
     transit: {
         name: 'Transit',
@@ -915,7 +901,10 @@ const data = {
             g: 200,
             b: 117
         },
-        active: false
+        motivation: [
+            'Public transportation has been a passion of mine for years. This is in part as a result of my love for travel, as I found enjoyment in taking transit systems in different cities and finding the intricacies that made each one unique. Perhaps more importantly than travel, however, good public transportation has a real impact on the residents of a city. Studies show that a well-connected transit network is the number one factor of getting citizens out of poverty, as it provides individuals with access to new opportunities.',
+            'But what good are these systems providing if they are not being used to their full extent or are not accessible to the population? That problem is why I am so excited about Transit. It creates a platform to make public transportation more usable in a beautiful way, combining my passions for delightful design and clean code. Because of that, I would love to contribute to the product through a Web Development, UI/UX, or Product Design Internship next summer.'
+        ]
     },
     disney: {
         name: 'Disney',
@@ -925,7 +914,6 @@ const data = {
             g: 0,
             b: 0
         },
-        active: false
     },
     airbnb: {
         name: 'Airbnb',
@@ -935,7 +923,10 @@ const data = {
             g: 90,
             b: 95
         },
-        active: false
+        motivation: [
+            'Traveling and exploring has been important to me from a very young age. Some of my first career aspirations included pilot, ship captain, and even world traveler (no joke – I showed up to career day in second grade wearing a polo, khaki shorts, and a lei). As I have grown up, it has become apparent that those careers are not in my future, but getting to work at Airbnb to help shape the way people travel and revolutionize the industry would bring some of those childhood dreams to fruition. Especially considering the impact Airbnb has already had on the industry by democratizing travel and becoming the default source of lodging for many.',
+            'Now, I would be remiss if I did not acknowledge the troubles the industry has run into with the rise of COVID-19. Times are tough, and I understand that. However, if you do happen to have an internship opening for next summer, I would love to help Airbnb move forward and continue innovating through and beyond the pandemic.'
+        ]
     },
     zelle: {
         name: 'Zelle',
@@ -945,7 +936,6 @@ const data = {
             g: 28,
             b: 211
         },
-        active: false
     },
     convertkit: {
         name: 'ConvertKit',
@@ -955,7 +945,6 @@ const data = {
             g: 105,
             b: 112
         },
-        active: false
     },
     doordash: {
         name: 'DoorDash',
@@ -965,7 +954,6 @@ const data = {
             g: 48,
             b: 8
         },
-        active: false
     },
     grubhub: {
         name: 'Grubhub',
@@ -975,7 +963,6 @@ const data = {
             g: 52,
             b: 64
         },
-        active: false
     },
     coinbase: {
         name: 'Coinbase',
@@ -985,7 +972,6 @@ const data = {
             g: 82,
             b: 241
         },
-        active: false
     },
     instacart: {
         name: 'Instacart',
@@ -995,7 +981,6 @@ const data = {
             g: 176,
             b: 42
         },
-        active: false
     },
     eventbrite: {
         name: 'Eventbrite',
@@ -1005,7 +990,6 @@ const data = {
             g: 85,
             b: 55
         },
-        active: false
     },
     gusto: {
         name: 'Gusto',
@@ -1015,7 +999,16 @@ const data = {
             g: 93,
             b: 71
         },
-        active: false
+        motivation: [
+            'Growing up, small businesses were all around me. My mother\'s parents owned and operated a small-town pharmacy, my father\'s parents ran a farm and a rural convenience store, and my father continued that spirit of entrepreneurship by starting his own company. Through these family connections, I was instilled early on with an appreciation for small businesses. I love the incredibly valuable product Gusto provides to allow small businesses to take care of their people and get back to doing what they do best.',
+            'I feel that Gusto\'s service is more important now than ever, as small businesses have been among those hit the hardest by the pandemic. I would love to add value to the product and the team at Gusto in whatever way possible through an internship position next summer.'
+        ],
+        pitch: [
+            'I love making stuff. Whether it is spreadsheets, drawings, brands, or apps, I love being involved in the creative process from start to finish. Being able to see the evolution of a vision from idea to implementation is captivating.',
+            'Because I get so excited about creating, it stops being work and starts becoming art. I focus not on how little I am able to get away with but rather on how much I am able to do. Take, for example, this portfolio website. I became so caught up in the project that I sought to go the extra mile. I put in the effort to develop a system that allows for unique experiences for different companies (like the one you are seeing now). I maintained a long-term vision, allowing the site to be extensible for future projects and work experiences.',
+            'But beyond mere excitement about creating software products, I also have relevant experience for the position. In addition to software engineering coursework at my university, I have participated in two internships focused on front-end and full-stack web development, respectively. In these experiences, I have gained industry-grade technical skills with JavaScript, React, PostgreSQL, and more, in addition to the communication skills that come along with developing in an agile environment.',
+            'While my past experiences and educational history provide me with many relevant skills for an internship at Gusto, I also understand that there will inevitably be countless challenges to encounter. As a natural learner, facing the unknown (or rather the not-yet-known) energizes me. In reality, the ability to learn and adapt is perhaps the most relevant skill because it is crucial for a company and a field so heavily focused on solving new and stimulating problems.'
+        ]
     },
     zapier: {
         name: 'Zapier',
@@ -1025,7 +1018,6 @@ const data = {
             g: 74,
             b: 0
         },
-        active: false
     },
     podium: {
         name: 'Podium',
@@ -1035,7 +1027,6 @@ const data = {
             g: 0,
             b: 0
         },
-        active: false
     },
     clever: {
         name: 'Clever',
@@ -1045,7 +1036,6 @@ const data = {
             g: 116,
             b: 246
         },
-        active: false
     },
     evernote: {
         name: 'Evernote',
@@ -1055,7 +1045,6 @@ const data = {
             g: 168,
             b: 45
         },
-        active: false
     },
     zeus: {
         name: 'Zeus',
@@ -1065,8 +1054,33 @@ const data = {
             g: 162,
             b: 216
         },
-        active: false
     },
+    nextdoor: {
+        name: 'Nextdoor',
+        logo: nextdoor,
+        color: {
+            r: 142,
+            g: 213,
+            b: 0
+        },
+        motivation: [
+            'Building communities can be an inherently tough thing to do. Although difficult, they are also vital to success and add signficantly to the human experience. One of the most pivotal communities we are apart of is that with our neighbors, purely based on proximity. Those are the people we are most closely surrounded with.',
+            'Especially recently, I have noticed that the neighborhoods I have grown up in and those all around the country are merely a group of individuals living near each other. They are not greater than the sum of their parts, as they have the potential to be. Communication is severely lacking and there is little sense of collective belonging.',
+            'I love the progress I see Nextdoor making in this space. I would love to contribute to a product that brings people together, and not just online, but in real life. I think Nextdoor is the perfect place for me to do that, and I hope that I am considered for this internship position.'
+        ]
+    },
+    roblox: {
+        name: 'Roblox',
+        logo: roblox,
+        color: {
+            r: 0,
+            g: 162,
+            b: 255
+        },
+        motivation: [
+            'I would love to work at Roblox because it has empowered children to create. Roblox has built a platform that makes it easy and intuitive to make and share games that spark joy with over 150 million monthly active users around the world. I would love to further improve the company and core product while making the internet more fun and creative.'
+        ]
+    }
 };
 
 export default data;

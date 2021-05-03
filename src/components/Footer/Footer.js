@@ -74,7 +74,7 @@ const Footer = props => {
                             LinkedIn
                         </a>
                         <a
-                            href='https://bit.ly/ng_resume_fall2020'
+                            href='https://bit.ly/ngresumefall2020'
                             target='_blank'
                             rel='noopener noreferrer'
                             onClick={() => firebase.analytics().logEvent('link_clicked', { to: 'resume', from: 'footer' })}

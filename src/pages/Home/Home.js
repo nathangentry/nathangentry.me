@@ -48,14 +48,19 @@ const Home = props => {
         motivation: null
     });
 
-    const fit = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.';
-    const different = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.';
-    const motivation = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.';
+    const motivation = [
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+    ];
+    const pitch = [
+        'Understandably, many exceptionally talented individuals are vying for a position at {company}. So why should I be considered?',
+        'My work on past projects – which you can read about below – is one reason why I think I would be a valuable addition at {company}. These experiences have allowed me to combine my passions for delightful design and clean code to be fully involved in creating both personal and professional web apps, from idea to implementation.',
+        'Of course, while I have experience with numerous projects and teams, I also realize there is so much more to learn. As a naturally curious person, I love digging to get to the bottom of a problem and using that new knowledge to develop a solution.'
+    ];
 
     useEffect(() => {
         if (props.match.params.company !== undefined) {
             const companyMatch = data[props.match.params.company];
-            if (companyMatch !== undefined && companyMatch.active) {
+            if (companyMatch !== undefined) {
                 setCompany({
                     name: companyMatch.name,
                     path: companyMatch.path,
@@ -64,9 +69,12 @@ const Home = props => {
                     primaryDark: companyMatch.color !== undefined ? `rgba(${companyMatch.color.r - 25 < 0 ? 0 : companyMatch.color.r - 25}, ${companyMatch.color.g - 25 < 0 ? 0 : companyMatch.color.g - 15}, ${companyMatch.color.b - 15 < 0 ? 0 : companyMatch.color.b - 15}, 1.0)` : 'rgba(24, 132, 100, 1.0)',
                     opacityColor: companyMatch.color !== undefined ? `rgba(${companyMatch.color.r}, ${companyMatch.color.g}, ${companyMatch.color.b}, 0.1)` : 'rgba(39, 147, 115, 0.1)',
                     opacityDark: companyMatch.color !== undefined ? `rgba(${companyMatch.color.r}, ${companyMatch.color.g}, ${companyMatch.color.b}, 0.2)` : 'rgba(39, 147, 115, 0.2)',
-                    fit: companyMatch.fit !== undefined ? companyMatch.fit : fit,
-                    different: companyMatch.different !== undefined ? companyMatch.different : different,
-                    motivation: companyMatch.motivation !== undefined ? companyMatch.motivation : motivation
+                    motivation: companyMatch.motivation !== undefined
+                        ? companyMatch.motivation.map(p => p.split('{company}').join(companyMatch.name))
+                        : motivation.map(p => p.split('{company}').join(companyMatch.name)),
+                    pitch: companyMatch.pitch !== undefined
+                        ? companyMatch.pitch.map(p => p.split('{company}').join(companyMatch.name))
+                        : pitch.map(p => p.split('{company}').join(companyMatch.name))
                 });
             } else {
                 props.history.push('/');
@@ -242,7 +250,7 @@ const Home = props => {
                                             <button className='primary'>Get in touch</button>
                                         </Link>
                                         <a
-                                            href='https://bit.ly/ng_resume_fall2020'
+                                            href='https://bit.ly/ngresumefall2020'
                                             target='_blank'
                                             rel='noopener noreferrer'
                                             onClick={() => firebase.analytics().logEvent('link_clicked', { to: 'resume', from: 'hero' })}
@@ -298,12 +306,12 @@ const Home = props => {
                                     <div id='unl-courses-highlight'>
                                         <h5 className='section-heading'>Courses</h5>
                                         <IconBullet icon='done' text='Java' />
-                                        <IconBullet icon='done' text='Design Thinking' />
+                                        <IconBullet icon='done' text='JavaScript' />
+                                        <IconBullet icon='done' text='Python' />
+                                        <IconBullet icon='done' text='R' />
                                         <IconBullet icon='done' text='Machine Learning' />
-                                        <IconBullet icon='done' text='Software Engineering' />
-                                        <IconBullet icon='done' text='Honors Statistics' />
+                                        <IconBullet icon='done' text='Design Thinking' />
                                         <IconBullet icon='done' text='Calculus I, II, & III' />
-                                        <IconBullet icon='done' text='Linear Algebra' />
                                     </div>
                                     <div id='involvements-info-bit'>
                                         <h5 className='section-heading'>Involvements</h5>

@@ -34,7 +34,7 @@ const WelcomeTile = props => {
                         <button className='primary'>Get in touch</button>
                     </Link>
                     <a
-                        href='https://bit.ly/ng_resume_fall2020'
+                        href='https://bit.ly/ngresumefall2020'
                         target='_blank'
                         rel='noopener noreferrer'
                         onClick={() => firebase.analytics().logEvent('link_clicked', { to: 'resume', from: 'hero' })}
@@ -45,18 +45,16 @@ const WelcomeTile = props => {
                 :
                 <>
                     <p className='large'>
-                        Currently, I’m searching for a Web Development, UI, or UX internship for the summer of 2021 and would love to work at {props.name}.
+                        Currently, I’m searching for a Web Development, UI/UX, or Product Design internship for the summer of 2021 and would love to work at {props.name}.
                     </p>
-                    <h4>Why am I a good fit?</h4>
-                    <p className='large'>{props.fit}</p>
-                    <h4>How am I different?</h4>
-                    <p className='large'>{props.different}</p>
-                    <h4>Why do I want to work at {props.name}?</h4>
-                    <p className='large'>{props.motivation}</p>
-                    <h4>Want to see more?</h4>
-                    <p className='large'>You can either check out my portfolio by scrolling down, or <a href='https://bit.ly/ng_resume_fall2020' target='_blank' rel='noopener noreferrer'>view my condensed resume here.</a></p>
+                    <h4>Why {props.name}?</h4>
+                    {props.motivation.map(p => <p className='large' key={p}>{p}</p>)}
+                    <h4>Why me?</h4>
+                    {props.pitch.map(p => <p className='large' key={p}>{p}</p>)}
+                    <h4>Still not convinced?</h4>
+                    <p className='large'>You can either check out my portfolio by scrolling down or <a href='https://bit.ly/ngresumefall2020' target='_blank' rel='noopener noreferrer'>view my condensed resume here.</a></p>
                     <h4>Ready to move forward?</h4>
-                    <p className='large'>Send an email to <a href='mailto:hello@nathangentry.me'>hello@nathangentry.me</a> to let me know, and we can move forward together from there.</p>
+                    <p className='large'>Send an email to <a href='mailto:hello@nathangentry.me'>hello@nathangentry.me</a> to let me know, and we can figure out the details together from there.</p>
                 </>
             }
         </Tile>
