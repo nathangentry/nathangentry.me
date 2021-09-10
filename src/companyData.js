@@ -375,7 +375,7 @@ const data = {
             b: 7
         },
         motivation: [
-            'Throughout my childhood, finance, and particularly investments, has fascinated me. In elementary school, I remember wanting to be a stockbroker. In middle school, I took online capital markets courses to learn more about the financial system. In high school, I ran stock market simulations with fake money to test out investment strategies. Now, in college, I have been able to pursue that passion with business courses through the prestigious Jeffrey S. Raikes School and an internship last summer at Cboe Global Markets.',
+            'Throughout my childhood, finance, and particularly investments, has fascinated me. In elementary school, I remember wanting to be a stockbroker. In middle school, I took online capital markets courses to learn more about the financial system. In high school, I ran stock market simulations with fake money to test out investment strategies. Now, in college, I have been able to pursue that passion with business courses through the Jeffrey S. Raikes School and an internship in the Summer of 2020 at Cboe Global Markets.',
             'These experiences have only grown my interest in investments, and I want to continue to foster my passion for finance and technology next summer. I would love the opportunity to work at {company} designing and developing beautiful products that help simplify, democratize, and modernize the markets.'
         ]
     },
@@ -388,7 +388,7 @@ const data = {
             b: 189
         },
         motivation: [
-            'Throughout my childhood, finance, and particularly investments, has fascinated me. In elementary school, I remember wanting to be a stockbroker. In middle school, I took online capital markets courses to learn more about the financial system. In high school, I ran stock market simulations with fake money to test out investment strategies. Now, in college, I have been able to pursue that passion with business courses through the prestigious Jeffrey S. Raikes School and an internship last summer at Cboe Global Markets.',
+            'Throughout my childhood, finance, and particularly investments, has fascinated me. In elementary school, I remember wanting to be a stockbroker. In middle school, I took online capital markets courses to learn more about the financial system. In high school, I ran stock market simulations with fake money to test out investment strategies. Now, in college, I have been able to pursue that passion with business courses through the Jeffrey S. Raikes School and an internship in the Summer of 2020 at Cboe Global Markets.',
             'These experiences have only grown my interest in investments, and I want to continue to foster my passion for finance and technology next summer. I would love the opportunity to work at {company} designing and developing beautiful products that help simplify, democratize, and modernize the markets.'
         ]
     },
@@ -727,7 +727,7 @@ const data = {
             b: 70
         },
         motivation: [
-            'Throughout my childhood, finance, and particularly investments, has fascinated me. In elementary school, I remember wanting to be a stockbroker. In middle school, I took online capital markets courses to learn more about the financial system. In high school, I ran stock market simulations with fake money to test out investment strategies. Now, in college, I have been able to pursue that passion with business courses through the prestigious Jeffrey S. Raikes School and an internship last summer at Cboe Global Markets.',
+            'Throughout my childhood, finance, and particularly investments, has fascinated me. In elementary school, I remember wanting to be a stockbroker. In middle school, I took online capital markets courses to learn more about the financial system. In high school, I ran stock market simulations with fake money to test out investment strategies. Now, in college, I have been able to pursue that passion with business courses through the Jeffrey S. Raikes School and an internship in the Summer of 2020 at Cboe Global Markets.',
             'These experiences have only grown my interest in investments, and I want to continue to foster my passion for finance and technology next summer. I would love the opportunity to work at {company} designing and developing beautiful products that help simplify, democratize, and modernize the markets.'
         ]
     },
@@ -740,7 +740,7 @@ const data = {
             b: 138
         },
         motivation: [
-            'Throughout my childhood, finance, and particularly investments, has fascinated me. In elementary school, I remember wanting to be a stockbroker. In middle school, I took online capital markets courses to learn more about the financial system. In high school, I ran stock market simulations with fake money to test out investment strategies. Now, in college, I have been able to pursue that passion with business courses through the prestigious Jeffrey S. Raikes School and an internship last summer at Cboe Global Markets.',
+            'Throughout my childhood, finance, and particularly investments, has fascinated me. In elementary school, I remember wanting to be a stockbroker. In middle school, I took online capital markets courses to learn more about the financial system. In high school, I ran stock market simulations with fake money to test out investment strategies. Now, in college, I have been able to pursue that passion with business courses through the Jeffrey S. Raikes School and an internship in the Summer of 2020 at Cboe Global Markets.',
             'These experiences have only grown my interest in investments, and I want to continue to foster my passion for finance and technology next summer. I would love the opportunity to work at {company} designing and developing beautiful products that help simplify, democratize, and modernize the markets.'
         ]
     },
