@@ -18,12 +18,14 @@ import ContactSection from '../../components/Section/ContactSection';
 import Footer from '../../components/Footer/Footer';
 
 import data from '../../companyData';
+import spreetailMain from '../../assets/spreetailMain.png';
+import spreetailLogo from '../../assets/spreetailLogo.png';
 import cboeMain from '../../assets/cboeMain.png';
 import cboeLogo from '../../assets/cboeLogo.png';
 import dmsiMain from '../../assets/dmsiMain.png';
 import dmsiLogo from '../../assets/dmsiLogo.png';
-import evergreenMain from '../../assets/evergreenMain.png';
-import evergreenLogo from '../../assets/evergreenLogo.png';
+import shindigMain from '../../assets/shindigMain.png';
+import shindigLogo from '../../assets/shindigLogo.png';
 import ngmeMain from '../../assets/ngmeMain.png';
 import ngmeLogo from '../../assets/ngmeLogo.png';
 import bulletinMain from '../../assets/bulletinMain.png';
@@ -107,6 +109,28 @@ const Home = props => {
 
     const experienceData = [
         {
+            id: 'spreetail',
+            title: 'Creating self-service tools empowering warehouse managers nationwide',
+            mainImage: spreetailMain,
+            logoImage: spreetailLogo,
+            company: 'Spreetail',
+            location: 'Lincoln, NE',
+            position: 'Software Development Intern',
+            timeframe: 'Summer 2021',
+            skills: [
+                ['C#', '.NET', 'Entity Framework'],
+                ['React', 'JavaScript', 'GitLab'],
+                ['MVC Framework', 'Jira']
+            ],
+            overview: [
+                'Spreetail is an e-commerce company helping businesses get into e-commerce by storing their products and listing them on more than a dozen online marketplaces. In my 10 weeks at Spreetail, I worked in coordination with the Supply Chain Operations team to develop a brand new suite of self-service tools that empower warehouse managers across the nation to handle data management in their warehouses. These tools offloaded tedious tasks for developers, which had a particular business impact for Spreetail as they look to grow their existing warehouses and expand into new ones.'
+            ],
+            myRole: [
+                'My experience at Spreetail allowed me to get experience working with the full stack of an MVC application. I started my summer with front-end work in React, creating the initial page that would act as a template for our other tools down the line. These pages were centered around leveraging third-party software and internal components to create custom data tables that effectively presented database information to a non-technical end-user.',
+                'After making that first step into the front-end, I transitioned to back-end work in C# and .NET, establishing the controllers, services, accessors, and interfaces necessary to interact with the database using best practices. For the remainder of the summer, I leveraging my full-stack experience to efficiently build out the back-end for additional tools. All-in-all, my colleagues and I collaborated to create tools that empowered warehouse managers to set up new picking carts, packing stations, and label printers.'
+            ]
+        },
+        {
             id: 'cboe',
             title: 'Developing a custom CMS for a high-traffic market insights blog',
             mainImage: cboeMain,
@@ -124,9 +148,9 @@ const Home = props => {
                 'Cboe Global Markets is a major player in the markets and exchanges industry. During the summer of 2020, they were transitioning their market insights blog into a news and video hub to create a more engaging experience for users. As my intern project, I created a content management system (CMS) for the marketing and communications team to streamline publishing content to the new site.'
             ],
             myRole: [
-                'A major focus of mine was on the front end of the application. I communicated effectively in a remote setting with the lead UI designer and stakeholders in the marketing and communications team. Through this collaboration, I translated wireframes into React code, while incorporating changes that benefited end-users.',
+                'A major focus of mine was on the front-end of the application. I communicated effectively in a remote setting with the lead UI designer and stakeholders in the marketing and communications team. Through this collaboration, I translated wireframes into React code, while incorporating changes that benefited end-users.',
                 'For example, the initial design segmented post creation, forcing the user to insert one paragraph, image, or video at a time. When evaluating from the user’s perspective, I felt this would be frustrating — especially compared to their current workflow. Instead, I adapted a familiar rich text editor to meet our project\'s needs while allowing authors to write posts more seamlessly.',
-                'In addition to implementing front end code, I also created API endpoints and library code in Python, as well as database tables in PostgreSQL to ensure uninterrupted data flow from end-to-end.'
+                'In addition to implementing front-end code, I also created API endpoints and library code in Python, as well as database tables in PostgreSQL to ensure uninterrupted data flow from end-to-end.'
             ]
         },
         {
@@ -156,20 +180,22 @@ const Home = props => {
 
     const projectData = [
         {
-            id: 'evergreen',
-            title: 'Launching a design agency that creates dynamic brands and websites',
-            mainImage: evergreenMain,
-            logoImage: evergreenLogo,
-            project: 'Evergreen Design Agency',
-            timeframe: 'Summer 2020 – Present',
+            id: 'shindig',
+            title: 'Launching a web app to help hosts navigate party planning in a pandemic',
+            mainImage: shindigMain,
+            logoImage: shindigLogo,
+            project: 'Shindig',
+            timeframe: 'Spring 2021',
             skills: [
-                ['React', 'CSS', 'Firebase'],
-                ['UI/UX Design', 'Figma', 'Branding'],
-                ['Marketing', 'Entrepreneurship', 'Copywriting']
+                ['UI/UX Design', 'Figma'],
+                ['React', 'CSS-in-JS'],
+                ['Vercel', 'Agile Development']
             ],
             overview: [
-                'Evergreen Design Agency is a branding and website design consulting firm that I launched in June 2020. This involved running social media campaigns to build a presence within the design community and generate potential business leads. Within just weeks, this campaign resulted in a bid for a design project.',
-                'In addition to the social media announcement, I produced a website for Evergreen Design Agency to act as a landing page for the company, highlighting previous work and the value proposition. This process was led from end-to-end by myself, including designing wireframes in Figma and then translating those to code with React and CSS.'
+                'Shindig is an event planning application that helps hosts customize their events to the comfort levels of their guests in the pandemic. The app allows hosts to create events and then send invites to their friends, who fill out a questionnaire on their comfortability with masks, social distancing, food, etc. These questionnaire responses are then compiled into reports and recommendations, enabling hosts to edit the details of their event such that the comfort of their attendees is maximized.',
+                'My primary focus was on user interface design and front-end development. We followed a mobile-first design methodology to create an experience that hosts could easily share with their invitees. When converting those designs to code, I worked on the create event flow and the questionnaire for invitees.',
+                <p>Shindig was developed as part of my Software Engineering IV class with fellow front-end engineer <a href='https://www.linkedin.com/in/daniel-noon/' target='_blank' rel='noopener noreferrer'>Daniel Noon</a> and back-end engineers <a href='https://www.linkedin.com/in/annakrueger1/' target='_blank' rel='noopener noreferrer'>Anna Krueger</a>, <a href='https://www.linkedin.com/in/blohrman' target='_blank' rel='noopener noreferrer'>Benjamin Lohrman</a>, and <a href='https://www.linkedin.com/in/megan-chaffey/' target='_blank' rel='noopener noreferrer'>Megan Chaffey</a>. Throughout the curriculum, we followed the software development lifecycle from requirements elicitation to release.</p>,
+                <a href='https://shindig.one' target='_blank' rel='noopener noreferrer'><button className='secondary'>Check out the project</button></a>
             ],
         },
         {
@@ -193,7 +219,7 @@ const Home = props => {
         },
         {
             id: 'bulletin',
-            title: 'Creating a web application for effective case management',
+            title: 'Creating a centralized hub for law enforcement case management',
             mainImage: bulletinMain,
             logoImage: bulletinLogo,
             project: 'Bulletin by BlueLine',
@@ -208,7 +234,6 @@ const Home = props => {
                 'Creating a product that catered to our target audience was a particular challenge in this project. Officers are notoriously reluctant to adopt new technology, so we placed a strong emphasis on simplifying the user experience. This manifests itself in a bare-bones home screen with a limited set of options to proceed. Additionally, after our user interviews, we incorporated a rotating information panel filled with jokes in an attempt to decrease cynicism in the workplace.',
                 'Beyond the home screen in the case updates page, we once again focused on simplicity. Highlights draw an officer\'s attention to new updates, with cases of particular importance at the top of their list. Additionally, search functionality makes the process of finding old information a breeze, with text highlighting to bring the user\'s attention to any matches.',
                 'Bulletin was developed as a part of the Raikes School\'s Innovation Processes course. Over the course of the semester, my team members and I developed a business model using the Lean Startup methodology. As a proof-of-concept for our business model, we developed this prototype and refined it with feedback from the Nebraska State Patrol.',
-                <a href='https://ip-group-7.web.app/wade' target='_blank' rel='noopener noreferrer'><button className='secondary'>Check out the project</button></a>
             ]
         }
     ]
@@ -250,7 +275,7 @@ const Home = props => {
                                             <button className='primary'>Get in touch</button>
                                         </Link>
                                         <a
-                                            href='https://bit.ly/ngresumefall2020'
+                                            href='https://bit.ly/ngresumefall2021'
                                             target='_blank'
                                             rel='noopener noreferrer'
                                             onClick={() => firebase.analytics().logEvent('link_clicked', { to: 'resume', from: 'hero' })}

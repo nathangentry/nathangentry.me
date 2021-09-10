@@ -74,7 +74,7 @@ const Footer = props => {
                             LinkedIn
                         </a>
                         <a
-                            href='https://bit.ly/ngresumefall2020'
+                            href='https://bit.ly/ngresumefall2021'
                             target='_blank'
                             rel='noopener noreferrer'
                             onClick={() => firebase.analytics().logEvent('link_clicked', { to: 'resume', from: 'footer' })}
@@ -82,7 +82,7 @@ const Footer = props => {
                             Resume
                         </a>
                     </div>
-                    <p id='footer-copyright'>&copy; 2020 Nathan Gentry</p>
+                    <p id='footer-copyright'>&copy; 2021 Nathan Gentry</p>
                 </div>
             </PageWidthWrapper>
         </div >
