@@ -275,7 +275,7 @@ const Home = props => {
                                             <button className='primary'>Get in touch</button>
                                         </Link>
                                         <a
-                                            href='https://bit.ly/ngresumefall2021'
+                                            href='https://bit.ly/ngfall2021resume'
                                             target='_blank'
                                             rel='noopener noreferrer'
                                             onClick={() => firebase.analytics().logEvent('link_clicked', { to: 'resume', from: 'hero' })}
