@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import emailjs from "emailjs-com";
 import Section from "./Section";
 import Tile from "../Tile/Tile";
 
+import "../../emailSetup";
 import "./ContactSection.scss";
 
 const ContactSection = (props) => {
@@ -17,31 +19,31 @@ const ContactSection = (props) => {
     const message = messageInput.value;
 
     if (validateInput(name, email, message)) {
-      // emailjs
-      //   .send("gmail", "message_form", {
-      //     name: name,
-      //     email: email,
-      //     message: message,
-      //     url: props.url,
-      //   })
-      //   .then(() => {
-      //     setFeedback({
-      //       status: "success",
-      //       message:
-      //         "Your message has been sent! I'll get back to you as soon as I can.",
-      //     });
-      //     nameInput.value = "";
-      //     emailInput.value = "";
-      //     messageInput.value = "";
-      //   })
-      //   .catch((e) => {
-      //     setFeedback({
-      //       status: "error",
-      //       message:
-      //         'Hmm...something went wrong. Please try again or email me directly at <a href="mailto:hello@nathangentry.me">hello@nathangentry.me</a>',
-      //     });
-      //     console.log(e);
-      //   });
+      emailjs
+        .send("gmail", "message_form", {
+          name: name,
+          email: email,
+          message: message,
+          url: props.url,
+        })
+        .then(() => {
+          setFeedback({
+            status: "success",
+            message:
+              "Your message has been sent! I'll get back to you as soon as I can.",
+          });
+          nameInput.value = "";
+          emailInput.value = "";
+          messageInput.value = "";
+        })
+        .catch((e) => {
+          setFeedback({
+            status: "error",
+            message:
+              'Hmm...something went wrong. Please try again or email me directly at <a href="mailto:hello@nathangentry.me">hello@nathangentry.me</a>',
+          });
+          console.log(e);
+        });
     }
   };
 

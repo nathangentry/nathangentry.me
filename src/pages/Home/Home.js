@@ -16,6 +16,10 @@ import ContactSection from "../../components/Section/ContactSection";
 import Footer from "../../components/Footer/Footer";
 
 import data from "../../companyData";
+import medsolMain from "../../assets/medsolMain.jpeg";
+import medsolLogo from "../../assets/medsolLogo.png";
+import bridgesMain from "../../assets/bridgesMain.jpg";
+import bridgesLogo from "../../assets/bridgesLogo.png";
 import spreetailMain from "../../assets/spreetailMain.png";
 import spreetailLogo from "../../assets/spreetailLogo.png";
 import cboeMain from "../../assets/cboeMain.png";
@@ -132,6 +136,89 @@ const Home = (props) => {
   }, [company.name]);
 
   const experienceData = [
+    {
+      id: "medsol",
+      title:
+        "Predicting nursing shortages before they happen to improve patient care",
+      mainImage: medsolMain,
+      logoImage: medsolLogo,
+      company: "Medical Solutions",
+      location: "Lincoln, NE",
+      position: "Development Manager",
+      timeframe: "Fall 2022 – Present",
+      skills: [
+        ["Python", "Databricks", "Machine Learning"],
+        ["React", "TypeScript", "Sass"],
+        ["C#", ".NET Core", "PostgreSQL"],
+      ],
+      overview: [
+        "Medical Solutions is a medical staffing firm that helps match travel nurses with hospitals across the country. For this project, my team and I are working on a predictive staffing tool for hospital managers and travel nurse recruiters. This tool has two parts: a machine learning model trained on nurse employment data and a web app to convey the model's findings to non-technical employees.",
+      ],
+      myRole: [
+        "In my role as development manager, I:",
+        <ul>
+          <li>
+            Analyze data from 2,000+ medical facilities with Python and
+            Databricks to predict nursing shortages before they happen.
+          </li>
+          <li>
+            Manage a team of 5 developers using agile methodologies and CI/CD
+            principles to consistently iterate on feedback.
+          </li>
+          <li>
+            Communicate continuously with stakeholders to create a shared
+            understanding of expectations, progress, and roadblocks.
+          </li>
+        </ul>,
+      ],
+    },
+    {
+      id: "bridges",
+      title:
+        "Modernizing critical workflows for a nonprofit tackling recidivism",
+      mainImage: bridgesMain,
+      logoImage: bridgesLogo,
+      company: "Bridges to Hope",
+      location: "Lincoln, NE",
+      position: "Software Engineer",
+      timeframe: "Fall 2021 – Spring 2022",
+      skills: [
+        ["React", "TypeScript", "Sass"],
+        ["C#", ".NET Core", "PostgreSQL"],
+        ["Figma", "UX Testing", "UI Prototyping"],
+      ],
+      overview: [
+        "Bridges to Hope is a nonprofit organization that helps ex-prisoners transition back into society. When exiting the criminal justice system, reentrants are met with significant up-front costs to restart their life. Bridges to Hope provides these individuals with donations, such as furniture, kitchen supplies, and clothing, to help ease this burden and reduce recidivism.",
+        "Over 10 months, a team of four developers and myself:",
+        <ul>
+          <li>
+            Created an award-winning data management system for a nonprofit that
+            helps ex-prisoners transition back into society.
+          </li>
+          <li>
+            Modernized 5+ workflows by replacing physical forms with a digital
+            administrative portal to improve operational efficiencies.
+          </li>
+          <li>
+            Increased data visibility through a digital reporting interface to
+            more easily unlock funding opportunities.
+          </li>
+        </ul>,
+        "Hear more from the people involved:",
+        <iframe
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/xEsToqtygco"
+          title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>,
+      ],
+      myRole: [
+        "My area of expertise was in designing and implementing the frontend. This presented an interesting challenge because these user interfaces needed to be analogous to the paper forms, while also requiring more consistency than the free form of paper and pen. Through continuous user interviews with end users, we created designs that inspired confident usage, even in those unfamiliar with technology.",
+      ],
+    },
     {
       id: "spreetail",
       title:
@@ -286,13 +373,6 @@ const Home = (props) => {
         "nathangentry.me is an interactive portfolio site I created to showcase my past work experience, personal projects, and education history. To ensure flexibility for years to come, I designed the site with componentization in mind, allowing new experiences and projects to be added with ease in the future.",
         "Interactivity was emphasized as a focal point of the website. Transitions originating from user actions spark joy and act as a differentiating factor from other resume sites. These were brought to life in development using React and SASS transitions.",
         "In addition to the general portfolio site for public visitors, I also ensured the site was extensible to match any number of companies and jobs I apply for in the future. By utilizing React Router and styled-components, I was able to create a unique, private experience for each company, including a cover letter and custom theming.",
-        <a
-          href="https://github.com/gentryn31/portfolio"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <button className="secondary">Check out the code</button>
-        </a>,
       ],
     },
     {
@@ -436,31 +516,26 @@ const Home = (props) => {
                   </div>
                   <div>
                     <h5 className="section-heading">Minors</h5>
-                    <p>Business, Math</p>
+                    <p>Business and Math</p>
                   </div>
                   <div>
                     <h5 className="section-heading">Timeframe</h5>
                     <p>August 2019 – May 2023</p>
                   </div>
                   <div id="unl-courses-highlight">
-                    <h5 className="section-heading">Courses</h5>
+                    <h5 className="section-heading">Coursework</h5>
                     <IconBullet icon="done" text="Java" />
                     <IconBullet icon="done" text="JavaScript" />
                     <IconBullet icon="done" text="Python" />
                     <IconBullet icon="done" text="R" />
                     <IconBullet icon="done" text="Machine Learning" />
                     <IconBullet icon="done" text="Design Thinking" />
-                    <IconBullet icon="done" text="Calculus I, II, & III" />
                   </div>
                   <div id="involvements-info-bit">
                     <h5 className="section-heading">Involvements</h5>
                     <IconBullet icon="done" text="Raikes Social Media Team" />
                     <IconBullet icon="done" text="Girls Code Lincoln" />
                     <IconBullet icon="done" text="Engineering Diplomats" />
-                    <IconBullet
-                      icon="done"
-                      text="Youth Entrepreneurship Clinics"
-                    />
                   </div>
                 </div>
                 <div id="raikes-info-bit">

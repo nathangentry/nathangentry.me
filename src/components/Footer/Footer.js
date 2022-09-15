@@ -71,7 +71,7 @@ const Footer = (props) => {
               Resume
             </a>
           </div>
-          <p id="footer-copyright">&copy; 2021 Nathan Gentry</p>
+          <p id="footer-copyright">&copy; 2022 Nathan Gentry</p>
         </div>
       </PageWidthWrapper>
     </div>
