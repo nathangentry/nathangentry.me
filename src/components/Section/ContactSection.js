@@ -1,20 +1,11 @@
-import React, { useState, useEffect } from "react";
-import * as firebase from 'firebase/app';
-import 'firebase/analytics';
-import emailjs from "emailjs-com";
+import React, { useState } from "react";
 import Section from "./Section";
 import Tile from "../Tile/Tile";
 
-import "../../emailSetup";
 import "./ContactSection.scss";
 
-const ContactSection = props => {
+const ContactSection = (props) => {
   const [feedback, setFeedback] = useState({ status: "", message: "" });
-
-  useEffect(() => {
-    feedback.status === "success" && firebase.analytics().logEvent('message_sent');
-    feedback.status === "error" && firebase.analytics().logEvent('message_error', { error: feedback.message });
-  }, [feedback]);
 
   const sendMessage = () => {
     const nameInput = document.getElementById("name-input");
@@ -26,32 +17,31 @@ const ContactSection = props => {
     const message = messageInput.value;
 
     if (validateInput(name, email, message)) {
-      emailjs
-        .send("gmail", "message_form", {
-          name: name,
-          email: email,
-          message: message,
-          url: props.url,
-        })
-        .then(() => {
-          setFeedback({
-            status: "success",
-            message:
-              "Your message has been sent! I'll get back to you as soon as I can."
-          });
-
-          nameInput.value = "";
-          emailInput.value = "";
-          messageInput.value = "";
-        })
-        .catch((e) => {
-          setFeedback({
-            status: "error",
-            message:
-              'Hmm...something went wrong. Please try again or email me directly at <a href="mailto:hello@nathangentry.me">hello@nathangentry.me</a>'
-          });
-          console.log(e);
-        });
+      // emailjs
+      //   .send("gmail", "message_form", {
+      //     name: name,
+      //     email: email,
+      //     message: message,
+      //     url: props.url,
+      //   })
+      //   .then(() => {
+      //     setFeedback({
+      //       status: "success",
+      //       message:
+      //         "Your message has been sent! I'll get back to you as soon as I can.",
+      //     });
+      //     nameInput.value = "";
+      //     emailInput.value = "";
+      //     messageInput.value = "";
+      //   })
+      //   .catch((e) => {
+      //     setFeedback({
+      //       status: "error",
+      //       message:
+      //         'Hmm...something went wrong. Please try again or email me directly at <a href="mailto:hello@nathangentry.me">hello@nathangentry.me</a>',
+      //     });
+      //     console.log(e);
+      //   });
     }
   };
 
@@ -74,8 +64,7 @@ const ContactSection = props => {
     if (name.length === 0) {
       setFeedback({
         status: "error",
-        message:
-          "Please include your name."
+        message: "Please include your name.",
       });
 
       nameLabel.className = "error";
@@ -83,8 +72,7 @@ const ContactSection = props => {
     } else if (email.length === 0) {
       setFeedback({
         status: "error",
-        message:
-          "Please include your email."
+        message: "Please include your email.",
       });
 
       emailLabel.className = "error";
@@ -96,7 +84,7 @@ const ContactSection = props => {
       setFeedback({
         status: "error",
         message:
-          "That doesn't seem to be a valid email address. Please double check your form and try again."
+          "That doesn't seem to be a valid email address. Please double check your form and try again.",
       });
 
       emailLabel.className = "error";
@@ -104,8 +92,7 @@ const ContactSection = props => {
     } else if (message.length === 0) {
       setFeedback({
         status: "error",
-        message:
-          "Please include your message."
+        message: "Please include your message.",
       });
 
       messageLabel.className = "error";
@@ -140,12 +127,18 @@ const ContactSection = props => {
             id="message-input"
           ></textarea>
         </form>
-        <div className='horizontal'>
+        <div className="horizontal">
           <button className="primary" onClick={sendMessage}>
             Submit
           </button>
           <div className={`feedback ${feedback.status}`}>
-            <i className='material-icons feedback-icon'>{feedback.status === 'error' ? 'error_outline' : feedback.status === 'success' ? 'done' : ''}</i>
+            <i className="material-icons feedback-icon">
+              {feedback.status === "error"
+                ? "error_outline"
+                : feedback.status === "success"
+                ? "done"
+                : ""}
+            </i>
             <p>{feedback.message}</p>
           </div>
         </div>
