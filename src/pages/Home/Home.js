@@ -61,56 +61,56 @@ const Home = (props) => {
     "Of course, while I have experience with numerous projects and teams, I also realize there is so much more to learn. As a naturally curious person, I love digging to get to the bottom of a problem and using that new knowledge to develop a solution.",
   ];
 
-  useEffect(() => {
-    if (props.match.params.company !== undefined) {
-      const companyMatch = data[props.match.params.company];
-      if (companyMatch !== undefined) {
-        setCompany({
-          name: companyMatch.name,
-          path: companyMatch.path,
-          logo: companyMatch.logo,
-          primaryColor:
-            companyMatch.color !== undefined
-              ? `rgba(${companyMatch.color.r}, ${companyMatch.color.g}, ${companyMatch.color.b}, 1.0)`
-              : "rgba(39, 147, 115, 1.0)",
-          primaryDark:
-            companyMatch.color !== undefined
-              ? `rgba(${
-                  companyMatch.color.r - 25 < 0 ? 0 : companyMatch.color.r - 25
-                }, ${
-                  companyMatch.color.g - 25 < 0 ? 0 : companyMatch.color.g - 15
-                }, ${
-                  companyMatch.color.b - 15 < 0 ? 0 : companyMatch.color.b - 15
-                }, 1.0)`
-              : "rgba(24, 132, 100, 1.0)",
-          opacityColor:
-            companyMatch.color !== undefined
-              ? `rgba(${companyMatch.color.r}, ${companyMatch.color.g}, ${companyMatch.color.b}, 0.1)`
-              : "rgba(39, 147, 115, 0.1)",
-          opacityDark:
-            companyMatch.color !== undefined
-              ? `rgba(${companyMatch.color.r}, ${companyMatch.color.g}, ${companyMatch.color.b}, 0.2)`
-              : "rgba(39, 147, 115, 0.2)",
-          motivation:
-            companyMatch.motivation !== undefined
-              ? companyMatch.motivation.map((p) =>
-                  p.split("{company}").join(companyMatch.name)
-                )
-              : motivation.map((p) =>
-                  p.split("{company}").join(companyMatch.name)
-                ),
-          pitch:
-            companyMatch.pitch !== undefined
-              ? companyMatch.pitch.map((p) =>
-                  p.split("{company}").join(companyMatch.name)
-                )
-              : pitch.map((p) => p.split("{company}").join(companyMatch.name)),
-        });
-      } else {
-        props.history.push("/");
-      }
-    }
-  }, [props.match.params.company]);
+  // useEffect(() => {
+  //   if (props.match.params.company !== undefined) {
+  //     const companyMatch = data[props.match.params.company];
+  //     if (companyMatch !== undefined) {
+  //       setCompany({
+  //         name: companyMatch.name,
+  //         path: companyMatch.path,
+  //         logo: companyMatch.logo,
+  //         primaryColor:
+  //           companyMatch.color !== undefined
+  //             ? `rgba(${companyMatch.color.r}, ${companyMatch.color.g}, ${companyMatch.color.b}, 1.0)`
+  //             : "rgba(39, 147, 115, 1.0)",
+  //         primaryDark:
+  //           companyMatch.color !== undefined
+  //             ? `rgba(${
+  //                 companyMatch.color.r - 25 < 0 ? 0 : companyMatch.color.r - 25
+  //               }, ${
+  //                 companyMatch.color.g - 25 < 0 ? 0 : companyMatch.color.g - 15
+  //               }, ${
+  //                 companyMatch.color.b - 15 < 0 ? 0 : companyMatch.color.b - 15
+  //               }, 1.0)`
+  //             : "rgba(24, 132, 100, 1.0)",
+  //         opacityColor:
+  //           companyMatch.color !== undefined
+  //             ? `rgba(${companyMatch.color.r}, ${companyMatch.color.g}, ${companyMatch.color.b}, 0.1)`
+  //             : "rgba(39, 147, 115, 0.1)",
+  //         opacityDark:
+  //           companyMatch.color !== undefined
+  //             ? `rgba(${companyMatch.color.r}, ${companyMatch.color.g}, ${companyMatch.color.b}, 0.2)`
+  //             : "rgba(39, 147, 115, 0.2)",
+  //         motivation:
+  //           companyMatch.motivation !== undefined
+  //             ? companyMatch.motivation.map((p) =>
+  //                 p.split("{company}").join(companyMatch.name)
+  //               )
+  //             : motivation.map((p) =>
+  //                 p.split("{company}").join(companyMatch.name)
+  //               ),
+  //         pitch:
+  //           companyMatch.pitch !== undefined
+  //             ? companyMatch.pitch.map((p) =>
+  //                 p.split("{company}").join(companyMatch.name)
+  //               )
+  //             : pitch.map((p) => p.split("{company}").join(companyMatch.name)),
+  //       });
+  //     } else {
+  //       props.history.push("/");
+  //     }
+  //   }
+  // }, [props.match.params.company]);
 
   const heroRightSectionRef = useRef();
   useEffect(() => {
@@ -158,16 +158,16 @@ const Home = (props) => {
         "In my role as development manager, I:",
         <ul>
           <li>
-            Analyze data from 2,000+ medical facilities with Python and
-            Databricks to predict nursing shortages before they happen.
+            Analyze data from 12,000+ travel nurses with Python and Databricks
+            to predict nursing shortages before they happen.
+          </li>
+          <li>
+            Develop a web app with React, C#, and .NET to relay model insights
+            to staffing managers across 4,000+ medical facilities.
           </li>
           <li>
             Manage a team of 5 developers using agile methodologies and CI/CD
             principles to consistently iterate on feedback.
-          </li>
-          <li>
-            Communicate continuously with stakeholders to create a shared
-            understanding of expectations, progress, and roadblocks.
           </li>
         </ul>,
       ],
@@ -200,19 +200,18 @@ const Home = (props) => {
             administrative portal to improve operational efficiencies.
           </li>
           <li>
-            Increased data visibility through a digital reporting interface to
-            more easily unlock funding opportunities.
+            Increased data visibility by using React and TypeScript to craft a
+            report generation tool that unlocks funding opportunities.
           </li>
         </ul>,
         "Hear more from the people involved:",
         <iframe
-          width="560"
-          height="315"
           src="https://www.youtube.com/embed/xEsToqtygco"
           title="YouTube video player"
           frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen
+          className="overview-video"
         ></iframe>,
       ],
       myRole: [
@@ -524,12 +523,12 @@ const Home = (props) => {
                   </div>
                   <div id="unl-courses-highlight">
                     <h5 className="section-heading">Coursework</h5>
-                    <IconBullet icon="done" text="Java" />
-                    <IconBullet icon="done" text="JavaScript" />
-                    <IconBullet icon="done" text="Python" />
-                    <IconBullet icon="done" text="R" />
+                    <IconBullet icon="done" text="Software Engineering" />
+                    <IconBullet icon="done" text="Algorithms" />
                     <IconBullet icon="done" text="Machine Learning" />
                     <IconBullet icon="done" text="Design Thinking" />
+                    <IconBullet icon="done" text="UI Design" />
+                    <IconBullet icon="done" text="Statistics" />
                   </div>
                   <div id="involvements-info-bit">
                     <h5 className="section-heading">Involvements</h5>
