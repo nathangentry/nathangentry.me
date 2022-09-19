@@ -32,7 +32,7 @@ const WelcomeTile = (props) => {
             <button className="primary">Get in touch</button>
           </Link>
           <a
-            href="https://bit.ly/ngfall2021resume"
+            href="https://bit.ly/ngfall2022"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -62,7 +62,7 @@ const WelcomeTile = (props) => {
           <p className="large">
             You can either check out my portfolio by scrolling down or{" "}
             <a
-              href="https://bit.ly/ngfall2021resume"
+              href="https://bit.ly/ngfall2022"
               target="_blank"
               rel="noopener noreferrer"
             >

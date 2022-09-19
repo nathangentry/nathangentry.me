@@ -482,7 +482,7 @@ const Home = (props) => {
                       <button className="primary">Get in touch</button>
                     </Link>
                     <a
-                      href="https://bit.ly/ngfall2021resume"
+                      href="https://bit.ly/ngfall2022"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
