@@ -144,7 +144,7 @@ const Home = (props) => {
       logoImage: medsolLogo,
       company: "Medical Solutions",
       location: "Lincoln, NE",
-      position: "Development Manager",
+      position: "Development Manager Intern",
       timeframe: "Fall 2022 – Present",
       skills: [
         ["Python", "Databricks", "Machine Learning"],
@@ -180,7 +180,7 @@ const Home = (props) => {
       logoImage: bridgesLogo,
       company: "Bridges to Hope",
       location: "Lincoln, NE",
-      position: "Software Engineer",
+      position: "Software Engineering Intern",
       timeframe: "Fall 2021 – Spring 2022",
       skills: [
         ["React", "TypeScript", "Sass"],
@@ -226,7 +226,7 @@ const Home = (props) => {
       logoImage: spreetailLogo,
       company: "Spreetail",
       location: "Lincoln, NE",
-      position: "Software Development Intern",
+      position: "Software Engineering Intern",
       timeframe: "Summer 2021",
       skills: [
         ["C#", ".NET", "Entity Framework"],
@@ -234,11 +234,25 @@ const Home = (props) => {
         ["MVC Framework", "Jira"],
       ],
       overview: [
-        "Spreetail is an e-commerce company helping businesses get into e-commerce by storing their products and listing them on more than a dozen online marketplaces. In my 10 weeks at Spreetail, I worked in coordination with the Supply Chain Operations team to develop a brand new suite of self-service tools that empower warehouse managers across the nation to handle data management in their warehouses. These tools offloaded tedious tasks for developers, which had a particular business impact for Spreetail as they look to grow their existing warehouses and expand into new ones.",
+        "Spreetail is an e-commerce company helping businesses succeed in over a dozen online marketplaces by managing the listings and logistics for them. At Spreetail, I built a self-service portal that empowered warehouse managers to support themselves. These tools eliminated tedious data management tasks for developers, reducing technical bloat and freeing them up to work on tasks that will bring new business value.",
       ],
       myRole: [
-        "My experience at Spreetail allowed me to get experience working with the full stack of an MVC application. I started my summer with front-end work in React, creating the initial page that would act as a template for our other tools down the line. These pages were centered around leveraging third-party software and internal components to create custom data tables that effectively presented database information to a non-technical end-user.",
-        "After making that first step into the front-end, I transitioned to back-end work in C# and .NET, establishing the controllers, services, accessors, and interfaces necessary to interact with the database using best practices. For the remainder of the summer, I leveraging my full-stack experience to efficiently build out the back-end for additional tools. All-in-all, my colleagues and I collaborated to create tools that empowered warehouse managers to set up new picking carts, packing stations, and label printers.",
+        "In my 10 weeks at Spreetail, I:",
+        <ul>
+          <li>
+            Launched self-service tools that empower warehouse managers across 8
+            international locations to support themselves.
+          </li>
+          <li>
+            Reduced the technical strain of opening new warehouses to help
+            Spreetail achieve next-day shipping to 80% of the U.S.
+          </li>
+          <li>
+            Deployed C# and .NET backend code and API endpoints within a legacy
+            codebase, using unit tests to ensure longevity.
+          </li>
+        </ul>,
+        "While I primarily worked in the backend code fleshing out the data management logic, I did convert mockups to frontend code for the first tool and aided in mentoring my fellow intern in his understanding of React.",
       ],
     },
     {
@@ -248,7 +262,7 @@ const Home = (props) => {
       logoImage: cboeLogo,
       company: "Cboe Global Markets",
       location: "Lenexa, KS",
-      position: "Full Stack Web Development Intern",
+      position: "Software Engineering Intern",
       timeframe: "Summer 2020",
       skills: [
         ["React", "Python", "PostgreSQL"],
@@ -257,6 +271,21 @@ const Home = (props) => {
       ],
       overview: [
         "Cboe Global Markets is a major player in the markets and exchanges industry. During the summer of 2020, they were transitioning their market insights blog into a news and video hub to create a more engaging experience for users. As my intern project, I created a content management system (CMS) for the marketing and communications team to streamline publishing content to the new site.",
+        "Over the course of 6 weeks, I:",
+        <ul>
+          <li>
+            Produced a custom Content Management System to manage Cboe’s
+            Insights blog that receives 470,000+ monthly hits.
+          </li>
+          <li>
+            Coded full stack functionality in React, Django, and PostgreSQL that
+            has enabled non-technical staff to publish 300+ posts.
+          </li>
+          <li>
+            Collaborated with a UI designer and end users to ensure long-term
+            usability and consistency within design systems.
+          </li>
+        </ul>,
       ],
       myRole: [
         "A major focus of mine was on the front-end of the application. I communicated effectively in a remote setting with the lead UI designer and stakeholders in the marketing and communications team. Through this collaboration, I translated wireframes into React code, while incorporating changes that benefited end-users.",
@@ -272,7 +301,7 @@ const Home = (props) => {
       logoImage: dmsiLogo,
       company: "DMSi Software",
       location: "Lincoln, NE",
-      position: "Front End Development Intern",
+      position: "Software Engineering Intern",
       timeframe: "Spring 2020",
       skills: [
         ["React", "SASS", "TypeScript"],
